@@ -9,7 +9,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
@@ -19,6 +18,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import InternshipsPage from '../InternshipsPage/InternshipsPage';
+import HomePage from '../HomePage/HomePage';
 
 import './App.css';
 
@@ -29,6 +30,7 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: 'FETCH_PROFILE'});
   }, [dispatch]);
 
   return (
@@ -58,6 +60,14 @@ function App() {
             path="/user"
           >
             <UserPage />
+          </ProtectedRoute>
+
+          {/* Internships page */}
+          <ProtectedRoute
+            exact
+            path="/internships"
+          >
+            <InternshipsPage />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -100,14 +110,7 @@ function App() {
             exact
             path="/home"
           >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/user" />
-              :
-              // Otherwise, show the Landing page
-              <LandingPage />
-            }
+              <HomePage />
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
@@ -115,7 +118,6 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-        <Footer />
       </div>
     </Router>
   );

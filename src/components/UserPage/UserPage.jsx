@@ -1,15 +1,38 @@
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
 
+import UserItem from '../UserItem/UserItem';
+
 function UserPage() {
+  let fileURL;
+
+  const handleUpload = (event) => {
+    let file = event.target.files[0];
+    console.log(file);
+
+    if (file.type != 'application/pdf'){
+      console.error(file.name, 'is not a pdf file.')
+    } else {
+      console.log(file.name, 'Successful upload');
+      fileURL = URL.createObjectURL(file);
+    }
+  }
+
+  const handleSubmit = () => {
+    //Open the URL on new Window
+    const pdfWindow = window.open();
+    pdfWindow.location.href = fileURL; 
+  }
+
   // this component doesn't do much to start, just renders some user reducer info to the DOM
-  const user = useSelector((store) => store.user);
+  const profile = useSelector((store) => store.profile);
+
+
   return (
     <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
-      <LogOutButton className="btn" />
+      {profile.map((data) => {
+        return <UserItem key={data.id} dataItem={data}/>
+      })}
     </div>
   );
 }
