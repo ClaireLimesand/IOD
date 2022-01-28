@@ -1,0 +1,27 @@
+.top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner {
+    width: 1100px;
+    height: 150px;
+}
+
+.picture {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+}
+
+.sub {
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 10%;
+}
+
+.name-pros {
+    display: flex;
+    column-gap: 2%;
+}
