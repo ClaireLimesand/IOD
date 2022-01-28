@@ -18,6 +18,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import InternshipsPage from '../InternshipsPage/InternshipsPage';
+import HomePage from '../HomePage/HomePage';
 
 import './App.css';
 
@@ -60,6 +62,14 @@ function App() {
             <UserPage />
           </ProtectedRoute>
 
+          {/* Internships page */}
+          <ProtectedRoute
+            exact
+            path="/internships"
+          >
+            <InternshipsPage />
+          </ProtectedRoute>
+
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
@@ -100,14 +110,7 @@ function App() {
             exact
             path="/home"
           >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/user" />
-              :
-              // Otherwise, show the Landing page
-              <LandingPage />
-            }
+              <HomePage />
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
