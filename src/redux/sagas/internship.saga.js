@@ -8,6 +8,7 @@ function* fetchInternships(action) {
             method: 'GET',
             url: '/api/internship'
         })
+        
         // Update the internships
         yield put({
             type: 'SET_INTERNSHIPS',
