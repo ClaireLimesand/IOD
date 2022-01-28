@@ -25,6 +25,10 @@
     left: 40px;
 }
 
+.student-name {
+    margin-bottom: 10px;
+}
+
 .sub {
     display: flex;
     justify-content: flex-start;
@@ -68,4 +72,26 @@
 .about-data {
     padding-left: 30px;
     padding-bottom: 20px;
+}
+
+.resume {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 190px;
+}
+
+.resume-input {
+    width: 180px;
+}
+
+.resume-button {
+    border: none;
+    width: 60%;
+    height: 20%;
+    border-radius: 10px;
+    background-color: #4F89B7;
+    color: white;
 }
