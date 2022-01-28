@@ -17,7 +17,7 @@ function InternshipsPage() {
     return (
         <div className="container">
             <h1 id='internships-page-title'>Internships</h1>
-            <section>
+            <section id='internships-container'>
                 {internships.map((internship) => {
                     return <Internship key={internship.id} internship={internship} />;
                 })}

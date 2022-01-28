@@ -3,10 +3,8 @@ import { useDispatch } from 'react-redux';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Divider } from '@mui/material';
 
 function Internship({internship}) {
     const dispatch = useDispatch();
@@ -15,7 +13,7 @@ function Internship({internship}) {
         <div className="container">
             <Card sx={{ maxWidth: 345, backgroundColor: '#E8E9EE' }}>
                 <center>
-                    <img src={internship.company_logo} className='company-logo'/>
+                    <img src={internship.company_logo} className='company-logo' draggable='false' />
                 </center>
                 <p className='company-logo-border'></p>
                 <CardContent>
