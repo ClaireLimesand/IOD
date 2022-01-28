@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
+import skills from './skills.reducer';
 import internshipReducer from './internship.reducer';
 import profile from './profile.reducer';
 
@@ -13,7 +14,8 @@ import profile from './profile.reducer';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  internshipReducer
+  skills,
+  internshipReducer,
   profile,
 });
 
