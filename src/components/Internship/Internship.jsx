@@ -13,22 +13,16 @@ function Internship({internship}) {
 
     return (
         <div className="container">
-            <Card sx={{ maxWidth: 345 }}>
-                {/* <CardMedia
-                    component="img"
-                    height="180"
-                    image={internship.company_logo}
-                    alt="company_logo"
-                    draggable="false"
-                /> */}
+            <Card sx={{ maxWidth: 345, backgroundColor: '#E8E9EE' }}>
                 <center>
-                    <img src={internship.company_logo} className='company_logo'/>
+                    <img src={internship.company_logo} className='company-logo'/>
                 </center>
+                <p className='company-logo-border'></p>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                         {internship.company_name}
                     </Typography>
-                    <Typography>
+                    <Typography sx={{ paddingBottom: 1, fontStyle: 'italic' }}>
                         {internship.company_subtitle}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
@@ -36,7 +30,7 @@ function Internship({internship}) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" variant='contained'>Apply</Button>
+                    <Button size="small" variant='contained' sx={{ backgroundColor: '#15B097' }}>Apply</Button>
                 </CardActions>
             </Card>
         </div>
