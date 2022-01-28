@@ -22,6 +22,15 @@ function Nav() {
     <div>
       <img src='globe.png' />
       <List>
+        {/* Home link */}
+        {user.id &&
+          <ListItem button onClick={() => history.push('/home')}>
+              <ListItemIcon>
+                  <MailIcon sx={{ color: 'white' }} />
+              </ListItemIcon>
+              <ListItemText primary="Home"/>
+          </ListItem>
+        }
         {/* Profile link */}
         {user.id &&
           <ListItem button onClick={() => history.push('/user')}>
