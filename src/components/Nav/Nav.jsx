@@ -26,7 +26,8 @@ function Nav() {
 
   const drawer = (
     <div>
-      <img src='globe.png' />
+      <img src='globe.png' draggable='false' />
+      <img src='gradient_bar.png' draggable='false' />
       <List>
         {/* Home link */}
         {user.id &&
