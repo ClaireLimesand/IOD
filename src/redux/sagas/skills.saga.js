@@ -3,7 +3,6 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 function* fetchSkills() {
     try {
-        console.log('in fetchSkills')
         const skills = yield axios.get('/api/skills');
         yield put({ 
             type: 'SET_SKILLS', 
@@ -15,7 +14,6 @@ function* fetchSkills() {
 }
 
 function* addSkill(action) {
-    console.log('action payload', action.payload)
     try {
         const response = yield axios({
             method: 'POST',
@@ -30,9 +28,25 @@ function* addSkill(action) {
     }
 }
 
+function* deleteSkill(action) {
+    console.log('action payload!!!!', action.payload)
+    try {
+        const response = yield axios({
+            method: 'DELETE',
+            url: `/api/skills/${action.payload}`,
+        })
+        yield put({
+            type: 'FETCH_SKILLS'
+        })
+    } catch (error) {
+        console.log('deleteSkill error', error);
+    }
+}
+
 function* skillsSaga() {
     yield takeEvery('FETCH_SKILLS', fetchSkills);
     yield takeEvery('ADD_SKILL', addSkill);
+    yield takeEvery('DELETE_SKILL', deleteSkill);
 }
 
 export default skillsSaga;
