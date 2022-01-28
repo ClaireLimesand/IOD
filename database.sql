@@ -25,14 +25,6 @@ CREATE TABLE "students" (
 	"user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE "users_internships" (
-	"id" SERIAL PRIMARY KEY,
-	"start_date" DATE,
-	"end_date" DATE,
-	"user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE,
-	"internship_id" INT REFERENCES "internships" ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 CREATE TABLE "internships" (
 	"id" SERIAL PRIMARY KEY,
 	"company_name" VARCHAR(300),
@@ -56,4 +48,12 @@ CREATE TABLE "skills" (
 CREATE TABLE "announcements" (
 	"id" SERIAL PRIMARY KEY,
 	"message" TEXT
+);
+
+CREATE TABLE "users_internships" (
+	"id" SERIAL PRIMARY KEY,
+	"start_date" DATE,
+	"end_date" DATE,
+	"user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE,
+	"internship_id" INT REFERENCES "internships" ON DELETE CASCADE ON UPDATE CASCADE
 );
