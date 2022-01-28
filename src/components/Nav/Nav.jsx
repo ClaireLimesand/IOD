@@ -50,7 +50,7 @@ function Nav() {
         }
         {/* Internships link */}
         {user.id &&
-          <ListItem button onClick={() => history.push('/')}>
+          <ListItem button onClick={() => history.push('/internships')}>
               <ListItemIcon>
                 <WorkIcon sx={{ color: 'white' }} />
               </ListItemIcon>
@@ -74,12 +74,19 @@ function Nav() {
               <ListItemText primary="About"/>
           </ListItem>
         {/* Logout link */}
-        {user.id &&
+        {user.id ?
           <ListItem button onClick={() => dispatch({ type: 'LOGOUT' })}>
               <ListItemIcon>
                 <LogoutIcon sx={{ color: 'white' }} />
               </ListItemIcon>
               <ListItemText primary="Logout"/>
+          </ListItem>
+        :
+          <ListItem button onClick={() => history.push('/user')}>
+              <ListItemIcon>
+                <LogoutIcon sx={{ color: 'white' }} />
+              </ListItemIcon>
+              <ListItemText primary="Login"/>
           </ListItem>
         }
       </List>
