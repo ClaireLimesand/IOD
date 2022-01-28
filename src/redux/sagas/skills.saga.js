@@ -14,8 +14,25 @@ function* fetchSkills() {
     }
 }
 
+function* addSkill(action) {
+    console.log('action payload', action.payload)
+    try {
+        const response = yield axios({
+            method: 'POST',
+            url: '/api/skills',
+            data: action.payload
+        })
+        yield put({
+            type: 'FETCH_SKILLS'
+        })
+    } catch (error) {
+        console.log('addSkill error', error);
+    }
+}
+
 function* skillsSaga() {
     yield takeEvery('FETCH_SKILLS', fetchSkills);
+    yield takeEvery('ADD_SKILL', addSkill);
 }
 
 export default skillsSaga;
