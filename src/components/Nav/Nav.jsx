@@ -9,33 +9,58 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
+import { useHistory } from 'react-router-dom';
 
 const drawerWidth = 240;
 
 function Nav() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const history = useHistory();
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  const user = useSelector((store) => store.user);
 
   const drawer = (
     <div>
       <img src='globe.png' />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
+        {/* Profile link */}
+        {user.id &&
+          <ListItem button onClick={() => history.push('/user')}>
+              <ListItemIcon>
+                  <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary="Profile"/>
           </ListItem>
-        ))}
+        }
+        {/* Internships link */}
+        {user.id &&
+          <ListItem button onClick={() => history.push('/')}>
+              <ListItemIcon>
+                  <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Internships"/>
+          </ListItem>
+        }
+        {/* People link */}
+        {user.id &&
+          <ListItem button onClick={() => history.push('/')}>
+              <ListItemIcon>
+                  <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="People"/>
+          </ListItem>
+        }
+        {/* About link */}
+        {user.id &&
+          <ListItem button onClick={() => history.push('/about')}>
+              <ListItemIcon>
+                  <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="About"/>
+          </ListItem>
+        }
       </List>
     </div>
   );
-
-  const user = useSelector((store) => store.user);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -44,21 +69,6 @@ function Nav() {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer>
         <Drawer
           variant="permanent"
           sx={{
