@@ -29,7 +29,6 @@ function* addSkill(action) {
 }
 
 function* deleteSkill(action) {
-    console.log('action payload!!!!', action.payload)
     try {
         const response = yield axios({
             method: 'DELETE',
@@ -43,10 +42,24 @@ function* deleteSkill(action) {
     }
 }
 
+function* editSkill(action) {
+    console.log('edit skill', action.payload)
+    try {
+        yield axios({
+            method: 'PUT',
+            url: `/api/gifts/${action.payload.id}`,
+            data: action.payload
+        })
+    }   catch (error) {
+        console.log(error)
+    }
+}
+
 function* skillsSaga() {
     yield takeEvery('FETCH_SKILLS', fetchSkills);
     yield takeEvery('ADD_SKILL', addSkill);
     yield takeEvery('DELETE_SKILL', deleteSkill);
+    yield takeEvery('EDIT_SKILL', editSkill);
 }
 
 export default skillsSaga;
