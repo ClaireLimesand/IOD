@@ -57,13 +57,13 @@ function Nav() {
               <ListItemText primary="Internships"/>
           </ListItem>
         }
-        {/* People link */}
+        {/* Students link */}
         {user.id &&
           <ListItem button onClick={() => history.push('/')}>
               <ListItemIcon>
                 <PeopleIcon sx={{ color: 'white' }} />
               </ListItemIcon>
-              <ListItemText primary="People"/>
+              <ListItemText primary="Students"/>
           </ListItem>
         }
         {/* About link */}
