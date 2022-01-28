@@ -26,7 +26,7 @@ function Nav() {
         {user.id &&
           <ListItem button onClick={() => history.push('/user')}>
               <ListItemIcon>
-                  <MailIcon />
+                  <MailIcon sx={{ color: 'white' }} />
               </ListItemIcon>
               <ListItemText primary="Profile"/>
           </ListItem>
@@ -35,7 +35,7 @@ function Nav() {
         {user.id &&
           <ListItem button onClick={() => history.push('/')}>
               <ListItemIcon>
-                  <InboxIcon />
+                  <InboxIcon sx={{ color: 'white' }} />
               </ListItemIcon>
               <ListItemText primary="Internships"/>
           </ListItem>
@@ -44,7 +44,7 @@ function Nav() {
         {user.id &&
           <ListItem button onClick={() => history.push('/')}>
               <ListItemIcon>
-                  <InboxIcon />
+                  <InboxIcon sx={{ color: 'white' }} />
               </ListItemIcon>
               <ListItemText primary="People"/>
           </ListItem>
@@ -53,7 +53,7 @@ function Nav() {
         {user.id &&
           <ListItem button onClick={() => history.push('/about')}>
               <ListItemIcon>
-                  <InboxIcon />
+                  <InboxIcon sx={{ color: 'white' }} />
               </ListItemIcon>
               <ListItemText primary="About"/>
           </ListItem>
@@ -63,7 +63,7 @@ function Nav() {
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} >
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -76,6 +76,7 @@ function Nav() {
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
           open
+          id="sidebar"
         >
           {drawer}
         </Drawer>
