@@ -1,4 +1,9 @@
 #sidebar > div {
-    background-color: #1d1c1c;
+    background-color: #191B20;
     color: #ffffff
+}
+
+#sidebar-logo-text {
+    font-size: 17px;
+    font-weight: bold;
 }

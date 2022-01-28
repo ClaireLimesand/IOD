@@ -27,6 +27,7 @@ function Nav() {
   const drawer = (
     <div>
       <img src='globe.png' draggable='false' />
+      <center id='sidebar-logo-text'>INTERNSHIP ON DEMAND</center>
       <img src='gradient_bar.png' draggable='false' />
       <List>
         {/* Home link */}
