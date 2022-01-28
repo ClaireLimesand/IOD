@@ -18,8 +18,8 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
+    internshipSaga(),
     skillsSaga(),
-    internshipSaga()
     profileSaga(),
   ]);
 }
