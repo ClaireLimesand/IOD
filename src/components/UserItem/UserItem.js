@@ -11,12 +11,12 @@ function UserItem({ dataItem }) {
     let file = event.target.files[0];
     console.log(file);
 
-    if (file.type != "application/pdf") {
-      console.error(file.name, "is not a pdf file.");
-    } else {
+    // if (file.type != "application/pdf") {
+    //   console.error(file.name, "is not a pdf file.");
+    // } else {
       console.log(file.name, "Successful upload");
       fileURL = URL.createObjectURL(file);
-    }
+    // }
   };
 
   const handleSubmit = () => {
