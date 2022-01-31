@@ -32,13 +32,14 @@ function UserItem({ dataItem }) {
   };
 
   const handleEditPicture = (event) => {
+    console.log(event);
+    
     let file = event.target.files[0];
     console.log(file);
-    pictureUrl = URL.createObjectURL(file);
 
     dispatch({
       type: 'UPLOAD_PICTURE',
-      payload: pictureUrl
+      payload: file.name
     });
   }
 

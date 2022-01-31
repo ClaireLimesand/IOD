@@ -4,9 +4,10 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* uploadPicture(action) {
     try {
         yield axios({
-            method: 'POST',
-            url: '/api/picture'
-        })
+            method: 'PUT',
+            url: '/api/picture',
+            data: {picture: `images/${action.payload}`}
+        });
     } catch(err) {
         console.error('GET error: ', err);
     }
