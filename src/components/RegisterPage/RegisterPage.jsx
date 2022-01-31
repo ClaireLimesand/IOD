@@ -1,7 +1,7 @@
 import React from 'react';
 import RegisterForm from '../RegisterForm/RegisterForm';
 
-import './RegisterPage.css';
+import "./RegisterPage.css";
 
 function RegisterPage() {
   
