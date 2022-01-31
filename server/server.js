@@ -4,6 +4,21 @@ require('dotenv').config();
 
 const app = express();
 
+// Cloudinary
+const cloudinary = require("cloudinary").v2;
+console.log(cloudinary.config().cloud_name);
+
+cloudinary.uploader
+  .upload("./public/images/profile_pic.jpeg", {
+    resource_type: "image",
+  })
+  .then((result) => {
+    console.log('success', JSON.stringify(result, null, 2));
+  })
+  .catch((error) => {
+    console.log('error', JSON.stringify(error, null, 2));
+  });
+
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
