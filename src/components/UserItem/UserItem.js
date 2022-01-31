@@ -2,10 +2,13 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 
+import { useHistory } from "react-router-dom";
+
 import "./UserItem.css";
 
 function UserItem({ dataItem }) {
   let fileURL;
+  const history = useHistory();
 
   const handleUpload = (event) => {
     let file = event.target.files[0];
@@ -23,6 +26,12 @@ function UserItem({ dataItem }) {
     //Open the URL on new Window
     const pdfWindow = window.open();
     pdfWindow.location.href = fileURL;
+  };
+
+  const handleLinkedClick = () => {
+    const pdfWindow = window.open();
+    pdfWindow.location.href = fileURL;
+    history.push('/user');
   };
 
   return (
@@ -47,7 +56,7 @@ function UserItem({ dataItem }) {
               <p className="pronouns">{dataItem.pronouns}</p>
             </div>
             <p className="email">{dataItem.email}</p>
-            <p className="linked">{dataItem.linkedin}</p>
+            <a href={dataItem.linkedin} onClick={handleLinkedClick}>Link to LinkedIn</a>
           </div>
 
           <div className="resume">
