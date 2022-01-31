@@ -1,0 +1,7 @@
+.login-main {
+    background-image: url('/public/images/login-background.jpeg');
+    background-repeat: repeat-x;
+    background-position: right top;
+    padding-bottom: 600px;
+    padding-top: 20px;
+}
