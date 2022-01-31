@@ -21,8 +21,10 @@ function UserItem({ dataItem }) {
 
   const handleSubmit = () => {
     //Open the URL on new Window
-    const pdfWindow = window.open();
-    pdfWindow.location.href = fileURL;
+    if (fileURL) {
+      const pdfWindow = window.open();
+      pdfWindow.location.href = fileURL;
+    }
   };
 
   return (
