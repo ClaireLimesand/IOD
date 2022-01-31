@@ -1,11 +1,15 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
+import { useDispatch } from "react-redux";
 
 import "./UserItem.css";
 
 function UserItem({ dataItem }) {
-  let fileURL;
+  const dispatch = useDispatch();
+  
+  let resumeUrl;
+  let pictureUrl;
 
   const handleUpload = (event) => {
     let file = event.target.files[0];
@@ -15,17 +19,28 @@ function UserItem({ dataItem }) {
     //   console.error(file.name, "is not a pdf file.");
     // } else {
       console.log(file.name, "Successful upload");
-      fileURL = URL.createObjectURL(file);
+      resumeUrl = URL.createObjectURL(file);
     // }
   };
 
   const handleSubmit = () => {
     //Open the URL on new Window
-    if (fileURL) {
+    if (resumeUrl) {
       const pdfWindow = window.open();
-      pdfWindow.location.href = fileURL;
+      pdfWindow.location.href = resumeUrl;
     }
   };
+
+  const handleEditPicture = (event) => {
+    let file = event.target.files[0];
+    console.log(file);
+    pictureUrl = URL.createObjectURL(file);
+
+    dispatch({
+      type: 'UPLOAD_PICTURE',
+      payload: pictureUrl
+    });
+  }
 
   return (
     <div>
@@ -60,6 +75,9 @@ function UserItem({ dataItem }) {
           </div>
         </div>
       </div>
+
+      {/* !-- TEMPORARY BUTTON --! */}
+      <input type="file" onChange={handleEditPicture} />
 
       <div className="about">
         <h3 className="about-text">About</h3>

@@ -4,21 +4,6 @@ require('dotenv').config();
 
 const app = express();
 
-// Cloudinary
-const cloudinary = require("cloudinary").v2;
-console.log(cloudinary.config().cloud_name);
-
-cloudinary.uploader
-  .upload("./public/images/profile_pic.jpeg", {
-    resource_type: "image",
-  })
-  .then((result) => {
-    console.log('success', JSON.stringify(result, null, 2));
-  })
-  .catch((error) => {
-    console.log('error', JSON.stringify(error, null, 2));
-  });
-
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
@@ -27,7 +12,7 @@ const userRouter = require('./routes/user.router');
 const skillsRouter = require('./routes/skills.router');
 const internshipRouter = require('./routes/internship.router');
 const profileRouter = require('./routes/profile.router');
-const resumeRouter = require('./routes/resume.router');
+const pictureRouter = require('./routes/picture.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -45,7 +30,7 @@ app.use('/api/user', userRouter);
 app.use('/api/skills', skillsRouter);
 app.use('/api/internship', internshipRouter);
 app.use('/api/profile', profileRouter);
-app.use('/api/resume', profileRouter);
+app.use('/api/picture', pictureRouter);
 
 // Serve static files
 app.use(express.static('build'));
