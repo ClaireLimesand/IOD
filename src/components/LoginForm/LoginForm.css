@@ -72,3 +72,7 @@
     box-shadow: 0 4px 2px rgba(98, 98, 98, 0.493);
     margin-bottom: 10px;
 }
+
+.login-button:hover {
+    background-color: #15B097;
+}
