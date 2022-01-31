@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
 
 function RegisterForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const registerUser = (event) => {
     event.preventDefault();
 
     dispatch({
-      type: 'REGISTER',
+      type: "REGISTER",
       payload: {
         username: username,
         password: password,
@@ -54,6 +56,18 @@ function RegisterForm() {
       <div>
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
+
+      <center>
+        <button
+          type="button"
+          className="btn btn_asLink"
+          onClick={() => {
+            history.push("/login");
+          }}
+        >
+          Login
+        </button>
+      </center>
     </form>
   );
 }
