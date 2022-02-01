@@ -3,6 +3,8 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
 import { useRef } from "react";
+import { Badge, ListItemIcon } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
 
 import "./UserItem.css";
 
@@ -42,7 +44,7 @@ function UserItem({ dataItem }) {
 
     dispatch({
       type: 'UPLOAD_PICTURE',
-      payload: file.name
+      payload: file
     });
   }
 
@@ -60,9 +62,14 @@ function UserItem({ dataItem }) {
               alt="profile_pic"
               src={dataItem.picture}
               sx={{ width: 200, height: 200 }}
-              onClick={() => inputPicture.current.click()}
             />
           </Stack>
+          <ListItemIcon>
+            <EditIcon 
+              id="edit-picture-icon" 
+              onClick={() => inputPicture.current.click()}
+            />
+          </ListItemIcon>
           <div>
             <div className="name-pros">
               <h2 className="student-name">{dataItem.name}</h2>
