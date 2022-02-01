@@ -57,3 +57,15 @@ CREATE TABLE "users_internships" (
 	"user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE,
 	"internship_id" INT REFERENCES "internships" ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+INSERT INTO "students" ("email", "pronouns", "name", "picture", "banner", "about", "linkedin", "user_id")
+VALUES (
+	'smrdelb@gmail.com', 
+	'He/Him', 
+	'Bennett Smrdel', 
+	NULL, 
+	NULL, 
+	'not existant', 
+	'https://www.linkedin.com/in/bennett-smrdel-634893212/', 
+	1
+);
