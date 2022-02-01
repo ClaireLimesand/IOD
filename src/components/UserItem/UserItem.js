@@ -47,14 +47,14 @@ function UserItem({ dataItem }) {
     <div>
       <div className="head">
         <div className="top">
-          <img className="banner" src={dataItem.banner} />
+          <img className="banner" src={dataItem.banner} draggable={false} />
         </div>
 
         <div className="sub">
           <Stack direction="row" spacing={2}>
             <Avatar
               className="avatar"
-              alt="Caleb"
+              alt="profile_pic"
               src={dataItem.picture}
               sx={{ width: 200, height: 200 }}
             />
