@@ -1,11 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
+const cloudinary = require("cloudinary").v2;
 
 const app = express();
 
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
+
+cloudinary.uploader
+.upload('./public/images/profile_pic.jpeg', {
+    resource_type: "image",
+})
+.then((result) => {
+    console.log('success', JSON.stringify(result, null, 2));
+})
+.catch((error) => {
+    console.log('error', JSON.stringify(error, null, 2));
+});
 
 // Route includes
 const userRouter = require('./routes/user.router');

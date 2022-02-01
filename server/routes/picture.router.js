@@ -36,7 +36,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
         });
       })
       .catch((dberror) => {
-        console.log('Opps you messed up DB error', dberror);
+        console.log('Oops you messed up DB error', dberror);
         res.sendStatus(500)
       })   
     // endpoint functionality

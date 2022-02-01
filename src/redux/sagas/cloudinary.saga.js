@@ -6,7 +6,7 @@ function* uploadPicture(action) {
         yield axios({
             method: 'PUT',
             url: '/api/picture',
-            data: {picture: `images/${action.payload}`}
+            data: {picture: action.payload}
         });
     } catch(err) {
         console.error('GET error: ', err);
