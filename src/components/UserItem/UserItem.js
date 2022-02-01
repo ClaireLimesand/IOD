@@ -44,7 +44,7 @@ function UserItem({ dataItem }) {
 
     dispatch({
       type: 'UPLOAD_PICTURE',
-      payload: file
+      payload: {file: file}
     });
   }
 

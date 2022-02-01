@@ -7,13 +7,13 @@ function* uploadPicture(action) {
       }
     
     const pictureForm = new FormData();
-    pictureForm.append('image', action.payload.selectedFile);
+    pictureForm.append('image', action.payload.file);
+    console.log(action.payload.file);
 
     try {
         yield axios({
             method: 'PUT',
             url: '/api/picture',
-            data: {picture: action.payload},
             headers: headers,
             data: pictureForm
         });
