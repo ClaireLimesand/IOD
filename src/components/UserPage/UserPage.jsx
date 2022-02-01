@@ -2,6 +2,7 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 
 import UserItem from '../UserItem/UserItem';
+import Skills from '../Skills/Skills';
 
 function UserPage() {
   let fileURL;
@@ -33,6 +34,7 @@ function UserPage() {
       {profile.map((data) => {
         return <UserItem key={data.id} dataItem={data}/>
       })}
+      <Skills /> 
     </div>
   );
 }

@@ -20,6 +20,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import InternshipsPage from '../InternshipsPage/InternshipsPage';
 import HomePage from '../HomePage/HomePage';
+import EditSkill from '../EditSkill/EditSkill';
 
 import './App.css';
 
@@ -76,6 +77,14 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/editskill/:id"
+          >
+            <EditSkill />
           </ProtectedRoute>
 
           <Route

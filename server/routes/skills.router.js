@@ -68,4 +68,43 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+        
+    const sqlQuery = `
+        SELECT * FROM "skills"
+            WHERE id=$1
+    `;
+    const SqlValues = [
+        req.params.id
+    ];
+    pool.query(sqlQuery, SqlValues)
+    .then((dbRes) => {
+        res.send(dbRes.rows[0]);
+    })
+    .catch((dbErr) => {
+        res.sendStatus(500);
+    })
+});
+
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+    const sqlText = `
+        UPDATE skills
+            SET skill = $1
+            WHERE id = $2;
+    `;
+    const sqlValues = [
+        req.body.skill,
+        req.params.id
+    ];
+
+    pool.query(sqlText, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(200);
+        })
+        .catch((dbErr) => {
+            console.log('PUT skills error', dbErr);
+            res.sendStatus(500);
+        })
+});
+
 module.exports = router;
