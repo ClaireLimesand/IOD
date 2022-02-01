@@ -2,14 +2,16 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import { ListItemIcon } from "@mui/material";
-
+import { DropzoneDialog } from 'material-ui-dropzone';
 import "./UserItem.css";
 
 function UserItem({ dataItem }) {
   const dispatch = useDispatch();
+
+  const [pictureOpen, setPictureOpen] = useState(false);
   
   let resumeUrl;
 
@@ -66,7 +68,8 @@ function UserItem({ dataItem }) {
           <ListItemIcon>
             <EditIcon 
               id="edit-picture-icon" 
-              onClick={() => inputPicture.current.click()}
+              onClick={() => setPictureOpen(true)}
+              // onClick={() => inputPicture.current.click()}
             />
           </ListItemIcon>
           <div>
@@ -86,6 +89,23 @@ function UserItem({ dataItem }) {
           </div>
         </div>
       </div>
+
+      {/* Profile pic import dialogue */}
+      <DropzoneDialog
+        acceptedFiles={['image/*']}
+        cancelButtonText={"cancel"}
+        submitButtonText={"submit"}
+        maxFileSize={5000000}
+        open={pictureOpen}
+        onClose={() => setPictureOpen(false)}
+        onSave={(files) => {
+          console.log('Files:', files[0]);
+          setPictureOpen(false);
+          handleEditPicture(files[0]);
+        }}
+        showPreviews={true}
+        showFileNamesInPreview={true}
+      />
 
       {/* This input is invisible */}
       <input type="file" ref={inputPicture} onChange={handleEditPicture} style={{opacity: 0}} />
