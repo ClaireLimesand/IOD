@@ -2,6 +2,7 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
+import { useRef } from "react";
 
 import "./UserItem.css";
 
@@ -10,6 +11,8 @@ function UserItem({ dataItem }) {
   
   let resumeUrl;
   let pictureUrl;
+
+  const inputPicture = useRef(null);
 
   const handleUpload = (event) => {
     let file = event.target.files[0];
@@ -57,6 +60,7 @@ function UserItem({ dataItem }) {
               alt="profile_pic"
               src={dataItem.picture}
               sx={{ width: 200, height: 200 }}
+              onClick={() => inputPicture.current.click()}
             />
           </Stack>
           <div>
@@ -77,8 +81,8 @@ function UserItem({ dataItem }) {
         </div>
       </div>
 
-      {/* !-- TEMPORARY BUTTON --! */}
-      <input type="file" onChange={handleEditPicture} />
+      {/* This input is invisible */}
+      <input type="file" ref={inputPicture} onChange={handleEditPicture} style={{opacity: 0}} />
 
       <div className="about">
         <h3 className="about-text">About</h3>
