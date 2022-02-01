@@ -20,7 +20,8 @@ Container
 -------------------------------------------------------------------------------- */
 
 .container {
-  padding-left: 255px;
+  padding-left: 265px;
+  padding-right: 25px;
 }
 
 /* --------------------------------------------------------------------------------
@@ -112,6 +113,10 @@ input {
   margin-bottom: 10px;
 }
 
+.edit-input {
+  border: 0;
+}
+
 /* Internships page */
 .company-logo {
   width: 200px;
@@ -132,9 +137,4 @@ input {
 
 #internships-container {
   padding-top: 3rem;
-}
-
-
-.edit-input {
-  border: 0;
 }
