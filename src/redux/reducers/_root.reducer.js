@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   skills,
   internshipReducer,
-  profile,
+  profile
 });
 
 export default rootReducer;

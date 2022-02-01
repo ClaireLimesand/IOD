@@ -3,8 +3,8 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
 import { useRef } from "react";
-import { Badge, ListItemIcon } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import { ListItemIcon } from "@mui/material";
 
 import "./UserItem.css";
 
@@ -12,7 +12,6 @@ function UserItem({ dataItem }) {
   const dispatch = useDispatch();
   
   let resumeUrl;
-  let pictureUrl;
 
   const inputPicture = useRef(null);
 

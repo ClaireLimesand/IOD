@@ -8,7 +8,6 @@ function* uploadPicture(action) {
     
     const pictureForm = new FormData();
     pictureForm.append('image', action.payload.file);
-    console.log(action.payload.file);
 
     try {
         yield axios({
@@ -17,6 +16,7 @@ function* uploadPicture(action) {
             headers: headers,
             data: pictureForm
         });
+        document.location.reload();
     } catch(err) {
         console.error('GET error: ', err);
     }

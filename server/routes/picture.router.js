@@ -10,22 +10,6 @@ const cloudinary = require("cloudinary").v2;
 const cloudinaryUpload = require('../modules/cloudinary-config');
 
 router.put('/', rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {
-    // let pictureUrl;
-
-    // cloudinary.uploader
-    //   .upload('./public/images/profile_pic.jpeg', {
-    //       resource_type: "image",
-    //   })
-    //   .then((result) => {
-    //       console.log('success', JSON.stringify(result, null, 2));
-    //       pictureUrl = result.url;
-    //       console.log('URL!!!', pictureUrl);
-    //   })
-    //   .catch((error) => {
-    //       console.log('error', JSON.stringify(error, null, 2));
-    //   })
-    //   .then(() => {
-      
       // after the image uploads, we have access to req.file:
       console.log('nifty! req.file:', req.file)
       const pictureUrl = req.file.path;
