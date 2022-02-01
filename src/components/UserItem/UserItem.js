@@ -37,10 +37,10 @@ function UserItem({ dataItem }) {
     }
   };
 
-  const handleEditPicture = (event) => {
-    console.log(event);
+  const handleEditPicture = (file) => {
+    // console.log(event);
     
-    let file = event.target.files[0];
+    // let file = event.target.files[0];
     console.log(file);
 
     dispatch({
