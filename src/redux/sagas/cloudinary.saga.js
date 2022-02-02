@@ -43,9 +43,45 @@ function* uploadBanner(action) {
     }
 }
 
+// Gets students info to see if user already exists
+function* retrieveUser(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/profile',
+        });
+        console.log(response.data);
+        if (response.data.length === 0) {
+            console.log(false);
+            // call checkUser    
+            
+        }
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
+
+
+// Checks if the user has a profile
+// POST a new row to the students table if they don't exist
+function* checkUser(action) {
+    if (action.payload.exists === false) {
+        try {
+            yield axios({
+                method: 'POST',
+                url: '/api/profile',
+                data: {}
+            });
+        } catch(err) {
+            console.error('GET error: ', err);
+        }
+    }
+}
+
 function* cloudinarySaga() {
   yield takeLatest('UPLOAD_PICTURE', uploadPicture);
   yield takeLatest('UPLOAD_BANNER', uploadBanner);
+  yield takeLatest('CHECK_USER_EXISTS', retrieveUser);
 }
 
 export default cloudinarySaga;
