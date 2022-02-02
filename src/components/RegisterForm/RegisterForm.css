@@ -11,7 +11,8 @@
   
 .register-globe {
     height: 200px;
-    animation: globe 0.5s ease both;
+    animation: globe 0.8s ease both;
+    animation-delay: 0.3s;
 }
 
 #register-text {
@@ -24,6 +25,8 @@
 .register-gradient {
     height: 10px;
     padding-bottom: 15px;
+    animation: gradient 0.8s ease both;
+    animation-delay: 0.3s;
 }
 
 .register-inputs {
@@ -95,5 +98,15 @@
 
     to {
     transform: rotate(360deg);
+    }
+}
+
+@keyframes gradient {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+    transform: scaleX(1);
     }
 }
