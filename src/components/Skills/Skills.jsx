@@ -3,10 +3,10 @@ import { useHistory } from "react-router";
 import {useDispatch, useSelector} from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import { useState } from 'react';
+
 import './Skills.css';
 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
@@ -17,7 +17,7 @@ import EditIcon from '@mui/icons-material/Edit';
 const style = {
     position: 'absolute',
     top: '50%',
-    left: '50%',
+    left: '60%',
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',

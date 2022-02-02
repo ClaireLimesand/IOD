@@ -1,0 +1,11 @@
+.edit-skill {
+    background-color: #E8E9EE;
+    width: 550px;
+    margin-top: 20px;
+    margin-left: 40px;
+    box-shadow: 0 6px 3px -2px rgba(0, 0, 0, 0.301);
+}
+
+.edit-skill-input {
+    width: 50%;
+}

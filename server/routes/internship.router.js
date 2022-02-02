@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  rejectUnauthenticated,
+    rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
@@ -20,6 +20,29 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         console.log('Oops you messed up DB error', dberror);
         res.sendStatus(500)
     })  
+});
+
+router.post('/', rejectUnauthenticated, (req, res) => {
+    
+    const sqlQuery =`INSERT INTO "internships" ("company_name", "company_subtitle", "start_date", "end_date", "company_logo", "company_description")
+        VALUES ($1, $2, $3, $4, $5, $6);`
+    const sqlValues = [
+        req.body.companyName,
+        req.body.subtitle,
+        req.body.startDate,
+        req.body.endDate,
+        req.user.logo,
+        req.body.description
+    ];
+    
+    pool.query(sqlQuery, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(201);
+        })
+        .catch((dbErr) => {
+            console.error('POST internship error', dbErr);
+            res.sendStatus(500);
+        })
 });
 
 // router.post('/', rejectUnauthenticated, (req, res) => {
