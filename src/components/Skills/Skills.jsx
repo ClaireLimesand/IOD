@@ -33,6 +33,7 @@ function Skills() {
     const store = useReduxStore();
 
     const skills = useSelector((store) => store.skillsReducer);
+    const user = useSelector((store) => store.user);
 
     const [skill, setSkill] = useState('');
     const [open, setOpen] = React.useState(false);
@@ -70,7 +71,6 @@ function Skills() {
             >
                 <AddIcon />
             </IconButton>
-            
             </h3>
             
             {store.skills.map((skill, i) => (

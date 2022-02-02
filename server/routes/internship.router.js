@@ -15,7 +15,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     `;
 
     pool.query(sqlText)
-        .then((dbres) => res.send(dbres.rows[0]))
+        .then((dbres) => res.send(dbres.rows))
         .catch((dberror) => {
         console.log('Oops you messed up DB error', dberror);
         res.sendStatus(500)

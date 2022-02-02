@@ -10,6 +10,7 @@ function* fetchInternships(action) {
         })
         
         // Update the internships
+        console.log(response.data)
         yield put({
             type: 'SET_INTERNSHIPS',
             payload: response.data
