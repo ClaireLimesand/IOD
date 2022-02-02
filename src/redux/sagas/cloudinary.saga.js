@@ -53,8 +53,10 @@ function* retrieveUser(action) {
         console.log(response.data);
         if (response.data.length === 0) {
             console.log(false);
-            // call checkUser    
-            
+            // Add a new user to the students table  
+            yield put({
+                type: 'NEW_USER',
+            });
         }
     } catch(err) {
         console.error('GET error: ', err);
@@ -65,16 +67,13 @@ function* retrieveUser(action) {
 // Checks if the user has a profile
 // POST a new row to the students table if they don't exist
 function* checkUser(action) {
-    if (action.payload.exists === false) {
-        try {
-            yield axios({
-                method: 'POST',
-                url: '/api/profile',
-                data: {}
-            });
-        } catch(err) {
-            console.error('GET error: ', err);
-        }
+    try {
+        yield axios({
+            method: 'POST',
+            url: '/api/profile',
+        });
+    } catch(err) {
+        console.error('GET error: ', err);
     }
 }
 
@@ -82,6 +81,7 @@ function* cloudinarySaga() {
   yield takeLatest('UPLOAD_PICTURE', uploadPicture);
   yield takeLatest('UPLOAD_BANNER', uploadBanner);
   yield takeLatest('CHECK_USER_EXISTS', retrieveUser);
+  yield takeLatest('NEW_USER', checkUser);
 }
 
 export default cloudinarySaga;
