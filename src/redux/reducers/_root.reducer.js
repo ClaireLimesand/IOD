@@ -4,6 +4,7 @@ import user from './user.reducer';
 import skills from './skills.reducer';
 import internshipReducer from './internship.reducer';
 import profile from './profile.reducer';
+import editSkill from './edit.skill.reducer';
 import announcements from './announcements.reducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   skills,
   internshipReducer,
   profile,
+  editSkill,
   announcements,
 });
 

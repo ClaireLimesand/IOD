@@ -5,14 +5,14 @@ import useReduxStore from '../../hooks/useReduxStore';
 import { useState } from 'react';
 import './Skills.css';
 
-import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
-import CheckIcon from '@mui/icons-material/Check';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
 
 const style = {
     position: 'absolute',
@@ -36,6 +36,7 @@ function Skills() {
 
     const [skill, setSkill] = useState('');
     const [open, setOpen] = React.useState(false);
+    const [editOpen, editSetOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     
@@ -47,27 +48,13 @@ function Skills() {
         const newSkill = {
             skill: skill
         }
-        console.log('new skill!!!', newSkill)
         dispatch({
             type: 'ADD_SKILL',
             payload: newSkill
         })
     }; 
 
-    const handleEditSkillButton = (id) => {
-        console.log('skill change!!', id)
-        // dispatch({
-        //     type: 'EDIT_SKILL',
-        //     payload: event.target.value
-        // })
-    };
-
-    const handleIdeaChange = () => {
-        console.log('skill change!!')
-    };
-    
     const handleDeleteSkillButton = (id) => {
-        console.log('skill ID', id)
         dispatch({
             type: 'DELETE_SKILL',
             payload: id
@@ -75,14 +62,38 @@ function Skills() {
     };  
 
     return (
-        <div>
+        <div className="skills">
             
-            <h4>Skills</h4>
+            <h3 className="skills-text">Skills
+            <IconButton
+                onClick={handleOpen}
+            >
+                <AddIcon />
+            </IconButton>
+            
+            </h3>
+            
             {store.skills.map((skill, i) => (
-            <p key={i}>{skill.skill}</p>
+            <p className="skills-list" key={i}>{skill.skill}
+            
+            <IconButton
+                onClick={() => {
+                    history.push(`/editskill/${skill.id}`);
+                    }}
+            >
+                <EditIcon />
+            </IconButton>
+
+            <IconButton
+                onClick={() => handleDeleteSkillButton(skill.id)}
+            >
+                <ClearIcon />
+            </IconButton>
+            
+            </p>
             ))
             }
-            <Button onClick={handleOpen}>Edit Skills</Button>
+            
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -95,7 +106,7 @@ function Skills() {
                     Add A Skill
                 </Typography>
                 
-                <TextField 
+                <input 
                 value={skill}
                 onChange={(event) => setSkill(event.target.value)}
                 />
@@ -103,36 +114,9 @@ function Skills() {
                 <button onClick={handleSaveSkillButton}>
                     Add Skill
                 </button>
-                
-                {store.skills.map((skill, i) => (
-                    <div>
-                    <input
-                    class="skill_input"
-                    key={i}
-                    value={skill.skill}
-                    onClick
-                    onChange={handleIdeaChange}
-                    />
-                        <IconButton
-                        onClick={() => handleEditSkillButton(skill.id)}
-                        >
-                            <CheckIcon />
-                        </IconButton>
-                        
-                        <IconButton
-                        onClick={() => handleDeleteSkillButton(skill.id)}
-                        >
-                            <ClearIcon />
-                        </IconButton>
-                    
-                    </div>
-                
-                    ))
-                }
 
                 </Box>
-            </Modal>
-
+            </Modal>     
         </div>
     );
 
