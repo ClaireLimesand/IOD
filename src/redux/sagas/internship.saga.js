@@ -36,7 +36,7 @@ function* addInternship(action) {
 
 function* internshipSaga() {
     yield takeLatest('FETCH_INTERNSHIPS', fetchInternships);
-    yield takeLatest('ADD_INTERNSHIPS', addInternship);
+    yield takeLatest('ADD_INTERNSHIP', addInternship);
 }
 
 export default internshipSaga;

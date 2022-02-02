@@ -41,7 +41,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(201);
         })
         .catch((dbErr) => {
-            console.error('POST friends error', dbErr);
+            console.error('POST skills error', dbErr);
             res.sendStatus(500);
         })
 });

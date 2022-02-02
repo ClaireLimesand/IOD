@@ -52,10 +52,10 @@ function InternshipsPage() {
         const newInternship = {
             companyName: companyName,
             subtitle: subtitle,
-            description: description,
             logo: logo,
             startDate: startDate,
-            endDate: endDate
+            endDate: endDate,
+            description: description,
         }
         console.log(newInternship)
         dispatch({
@@ -112,9 +112,15 @@ function InternshipsPage() {
                 />
 
                 <input 
-                placeholder="internship description"
+                placeholder="internship end date"
                 value={endDate}
                 onChange={(event) => setEndDate(event.target.value)}
+                />
+
+                <input 
+                placeholder="internship description"
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
                 />
                 
                 <button onClick={handleSaveButton}>
