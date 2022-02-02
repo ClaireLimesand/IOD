@@ -12,6 +12,9 @@ function UserPage() {
 
   useEffect(() => {
     dispatch({
+      type: 'FETCH_PROFILE'
+    });
+    dispatch({
       type: 'CHECK_USER_EXISTS'
     });
   }, [])

@@ -6,7 +6,6 @@ import { useRef, useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import { ListItemIcon } from "@mui/material";
 import { DropzoneDialog } from 'material-ui-dropzone';
-import { useHistory } from "react-router-dom";
 import "./UserItem.css";
 import { Badge } from "@mui/material";
 
@@ -18,21 +17,16 @@ function UserItem({ dataItem }) {
   
   let resumeUrl;
 
-  const inputPicture = useRef(null);
-  
-  let fileURL;
-  const history = useHistory();
-
   const handleUpload = (event) => {
     let file = event.target.files[0];
     console.log(file);
 
-    // if (file.type != "application/pdf") {
-    //   console.error(file.name, "is not a pdf file.");
-    // } else {
+    if (file.type != "application/pdf") {
+      console.error(file.name, "is not a pdf file.");
+    } else {
       console.log(file.name, "Successful upload");
       resumeUrl = URL.createObjectURL(file);
-    // }
+    }
   };
 
   const handleSubmit = () => {
@@ -62,9 +56,7 @@ function UserItem({ dataItem }) {
   }
 
   const handleLinkedClick = () => {
-    const pdfWindow = window.open();
-    pdfWindow.location.href = fileURL;
-    history.push('/user');
+    window.open(dataItem.linkedin);
   };
 
   return (
@@ -82,7 +74,6 @@ function UserItem({ dataItem }) {
               </ListItemIcon>
             }
           >
-            
           </Badge>
         </div>
 
@@ -107,7 +98,9 @@ function UserItem({ dataItem }) {
               <p className="pronouns">{dataItem.pronouns}</p>
             </div>
             <p className="email">{dataItem.email}</p>
-            <a href={dataItem.linkedin} onClick={handleLinkedClick}>Link to LinkedIn</a>
+            {dataItem.linkedin &&
+            <img src="linkedIn-icon.png" onClick={handleLinkedClick} className="profile-link" draggable={false} />
+            }
           </div>
 
           <div className="resume">
