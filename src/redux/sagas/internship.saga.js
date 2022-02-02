@@ -19,8 +19,24 @@ function* fetchInternships(action) {
     }
 }
 
+function* addInternship(action) {
+    try {
+        const response = yield axios({
+            method: 'POST',
+            url: '/api/internship',
+            data: action.payload
+        })
+        yield put({
+            type: 'FETCH_INTERNSHIPS'
+        })
+    } catch (err) {
+        console.log('POST internhsip error:', err);
+    }
+}
+
 function* internshipSaga() {
-  yield takeLatest('FETCH_INTERNSHIPS', fetchInternships);
+    yield takeLatest('FETCH_INTERNSHIPS', fetchInternships);
+    yield takeLatest('ADD_INTERNSHIPS', addInternship);
 }
 
 export default internshipSaga;
