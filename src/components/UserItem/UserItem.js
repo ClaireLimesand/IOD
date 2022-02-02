@@ -7,11 +7,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import { ListItemIcon } from "@mui/material";
 import { DropzoneDialog } from 'material-ui-dropzone';
 import "./UserItem.css";
+import { Badge } from "@mui/material";
 
 function UserItem({ dataItem }) {
   const dispatch = useDispatch();
 
   const [pictureOpen, setPictureOpen] = useState(false);
+  const [bannerOpen, setBannerOpen] = useState(false);
   
   let resumeUrl;
 
@@ -38,13 +40,19 @@ function UserItem({ dataItem }) {
   };
 
   const handleEditPicture = (file) => {
-    // console.log(event);
-    
-    // let file = event.target.files[0];
     console.log(file);
 
     dispatch({
       type: 'UPLOAD_PICTURE',
+      payload: {file: file}
+    });
+  }
+
+  const handleEditBanner = (file) => {
+    console.log(file);
+
+    dispatch({
+      type: 'UPLOAD_BANNER',
       payload: {file: file}
     });
   }
@@ -54,6 +62,18 @@ function UserItem({ dataItem }) {
       <div className="head">
         <div className="top">
           <img className="banner" src={dataItem.banner} draggable={false} />
+          <Badge
+            badgeContent={
+              <ListItemIcon>
+                <EditIcon 
+                  id="edit-banner-icon" 
+                  onClick={() => setBannerOpen(true)}
+                />
+              </ListItemIcon>
+            }
+          >
+            
+          </Badge>
         </div>
 
         <div className="sub">
@@ -69,7 +89,6 @@ function UserItem({ dataItem }) {
             <EditIcon 
               id="edit-picture-icon" 
               onClick={() => setPictureOpen(true)}
-              // onClick={() => inputPicture.current.click()}
             />
           </ListItemIcon>
           <div>
@@ -107,8 +126,22 @@ function UserItem({ dataItem }) {
         showFileNamesInPreview={true}
       />
 
-      {/* This input is invisible */}
-      <input type="file" ref={inputPicture} onChange={handleEditPicture} style={{opacity: 0}} />
+      {/* Banner import dialogue */}
+      <DropzoneDialog
+        acceptedFiles={['image/*']}
+        cancelButtonText={"cancel"}
+        submitButtonText={"submit"}
+        maxFileSize={5000000}
+        open={bannerOpen}
+        onClose={() => setBannerOpen(false)}
+        onSave={(files) => {
+          console.log('Files:', files[0]);
+          setBannerOpen(false);
+          handleEditBanner(files[0]);
+        }}
+        showPreviews={true}
+        showFileNamesInPreview={true}
+      />
 
       <div className="about">
         <h3 className="about-text">About</h3>

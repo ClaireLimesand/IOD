@@ -26,12 +26,6 @@
     left: 3vw;
 }
 
-/* .avatar:hover {
-    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
-    cursor: pointer;
-    transform: scale(1.02,1.02);
-} */
-
 .student-name {
     margin-bottom: 10px;
 }
@@ -112,6 +106,20 @@
 }
 
 #edit-picture-icon:hover {
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    cursor: pointer;
+    transform: scale(1.02,1.02);
+}
+
+#edit-banner-icon {
+    margin-top: 40px;
+    transition: ease 0.3s;
+    border: 1px solid rgba(0, 0, 0, 0.295);
+    border-radius: 30px;
+    padding: 5px;
+}
+
+#edit-banner-icon:hover {
     box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
     cursor: pointer;
     transform: scale(1.02,1.02);

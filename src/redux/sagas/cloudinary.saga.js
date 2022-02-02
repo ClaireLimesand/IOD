@@ -22,8 +22,30 @@ function* uploadPicture(action) {
     }
 }
 
+function* uploadBanner(action) {
+    const headers = {
+        'content-type': 'multipart/form-data'
+      }
+    
+    const bannerForm = new FormData();
+    bannerForm.append('image', action.payload.file);
+
+    try {
+        yield axios({
+            method: 'PUT',
+            url: '/api/banner',
+            headers: headers,
+            data: bannerForm
+        });
+        document.location.reload();
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
+
 function* cloudinarySaga() {
   yield takeLatest('UPLOAD_PICTURE', uploadPicture);
+  yield takeLatest('UPLOAD_BANNER', uploadBanner);
 }
 
 export default cloudinarySaga;
