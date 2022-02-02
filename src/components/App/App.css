@@ -20,7 +20,8 @@ Container
 -------------------------------------------------------------------------------- */
 
 .container {
-  padding-left: 255px;
+  padding-left: 265px;
+  padding-right: 25px;
 }
 
 /* --------------------------------------------------------------------------------
@@ -96,6 +97,26 @@ Alert
 Form Treatment
 -------------------------------------------------------------------------------- */
 
+.formPanel {
+  box-sizing: border-box;
+  width: 400px;
+  max-width: 100%;
+  padding: 25px;
+  margin: 0 auto 20px;
+  background-color: #efefef;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+}
+
+input {
+  margin: 5px;
+  margin-bottom: 10px;
+}
+
+.edit-input {
+  border: 0;
+}
+
 /* Internships page */
 .company-logo {
   width: 200px;
@@ -116,9 +137,4 @@ Form Treatment
 
 #internships-container {
   padding-top: 3rem;
-}
-
-
-.edit-input {
-  border: 0;
 }
