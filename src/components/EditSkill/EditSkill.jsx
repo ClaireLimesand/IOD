@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { useState } from 'react';
 import { useHistory } from "react-router";
 import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import "./EditSkill.css";
+
 import IconButton from '@mui/material/IconButton';
 import CheckIcon from '@mui/icons-material/Check';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function EditSkill() {
     const history = useHistory();
@@ -40,21 +42,35 @@ function EditSkill() {
         history.push(`/user`)
     }
 
+    const handleBack = (e) => {
+        e.preventDefault();
+        history.push(`/user`)
+    }
+
     return (
         <div className="container">
+            <div className="edit-skill">
 
-        <input
-            value={editSkillReducer.skill || ""}
-            onChange={handleSkillChange}
-        >
-        </input>
+            <input
+                className="edit-skill-input"
+                value={editSkillReducer.skill || ""}
+                onChange={handleSkillChange}
+            >
+            </input>
 
-        <IconButton
-            onClick={handleSubmit}
-        >
-                <CheckIcon />
-        </IconButton>
-                
+            <IconButton
+                onClick={handleSubmit}
+            >
+                    <CheckIcon />
+            </IconButton>
+
+            <IconButton
+                onClick={handleBack}
+            >
+                    <ArrowBackIcon />
+            </IconButton>
+            
+            </div>
         </div>
     );
 }

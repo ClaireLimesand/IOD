@@ -15,8 +15,12 @@ CREATE TABLE "user" (
 
 CREATE TABLE "internships" (
 	"id" SERIAL PRIMARY KEY,
-	"company_name" VARCHAR(300),
-	"date" TEXT
+	"company_name" VARCHAR(255),
+	"company_subtitle" TEXT,
+	"start_date" DATE,
+	"end_date" DATE,
+	"company_logo" TEXT,
+	"company_description" TEXT
 );
 
 CREATE TABLE "message_types" (
@@ -63,3 +67,9 @@ CREATE TABLE "skills" (
 	"skill" TEXT,
 	"user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+-- test data
+
+INSERT INTO "internships" ("id", "company_name", "start_date", "end_date", "company_logo", "company_subtitle", "company_description") 
+VALUES ('1', '3M', '2022-06-24', '2022-08-24', '3m_logo.png', 'Design Research and Innovation', 'Paired with leading scientists and 
+resources, you’ll have the opportunity to learn new methods and gain experience on key equipment.');
