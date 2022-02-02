@@ -1,37 +1,42 @@
-.formPanel {
+#formPanel {
     box-sizing: border-box;
     width: 300px;
     height: 500px;
     max-width: 100%;
     padding: 25px;
-    margin: 130px auto 20px;
-    margin-left: 640px;
     background-color: #efefef;
     border-radius: 45px;
     box-shadow: 0 12px 4px rgba(255, 255, 255, 0.4);
-  }
+}
   
 .register-globe {
-    position: relative;
-    bottom: 50px;
-  }
+    height: 200px;
+    animation: globe 0.5s ease both;
+}
 
 #register-text {
-    position: relative;
-    bottom: 110px;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: bold;
+    cursor: text;
+    padding-bottom: 4px;
 }
 
 .register-gradient {
-    position: relative;
-    bottom: 110px;
     height: 10px;
+    padding-bottom: 15px;
 }
 
 .register-inputs {
-    position: relative;
-    bottom: 100px;
+    margin-bottom: 13px;
+}
+
+.register-inputs input:hover {
+    transition: ease 0.3s;
+    transform: scale(1.03, 1.03);
+}
+
+.register-inputs input:focus {
+    background-color: #19c9ab29;
 }
 
 .register-username {
@@ -70,9 +75,25 @@
     border: none;
     background-color: #18C9AB;
     box-shadow: 0 4px 2px rgba(98, 98, 98, 0.493);
-    margin-bottom: 10px;
+    cursor: pointer;
+    transition: ease 0.3s;
+    margin-bottom: 16px;
+}
+
+.register-button:hover {
+    transform: scale(1.03, 1.03);
 }
 
 .register-button:hover {
     background-color: #15B097;
+}
+
+@keyframes globe {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+    transform: rotate(360deg);
+    }
 }
