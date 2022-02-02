@@ -1,9 +1,16 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
-
+import {useSelector, useDispatch } from 'react-redux';
 import UserItem from '../UserItem/UserItem';
+import {useEffect} from 'react';
 
 function UserPage() {
+ // this component doesn't do much to start, just renders some user reducer info to the DOM
+  const profile = useSelector((store) => store.profile);
+
+  const dispatch= useDispatch();
+  useEffect (()=>{
+    dispatch({type:'FETCH_USER'})
+  },[profile.value])
   let fileURL;
 
   const handleUpload = (event) => {
@@ -23,9 +30,6 @@ function UserPage() {
     const pdfWindow = window.open();
     pdfWindow.location.href = fileURL; 
   }
-
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
-  const profile = useSelector((store) => store.profile);
 
 
   return (
