@@ -4,12 +4,19 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 import Internship from '../Internship/Internship';
+import './InternshipPage.css';
 
+import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+
+import TextField from '@mui/material/TextField';
+import DateRangePicker from '@mui/lab/DateRangePicker';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 const style = {
     position: 'absolute',
@@ -20,7 +27,7 @@ const style = {
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 6,
 };
 
 function InternshipsPage() {
@@ -34,8 +41,10 @@ function InternshipsPage() {
     const [subtitle, setSubtitle] = useState('');
     const [description, setDescription] = useState('');
     const [logo, setLogo] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+    const [dateRange, setDateRange] = React.useState([null, null]);
+
+    const startDate= dateRange[0];
+    const endDate = dateRange[1];
 
     const [open, setOpen] = React.useState(false);
     const [editOpen, editSetOpen] = React.useState(false);
@@ -49,6 +58,8 @@ function InternshipsPage() {
     }, [])
 
     const handleSaveButton = () => {
+        console.log(startDate)
+        console.log(endDate)
         const newInternship = {
             companyName: companyName,
             subtitle: subtitle,
@@ -62,6 +73,7 @@ function InternshipsPage() {
             type: 'ADD_INTERNSHIP',
             payload: newInternship
         })
+        setOpen(false)
     }; 
 
     return (
@@ -84,48 +96,73 @@ function InternshipsPage() {
                 <Box sx={style}>
                 
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Add An Intership
+                    New Intership
                 </Typography>
                 
                 <input 
+                className="internship-input"
                 placeholder="company name"
                 value={companyName}
                 onChange={(event) => setCompanyName(event.target.value)}
                 />
 
                 <input 
+                className="internship-input"
                 placeholder="internship subtitle"
                 value={subtitle}
                 onChange={(event) => setSubtitle(event.target.value)}
                 />
 
                 <input 
+                className="internship-input"
                 placeholder="logo picture"
                 value={logo}
                 onChange={(event) => setLogo(event.target.value)}
                 />
 
-                <input 
-                placeholder="internship start date"
-                value={startDate}
-                onChange={(event) => setStartDate(event.target.value)}
-                />
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DateRangePicker
+                        startText="internship start date"
+                        endText="internship end date"
+                        value={dateRange}
+                        onChange={(newValue) => {
+                        setDateRange(newValue);
+                        }}
+                        renderInput={(startProps, endProps) => (
+                        <React.Fragment>
+                            <TextField {...startProps} />
+                            <Box sx={{ mx: 2 }}> to </Box>
+                            <TextField {...endProps} />
+                        </React.Fragment>
+                        )}
+                    />
+                </LocalizationProvider>
 
-                <input 
-                placeholder="internship end date"
-                value={endDate}
-                onChange={(event) => setEndDate(event.target.value)}
-                />
-
-                <input 
+                <textarea 
+                rows="5"
+                className="internship-description"
                 placeholder="internship description"
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
                 />
                 
-                <button onClick={handleSaveButton}>
-                    Add Internship
-                </button>
+                <Button 
+                    size="small" 
+                    variant='contained' 
+                    sx={{ backgroundColor: '#15B097' }}
+                    onClick={handleSaveButton}
+                >
+                    Save
+                </Button>
+                
+                <Button 
+                    size="small" 
+                    variant='contained' 
+                    sx={{ backgroundColor: '#15B097' }}
+                    onClick={handleClose}
+                >
+                    Cancel
+                </Button>
 
                 </Box>
             </Modal>    
