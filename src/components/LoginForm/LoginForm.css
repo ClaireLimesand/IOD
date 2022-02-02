@@ -1,0 +1,78 @@
+.formPanel {
+    box-sizing: border-box;
+    width: 300px;
+    height: 500px;
+    max-width: 100%;
+    padding: 25px;
+    margin: 130px auto 20px;
+    margin-left: 640px;
+    background-color: #efefef;
+    border-radius: 45px;
+    box-shadow: 0 12px 4px rgba(255, 255, 255, 0.4);
+  }
+  
+.login-globe {
+    position: relative;
+    bottom: 50px;
+  }
+
+#login-text {
+    position: relative;
+    bottom: 110px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.login-gradient {
+    position: relative;
+    bottom: 110px;
+    height: 10px;
+}
+
+.login-inputs {
+    position: relative;
+    bottom: 100px;
+}
+
+.login-username {
+    width: 230px;
+    height: 30px;
+    margin: 5px;
+    margin-bottom: 20px;
+    border-radius: 100px;
+    border: none;
+    padding-left: 10px;
+    background-color: #E8E9EE;
+}
+
+.login-password {
+    width: 230px;
+    height: 30px;
+    margin: 5px;
+    border-radius: 100px;
+    border: none;
+    padding-left: 10px;
+    background-color: #E8E9EE;
+}
+
+.login-main-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-button {
+    width: 130px;
+    height: 45px;
+    font-size: larger;
+    color: white;
+    border-radius: 15px;
+    border: none;
+    background-color: #18C9AB;
+    box-shadow: 0 4px 2px rgba(98, 98, 98, 0.493);
+    margin-bottom: 10px;
+}
+
+.login-button:hover {
+    background-color: #15B097;
+}

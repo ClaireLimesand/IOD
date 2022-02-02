@@ -4,6 +4,8 @@ import user from './user.reducer';
 import skills from './skills.reducer';
 import internshipReducer from './internship.reducer';
 import profile from './profile.reducer';
+import editSkill from './edit.skill.reducer';
+import announcements from './announcements.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -16,7 +18,9 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   skills,
   internshipReducer,
-  profile
+  profile,
+  editSkill,
+  announcements,
 });
 
 export default rootReducer;
