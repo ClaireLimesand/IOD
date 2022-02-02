@@ -1,12 +1,25 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-
+import { useDispatch } from "react-redux";
+import { useRef, useState } from "react";
+import EditIcon from '@mui/icons-material/Edit';
+import { ListItemIcon } from "@mui/material";
+import { DropzoneDialog } from 'material-ui-dropzone';
 import { useHistory } from "react-router-dom";
-
 import "./UserItem.css";
+import { Badge } from "@mui/material";
 
 function UserItem({ dataItem }) {
+  const dispatch = useDispatch();
+
+  const [pictureOpen, setPictureOpen] = useState(false);
+  const [bannerOpen, setBannerOpen] = useState(false);
+  
+  let resumeUrl;
+
+  const inputPicture = useRef(null);
+  
   let fileURL;
   const history = useHistory();
 
@@ -14,19 +27,39 @@ function UserItem({ dataItem }) {
     let file = event.target.files[0];
     console.log(file);
 
-    if (file.type != "application/pdf") {
-      console.error(file.name, "is not a pdf file.");
-    } else {
+    // if (file.type != "application/pdf") {
+    //   console.error(file.name, "is not a pdf file.");
+    // } else {
       console.log(file.name, "Successful upload");
-      fileURL = URL.createObjectURL(file);
-    }
+      resumeUrl = URL.createObjectURL(file);
+    // }
   };
 
   const handleSubmit = () => {
     //Open the URL on new Window
-    const pdfWindow = window.open();
-    pdfWindow.location.href = fileURL;
+    if (resumeUrl) {
+      const pdfWindow = window.open();
+      pdfWindow.location.href = resumeUrl;
+    }
   };
+
+  const handleEditPicture = (file) => {
+    console.log(file);
+
+    dispatch({
+      type: 'UPLOAD_PICTURE',
+      payload: {file: file}
+    });
+  }
+
+  const handleEditBanner = (file) => {
+    console.log(file);
+
+    dispatch({
+      type: 'UPLOAD_BANNER',
+      payload: {file: file}
+    });
+  }
 
   const handleLinkedClick = () => {
     const pdfWindow = window.open();
@@ -38,18 +71,36 @@ function UserItem({ dataItem }) {
     <div>
       <div className="head">
         <div className="top">
-          <img className="banner" src={dataItem.banner} />
+          <img className="banner" src={dataItem.banner} draggable={false} />
+          <Badge
+            badgeContent={
+              <ListItemIcon>
+                <EditIcon 
+                  id="edit-banner-icon" 
+                  onClick={() => setBannerOpen(true)}
+                />
+              </ListItemIcon>
+            }
+          >
+            
+          </Badge>
         </div>
 
         <div className="sub">
           <Stack direction="row" spacing={2}>
             <Avatar
               className="avatar"
-              alt="Caleb"
+              alt="profile_pic"
               src={dataItem.picture}
               sx={{ width: 200, height: 200 }}
             />
           </Stack>
+          <ListItemIcon>
+            <EditIcon 
+              id="edit-picture-icon" 
+              onClick={() => setPictureOpen(true)}
+            />
+          </ListItemIcon>
           <div>
             <div className="name-pros">
               <h2 className="student-name">{dataItem.name}</h2>
@@ -67,6 +118,40 @@ function UserItem({ dataItem }) {
           </div>
         </div>
       </div>
+
+      {/* Profile pic import dialogue */}
+      <DropzoneDialog
+        acceptedFiles={['image/*']}
+        cancelButtonText={"cancel"}
+        submitButtonText={"submit"}
+        maxFileSize={5000000}
+        open={pictureOpen}
+        onClose={() => setPictureOpen(false)}
+        onSave={(files) => {
+          console.log('Files:', files[0]);
+          setPictureOpen(false);
+          handleEditPicture(files[0]);
+        }}
+        showPreviews={true}
+        showFileNamesInPreview={true}
+      />
+
+      {/* Banner import dialogue */}
+      <DropzoneDialog
+        acceptedFiles={['image/*']}
+        cancelButtonText={"cancel"}
+        submitButtonText={"submit"}
+        maxFileSize={5000000}
+        open={bannerOpen}
+        onClose={() => setBannerOpen(false)}
+        onSave={(files) => {
+          console.log('Files:', files[0]);
+          setBannerOpen(false);
+          handleEditBanner(files[0]);
+        }}
+        showPreviews={true}
+        showFileNamesInPreview={true}
+      />
 
       <div className="about">
         <h3 className="about-text">About</h3>

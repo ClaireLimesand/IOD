@@ -68,8 +68,35 @@ CREATE TABLE "skills" (
 	"user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+
 -- test data
 
 INSERT INTO "internships" ("id", "company_name", "start_date", "end_date", "company_logo", "company_subtitle", "company_description") 
 VALUES ('1', '3M', '2022-06-24', '2022-08-24', '3m_logo.png', 'Design Research and Innovation', 'Paired with leading scientists and 
 resources, you’ll have the opportunity to learn new methods and gain experience on key equipment.');
+
+CREATE TABLE "announcements" (
+	"id" SERIAL PRIMARY KEY,
+	"message" TEXT
+);
+
+CREATE TABLE "users_internships" (
+	"id" SERIAL PRIMARY KEY,
+	"start_date" DATE,
+	"end_date" DATE,
+	"user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE,
+	"internship_id" INT REFERENCES "internships" ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO "students" ("email", "pronouns", "name", "picture", "banner", "about", "linkedin", "user_id")
+VALUES (
+	'smrdelb@gmail.com', 
+	'He/Him', 
+	'Bennett Smrdel', 
+	NULL, 
+	NULL, 
+	'not existant', 
+	'https://www.linkedin.com/in/bennett-smrdel-634893212/', 
+	1
+);
+
