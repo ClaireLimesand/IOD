@@ -62,19 +62,19 @@ function Skills() {
     };  
 
     return (
-        <div>
+        <div className="skills">
             
-            <h4>Skills
+            <h3 className="skills-text">Skills
             <IconButton
                 onClick={handleOpen}
             >
                 <AddIcon />
             </IconButton>
             
-            </h4>
+            </h3>
             
             {store.skills.map((skill, i) => (
-            <p key={i}>{skill.skill}
+            <p className="skills-list" key={i}>{skill.skill}
             
             <IconButton
                 onClick={() => {

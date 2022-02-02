@@ -1,3 +1,25 @@
 .skill_input {
     border: 0;
 }
+
+.skills {
+    background-color: #E8E9EE;
+    width: 550px;
+    margin-left: 40px;
+    box-shadow: 0 6px 3px -2px rgba(0, 0, 0, 0.301);
+}
+
+.skills-text {
+    margin-left: 30px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    width: 500px;
+    border-bottom: 2px solid gray;
+}
+
+.skills-list {
+    margin-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 500px;
+}
