@@ -32,6 +32,7 @@ function App() {
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
     dispatch({ type: 'FETCH_PROFILE'});
+    dispatch({ type: 'FETCH_ANNOUNCEMENTS'});
   }, [dispatch]);
 
   return (

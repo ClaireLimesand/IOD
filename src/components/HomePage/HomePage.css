@@ -1,0 +1,19 @@
+.home-header {
+    background-image: url('/public/images/login-background.jpeg');
+    background-repeat: repeat-x;
+    background-position: bottom;
+    padding-bottom: 100px;
+    width: 1170px;
+    height: 100px;
+    opacity: 30%;
+    margin-top: 10px;
+}
+
+.home-header-text {
+    position: relative;
+    bottom: 100px;
+    left: 25px;
+    font-size: 50px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom: 0;
+}
