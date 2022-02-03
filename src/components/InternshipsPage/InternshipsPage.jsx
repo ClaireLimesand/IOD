@@ -10,8 +10,6 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import IconButton from '@mui/material/IconButton';
-import AddIcon from '@mui/icons-material/Add';
 
 import TextField from '@mui/material/TextField';
 import DateRangePicker from '@mui/lab/DateRangePicker';
@@ -80,11 +78,14 @@ function InternshipsPage() {
         <div className="container">
             <h1 id='internships-page-title'>Internships
                 {user.access_level == 3 &&
-                <IconButton
+                <Button
                     onClick={handleOpen}
+                    size="small" 
+                    variant='contained' 
+                    sx={{ backgroundColor: '#15B097' }}
                 >
-                    <AddIcon />
-                </IconButton>
+                    + New Internship
+                </Button>
                 }
             </h1>
             <Modal
