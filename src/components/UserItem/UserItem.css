@@ -71,26 +71,38 @@
     padding-bottom: 20px;
 }
 
+@media only screen and (min-width: 1300px) {
+    .resume {
+        margin-left: 25%;
+    }
+  }
+
 .resume {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-    margin-top: 10px;
-    margin-left: 190px;
+    margin-top: 30px;
+    gap: 10px;
 }
 
 .resume-input {
-    width: 180px;
+    border: none;
+    border-radius: 10px;
+    background-color: #1c994c;
+    color: white;
+    padding: 5px;
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    cursor: pointer;
 }
 
 .resume-button {
     border: none;
-    width: 60%;
-    height: 20%;
     border-radius: 10px;
     background-color: #4F89B7;
     color: white;
+    padding: 10px;
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    cursor: pointer;
 }
 
 #edit-picture-icon {

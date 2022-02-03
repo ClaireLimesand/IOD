@@ -20,7 +20,6 @@ function UserItem({ dataItem }) {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-
   const [pictureOpen, setPictureOpen] = useState(false);
   const [bannerOpen, setBannerOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
@@ -110,7 +109,6 @@ function UserItem({ dataItem }) {
             {/* <label htmlFor="resume-upload">Upload Resume</label>
             <input className="resume-input" type="file" onChange={handleUpload} id="resume-upload" /> */}
             <button className="resume-input" onClick={() => setResumeOpen(true)}>Upload Resume</button>
-            <br />
             <button className="resume-button" onClick={handleSubmit}>View Resume</button>
           </div>
         </div>
