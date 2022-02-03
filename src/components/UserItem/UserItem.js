@@ -31,7 +31,11 @@ function UserItem({ dataItem }) {
   const handleLinkedClick = () => {
     const pdfWindow = window.open();
     pdfWindow.location.href = fileURL;
-    history.push('/user');
+    history.push("/user");
+  };
+
+  const handlePortfolio = () => {
+    history.push("/portfolio");
   };
 
   return (
@@ -56,14 +60,28 @@ function UserItem({ dataItem }) {
               <p className="pronouns">{dataItem.pronouns}</p>
             </div>
             <p className="email">{dataItem.email}</p>
-            <a href={dataItem.linkedin} onClick={handleLinkedClick}>Link to LinkedIn</a>
+            <a href={dataItem.linkedin} onClick={handleLinkedClick}>
+              Link to LinkedIn
+            </a>
           </div>
 
           <div className="resume">
             <label htmlFor="resume-upload">Upload Resume</label>
-            <input className="resume-input" type="file" onChange={handleUpload} id="resume-upload" />
+            <input
+              className="resume-input"
+              type="file"
+              onChange={handleUpload}
+              id="resume-upload"
+            />
             <br />
-            <button className="resume-button" onClick={handleSubmit}>View Resume</button>
+            <button className="resume-button" onClick={handleSubmit}>
+              View Resume
+            </button>
+          </div>
+          <div className="portfolio-div">
+            <button className="portfolio-button" onClick={handlePortfolio}>
+              Portfolio
+            </button>
           </div>
         </div>
       </div>

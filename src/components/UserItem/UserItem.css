@@ -79,6 +79,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    position: relative;
+    left: 110px;
     margin-top: 10px;
     margin-left: 190px;
 }
@@ -91,6 +93,26 @@
     border: none;
     width: 60%;
     height: 20%;
+    border-radius: 10px;
+    background-color: #4F89B7;
+    color: white;
+}
+
+.portfolio-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 190px;
+    width: 150px;
+}
+
+.portfolio-button {
+    border: none;
+    height: 20%;
+    position: relative;
+    bottom: 7px;
+    padding-left: 10%;
+    padding-right: 10%;
     border-radius: 10px;
     background-color: #4F89B7;
     color: white;

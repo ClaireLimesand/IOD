@@ -20,6 +20,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import InternshipsPage from '../InternshipsPage/InternshipsPage';
 import HomePage from '../HomePage/HomePage';
+import StudentPortfolio from '../StudentPortfolio/StudentPortfolio';
 
 import './App.css';
 
@@ -32,6 +33,7 @@ function App() {
     dispatch({ type: 'FETCH_USER' });
     dispatch({ type: 'FETCH_PROFILE'});
     dispatch({ type: 'FETCH_ANNOUNCEMENTS'});
+    dispatch({ type: 'FETCH_PORTFOLIO'});
   }, [dispatch]);
 
   return (
@@ -61,6 +63,14 @@ function App() {
             path="/user"
           >
             <UserPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows portfolio page
+            exact
+            path="/portfolio"
+          >
+            <StudentPortfolio />
           </ProtectedRoute>
 
           {/* Internships page */}
