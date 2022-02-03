@@ -2,45 +2,32 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import { ListItemIcon } from "@mui/material";
 import { DropzoneDialog } from 'material-ui-dropzone';
-import { useHistory } from "react-router-dom";
 import "./UserItem.css";
 import { Badge } from "@mui/material";
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 function UserItem({ dataItem }) {
-  const dispatch = useDispatch();
+  const useStyles = makeStyles(theme => createStyles({
+    previewChip: {
+      minWidth: 160,
+      maxWidth: 210
+    },
+  }));
+  const classes = useStyles();
 
+  const dispatch = useDispatch();
   const [pictureOpen, setPictureOpen] = useState(false);
   const [bannerOpen, setBannerOpen] = useState(false);
-  
-  let resumeUrl;
-
-  const inputPicture = useRef(null);
-  
-  let fileURL;
-  const history = useHistory();
-
-  const handleUpload = (event) => {
-    let file = event.target.files[0];
-    console.log(file);
-
-    // if (file.type != "application/pdf") {
-    //   console.error(file.name, "is not a pdf file.");
-    // } else {
-      console.log(file.name, "Successful upload");
-      resumeUrl = URL.createObjectURL(file);
-    // }
-  };
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   const handleSubmit = () => {
-    //Open the URL on new Window
-    if (resumeUrl) {
-      const pdfWindow = window.open();
-      pdfWindow.location.href = resumeUrl;
-    }
+    dispatch({
+      type: 'FETCH_RESUME'
+    });
   };
 
   const handleEditPicture = (file) => {
@@ -61,10 +48,17 @@ function UserItem({ dataItem }) {
     });
   }
 
+  const handleEditResume = (file) => {
+    console.log(file);
+
+    dispatch({
+      type: 'UPLOAD_RESUME',
+      payload: {file: file}
+    });
+  }
+
   const handleLinkedClick = () => {
-    const pdfWindow = window.open();
-    pdfWindow.location.href = fileURL;
-    history.push('/user');
+    window.open(dataItem.linkedin);
   };
 
   return (
@@ -82,7 +76,6 @@ function UserItem({ dataItem }) {
               </ListItemIcon>
             }
           >
-            
           </Badge>
         </div>
 
@@ -107,13 +100,15 @@ function UserItem({ dataItem }) {
               <p className="pronouns">{dataItem.pronouns}</p>
             </div>
             <p className="email">{dataItem.email}</p>
-            <a href={dataItem.linkedin} onClick={handleLinkedClick}>Link to LinkedIn</a>
+            {dataItem.linkedin &&
+            <img src="linkedIn-icon.png" onClick={handleLinkedClick} className="profile-link" draggable={false} />
+            }
           </div>
 
           <div className="resume">
-            <label htmlFor="resume-upload">Upload Resume</label>
-            <input className="resume-input" type="file" onChange={handleUpload} id="resume-upload" />
-            <br />
+            {/* <label htmlFor="resume-upload">Upload Resume</label>
+            <input className="resume-input" type="file" onChange={handleUpload} id="resume-upload" /> */}
+            <button className="resume-input" onClick={() => setResumeOpen(true)}>Upload Resume</button>
             <button className="resume-button" onClick={handleSubmit}>View Resume</button>
           </div>
         </div>
@@ -152,6 +147,40 @@ function UserItem({ dataItem }) {
         showPreviews={true}
         showFileNamesInPreview={true}
       />
+
+        {/* Resume import dialogue */}
+        <DropzoneDialog
+          showPreviews={true}
+          showPreviewsInDropzone={false}
+          useChipsForPreview
+          previewGridProps={{container: { spacing: 1, direction: 'row' }}}
+          previewChipProps={{classes: { root: classes.previewChip } }}
+          previewText="Selected files"
+          cancelButtonText={"cancel"}
+          submitButtonText={"submit"}
+          maxFileSize={5000000}
+          open={resumeOpen}
+          onClose={() => setResumeOpen(false)}
+          onSave={(files) => {
+            console.log('Files:', files[0]);
+            setResumeOpen(false);
+            handleEditResume(files[0]);
+          }}
+        />
+        {/* <DropzoneDialog
+        cancelButtonText={"cancel"}
+        submitButtonText={"submit"}
+        maxFileSize={5000000}
+        open={resumeOpen}
+        onClose={() => setResumeOpen(false)}
+        onSave={(files) => {
+          console.log('Files:', files[0]);
+          setResumeOpen(false);
+          handleEditResume(files[0]);
+        }}
+        showPreviews={true}
+        showFileNamesInPreview={true}
+      /> */}
 
       <div className="about">
         <h3 className="about-text">About</h3>
