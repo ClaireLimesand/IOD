@@ -33,7 +33,24 @@ router.put('/', rejectUnauthenticated, cloudinaryUpload.single('image'), async (
          console.log('Oops you messed up DB error', dberror);
          res.sendStatus(500)
        })  
-      // })
   });
+
+  router.get('/', rejectUnauthenticated, (req, res) => {
+    const sqlText = 
+    `
+        SELECT "resume" FROM "students"
+        WHERE user_id = $1;
+    `;
+    const sqlValues = [
+        req.user.id
+    ];
+
+    pool.query(sqlText, sqlValues)
+        .then((dbres) => res.send(dbres.rows[0]))
+        .catch((dberror) => {
+        console.log('Oops you messed up DB error', dberror);
+        res.sendStatus(500)
+    })  
+});
 
 module.exports = router;

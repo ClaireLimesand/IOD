@@ -63,6 +63,19 @@ function* uploadResume(action) {
     }
 }
 
+function* fetchResume(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/resume',
+        });
+        console.log(response.data.resume);
+        window.open(response.data.resume);
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
+
 // Gets students info to see if user already exists
 function* retrieveUser(action) {
     try {
@@ -101,6 +114,7 @@ function* cloudinarySaga() {
   yield takeLatest('UPLOAD_PICTURE', uploadPicture);
   yield takeLatest('UPLOAD_BANNER', uploadBanner);
   yield takeLatest('UPLOAD_RESUME', uploadResume);
+  yield takeLatest('FETCH_RESUME', fetchResume);
   yield takeLatest('CHECK_USER_EXISTS', retrieveUser);
   yield takeLatest('NEW_USER', checkUser);
 }

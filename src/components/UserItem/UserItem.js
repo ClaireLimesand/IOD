@@ -26,7 +26,9 @@ function UserItem({ dataItem }) {
   const [resumeOpen, setResumeOpen] = useState(false);
 
   const handleSubmit = () => {
-    
+    dispatch({
+      type: 'FETCH_RESUME'
+    });
   };
 
   const handleEditPicture = (file) => {
@@ -49,7 +51,6 @@ function UserItem({ dataItem }) {
 
   const handleEditResume = (file) => {
     console.log(file);
-    resumeUrl = URL.createObjectURL(file);
 
     dispatch({
       type: 'UPLOAD_RESUME',
