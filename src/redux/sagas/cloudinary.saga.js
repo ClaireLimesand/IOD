@@ -43,6 +43,26 @@ function* uploadBanner(action) {
     }
 }
 
+function* uploadResume(action) {
+    const headers = {
+        'content-type': 'multipart/form-data'
+      }
+    
+    const resumeForm = new FormData();
+    resumeForm.append('image', action.payload.file);
+
+    try {
+        yield axios({
+            method: 'PUT',
+            url: '/api/resume',
+            headers: headers,
+            data: resumeForm
+        });
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
+
 // Gets students info to see if user already exists
 function* retrieveUser(action) {
     try {
@@ -50,7 +70,7 @@ function* retrieveUser(action) {
             method: 'GET',
             url: '/api/profile',
         });
-        console.log(response.data);
+
         if (response.data.length === 0) {
             console.log(false);
             // Add a new user to the students table  
@@ -80,6 +100,7 @@ function* checkUser(action) {
 function* cloudinarySaga() {
   yield takeLatest('UPLOAD_PICTURE', uploadPicture);
   yield takeLatest('UPLOAD_BANNER', uploadBanner);
+  yield takeLatest('UPLOAD_RESUME', uploadResume);
   yield takeLatest('CHECK_USER_EXISTS', retrieveUser);
   yield takeLatest('NEW_USER', checkUser);
 }

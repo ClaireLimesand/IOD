@@ -15,14 +15,28 @@ img {
   max-width: 100%;
 }
 
+
 /* --------------------------------------------------------------------------------
 Container
 -------------------------------------------------------------------------------- */
 
-.container {
+@media only screen and (max-width: 600px) {
+  .container {
+    padding-left: 0;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .container {
+    padding-left: 260px;
+    padding-right: 32px;
+  }
+}
+
+/* .container {
   padding-left: 265px;
   padding-right: 25px;
-}
+} */
 
 /* --------------------------------------------------------------------------------
 Button

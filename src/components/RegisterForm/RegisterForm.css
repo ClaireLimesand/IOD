@@ -7,6 +7,7 @@
     background-color: #efefef;
     border-radius: 45px;
     box-shadow: 0 12px 4px rgba(255, 255, 255, 0.4);
+    margin-top: 30px;
 }
   
 .register-globe {
@@ -33,13 +34,16 @@
     margin-bottom: 13px;
 }
 
+.register-inputs input {
+    box-shadow: 0 6px 3px -2px rgba(0, 0, 0, 0.301);
+}
+
 .register-inputs input:hover {
-    transition: ease 0.3s;
     transform: scale(1.03, 1.03);
 }
 
 .register-inputs input:focus {
-    background-color: #19c9ab29;
+    background-color: #19c9ac1e;
 }
 
 .register-username {
