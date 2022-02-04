@@ -23,7 +23,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-    
     const sqlQuery =`INSERT INTO "internships" ("company_name", "company_subtitle", "start_date", "end_date", "company_logo", "company_description")
         VALUES ($1, $2, $3, $4, $5, $6);`
     const sqlValues = [
@@ -45,23 +44,24 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
-// router.post('/', rejectUnauthenticated, (req, res) => {
-//     const sqlText =`INSERT INTO "tasks" ("name", "description", "difficulty", "user_id")
-//       VALUES ($1, $2, $3, $4);`
-//     const sqlValues = [
-//         req.body.name,
-//         req.body.description,
-//         req.body.difficulty,
-//         req.user.id
-//     ];
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    const sqlQuery = `
+    DELETE FROM "internships" 
+        WHERE "id"=$1;
+    `;
 
-//      pool.query(sqlText, sqlValues)
-//       .then((dbres) => res.sendStatus(201))
-//       .catch((dberror) => {
-//         console.log('Opps you messed up DB error', dberror);
-//         res.sendStatus(500)
-//       })   
-//     // endpoint functionality
-//   });
+    const sqlValues = [
+        req.params.id
+    ]
+
+    pool.query(sqlQuery, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(201);
+        })
+        .catch((dbErr) => {
+            console.error('DELETE internship error', dbErr);
+            res.sendStatus(500);
+        })
+});
 
 module.exports = router;

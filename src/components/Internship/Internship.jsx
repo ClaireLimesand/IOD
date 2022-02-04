@@ -8,6 +8,15 @@ import Typography from '@mui/material/Typography';
 
 function Internship({internship}) {
     const dispatch = useDispatch();
+    
+    const user = useSelector((store) => store.user);
+
+    const handleDeleteButton = (id) => {
+        dispatch({
+            type: 'DELETE_INTERNSHIP',
+            payload: id
+        })
+    };  
 
     return (
         <div className="container">
@@ -29,6 +38,16 @@ function Internship({internship}) {
                 </CardContent>
                 <CardActions>
                     <Button size="small" variant='contained' sx={{ backgroundColor: '#15B097' }}>Apply</Button>
+                    
+                    {user.access_level == 3 &&
+                        <Button  
+                            onClick={() => handleDeleteButton(internship.id)} 
+                            size="small" 
+                            variant='contained' 
+                            sx={{ backgroundColor: '#15B097' }}>
+                                Delete
+                        </Button>
+                    }
                 </CardActions>
             </Card>
         </div>

@@ -48,7 +48,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 // DELETE for a user's skills 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-
     const sqlQuery = `
     DELETE FROM "skills" 
         WHERE "id"=$1;

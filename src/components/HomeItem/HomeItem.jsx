@@ -2,6 +2,7 @@
 import './HomeItem.css';
 
 function HomeItem({messageItem}) {
+
     return(
         <div>
             <div className="home-messages">
