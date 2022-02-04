@@ -2,6 +2,7 @@ const hydrators = require('./hydrators');
 const newFile = require('./triggers/newFile');
 const uploadFileV10 = require('./creates/uploadFile_v10');
 const uploadFileV9 = require('./creates/uploadFile_v9');
+const newUser = require('./triggers/newUser');
 
 module.exports = {
   // This is just shorthand to reference the installed dependencies you have.
@@ -15,6 +16,7 @@ module.exports = {
   // If you want your triggers to show up, you better include it here!
   triggers: {
     [newFile.key]: newFile,
+    [newUser.key]: newUser,
   },
 
   // If you want your creates to show up, you better include it here!
