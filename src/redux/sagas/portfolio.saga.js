@@ -1,41 +1,24 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-function* fetchthreeMport() {
+function* fetchPortfolio() {
     try {
         const response = yield axios({
             method: 'GET',
-            url: '/api/threeM'
+            url: '/api/portfolio'
         });
         console.log(response.data);
         yield put({
-            type: 'SET_THREEMPORT',
+            type: 'SET_PORTFOLIO',
             payload: response.data
         });
     } catch(err) {
-        console.log('Error in fetchthreeMport Saga', err);
-    };
-}
-
-function* fetchSpectrum() {
-    try {
-        const response = yield axios({
-            method: 'GET',
-            url: '/api/spectrum'
-        });
-        console.log('spectrum', response.data);
-        yield put({
-            type: 'SET_SPECTRUMPORT',
-            payload: response.data
-        });
-    } catch(err) {
-        console.log('Error in fetchSpectrum Saga', err);
+        console.log('Error in fetchPortfolio Saga', err);
     };
 }
 
 function* portfolioSaga() {
-    yield takeLatest('FETCH_THREEMPORT', fetchthreeMport);
-    yield takeLatest('FETCH_SPECTRUMPORT', fetchSpectrum);
+    yield takeLatest('FETCH_PORTFOLIO', fetchPortfolio);
 };
 
 export default portfolioSaga;

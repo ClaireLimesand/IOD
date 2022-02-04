@@ -33,8 +33,7 @@ function App() {
     dispatch({ type: 'FETCH_USER' });
     dispatch({ type: 'FETCH_PROFILE'});
     dispatch({ type: 'FETCH_ANNOUNCEMENTS'});
-    dispatch({ type: 'FETCH_THREEMPORT'});
-    dispatch({ type: 'FETCH_SPECTRUMPORT'});
+    dispatch({ type: 'FETCH_PORTFOLIO'});
   }, [dispatch]);
 
   return (

@@ -1,6 +1,6 @@
-const threeM = (state = [], action) => {
+const portfolio = (state = [], action) => {
     switch (action.type) {
-        case 'SET_THREEMPORT':
+        case 'SET_PORTFOLIO':
             console.log('Reducer portfolio data', action.payload);
             return action.payload;
         default:
@@ -8,4 +8,4 @@ const threeM = (state = [], action) => {
     }
 };
 
-export default threeM;
+export default portfolio;
