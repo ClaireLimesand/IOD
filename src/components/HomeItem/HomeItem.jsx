@@ -1,4 +1,3 @@
-
 import './HomeItem.css';
 
 function HomeItem({messageItem}) {

@@ -87,3 +87,22 @@ VALUES (
 	1
 );
 
+INSERT INTO "projects" ("project_name", "description", "user_id", "internship_id")
+VALUES
+('Failed Product', 'Identified failures and bugs in a project, then fixed them to make the project working.', 1, 2),
+('Secure Safety', 'Built the backend of a safety project and practiced best ways to secure routes and login information', 1, 1),
+('Think like an Industrial Designer', 'Designed and drew out a basic T.V. stand', 1, 2);
+
+INSERT INTO "message_types" ("title")
+VALUES
+('Update'),
+('Feedback'),
+('Important'),
+('Congratulations');
+
+INSERT INTO "announcements" ("message", "message_id")
+VALUES
+('We are currently in the building process of creating the future of internships!', 1),
+('There is a lot of work to be done still but we are doing great, keep up the good work!', 2),
+('This is NOT a finished product, not all features are implemented', 3),
+('We are recognizing the IOD team in their outstanding work and dedicationg to this project!', 4);
