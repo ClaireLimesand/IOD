@@ -67,6 +67,7 @@ function Skills() {
             
             <h3 className="skills-text">Skills
             <IconButton
+                id="add-skill-icon" 
                 onClick={handleOpen}
             >
                 <AddIcon />
@@ -77,6 +78,7 @@ function Skills() {
             <p className="skills-list" key={i}>{skill.skill}
             
             <IconButton
+                id="edit-skill-icon" 
                 onClick={() => {
                     history.push(`/editskill/${skill.id}`);
                     }}
@@ -85,6 +87,7 @@ function Skills() {
             </IconButton>
 
             <IconButton
+                id="delete-skill-icon" 
                 onClick={() => handleDeleteSkillButton(skill.id)}
             >
                 <ClearIcon />
