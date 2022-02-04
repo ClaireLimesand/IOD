@@ -13,7 +13,8 @@ const skillsRouter = require('./routes/skills.router');
 const internshipRouter = require('./routes/internship.router');
 const profileRouter = require('./routes/profile.router');
 const announcementsRouter = require('./routes/announcements.router');
-const portfolioRouter = require('./routes/portfolio.router');
+const threeMportRouter = require('./routes/threeMport.router');
+const spectrumRouter = require('./routes/spectrum.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -32,7 +33,8 @@ app.use('/api/skills', skillsRouter);
 app.use('/api/internship', internshipRouter);
 app.use('/api/profile', profileRouter);
 app.use('/api/announcements', announcementsRouter);
-app.use('/api/portfolio', portfolioRouter);
+app.use('/api/threeM', threeMportRouter);
+app.use('/api/spectrum', spectrumRouter);
 
 // Serve static files
 app.use(express.static('build'));

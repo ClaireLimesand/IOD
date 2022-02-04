@@ -1,10 +1,14 @@
 import React from "react";
 
-function PortfolioItem({dataItem}) {
+function PortfolioItem({threeM}, {spectrum}) {
     return (
         <div>
             <div>
-                <h2>{dataItem.project_name}</h2>
+                <h2>{threeM.project_name}</h2>
+            </div>
+
+            <div>
+                {spectrum.project_name}
             </div>
         </div>
     )

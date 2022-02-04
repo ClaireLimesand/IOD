@@ -10,10 +10,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         SELECT * FROM "projects"
         WHERE "user_id" = $1 AND "internship_id" = $2;
     `;
-    const sqlValues = [req.user.id, 1];
+    const sqlValues = [req.user.id, 2];
     pool.query(sqlText, sqlValues)
         .then((dbRes) => {
-            console.log('Portfolio', dbRes.rows);
+            console.log('Spectrum', dbRes.rows);
             
             res.send(dbRes.rows);
         })

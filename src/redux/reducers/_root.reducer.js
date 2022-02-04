@@ -5,7 +5,8 @@ import skills from './skills.reducer';
 import internshipReducer from './internship.reducer';
 import profile from './profile.reducer';
 import announcements from './announcements.reducer';
-import portfolio from './portfolio.reducer';
+import threeM from './threeMPort.reducer';
+import spectrum from './spectrum.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   internshipReducer,
   profile,
   announcements,
-  portfolio,
+  threeM,
+  spectrum,
 });
 
 export default rootReducer;
