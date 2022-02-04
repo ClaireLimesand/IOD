@@ -7,6 +7,7 @@ import "./RegisterForm.css";
 function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -19,6 +20,7 @@ function RegisterForm() {
         payload: {
           username: username,
           password: password,
+          email: email
         },
       });
   }; // end registerUser
@@ -39,7 +41,7 @@ function RegisterForm() {
             <center>
               <label htmlFor="username">
                 <input
-                  className="register-username"
+                  className="register-password"
                   placeholder="Username"
                   type="text"
                   name="username"
@@ -57,6 +59,17 @@ function RegisterForm() {
                   value={password}
                   required
                   onChange={(event) => setPassword(event.target.value)}
+                />
+              </label>
+              <label htmlFor="email">
+                <input
+                  className="register-password"
+                  placeholder="Email"
+                  type="email"
+                  name="email"
+                  value={email}
+                  required
+                  onChange={(event) => setEmail(event.target.value)}
                 />
               </label>
             </center>

@@ -20,10 +20,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // is that the password gets encrypted before being inserted
 router.post('/register', (req, res, next) => {
   const username = req.body.username;
+  const email = req.body.email;
   const password = encryptLib.encryptPassword(req.body.password);
 
   // Zapier webhook
-  notifyWebhook("https://hooks.zapier.com/hooks/catch/11758328/b50ne4b/", {user: "saasbase", message: "Trigger Webhook event"});
+  notifyWebhook("https://hooks.zapier.com/hooks/catch/11758328/b50ne4b/", {email: email, name: username});
 
   const queryText = `INSERT INTO "user" (username, password)
     VALUES ($1, $2) RETURNING id`;
