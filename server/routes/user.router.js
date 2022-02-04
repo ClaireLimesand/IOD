@@ -5,6 +5,7 @@ const {
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
+const notifyWebhook = require('../modules/zapier');
 
 const router = express.Router();
 
@@ -20,6 +21,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
+
+  // Zapier webhook
+  notifyWebhook("https://hooks.zapier.com/hooks/catch/11758328/b50ne4b/", {user: "saasbase", message: "Trigger Webhook event"});
 
   const queryText = `INSERT INTO "user" (username, password)
     VALUES ($1, $2) RETURNING id`;

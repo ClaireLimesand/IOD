@@ -14,13 +14,13 @@ function RegisterForm() {
   const registerUser = (event) => {
     event.preventDefault();
 
-    dispatch({
-      type: "REGISTER",
-      payload: {
-        username: username,
-        password: password,
-      },
-    });
+      dispatch({
+        type: "REGISTER",
+        payload: {
+          username: username,
+          password: password,
+        },
+      });
   }; // end registerUser
 
   return (
