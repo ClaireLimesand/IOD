@@ -30,7 +30,7 @@ function Nav() {
       <img src='globe.png' draggable='false' />
       <center id='sidebar-logo-text'>INTERNSHIP ON DEMAND</center>
       <img src='gradient_bar.png' draggable='false' />
-      <List>
+      <List id="nav-list">
         {/* Home link */}
         {user.id &&
           <ListItem button onClick={() => history.push('/home')}>

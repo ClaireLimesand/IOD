@@ -1,11 +1,11 @@
 import React from "react";
+import { DropzoneDialog } from 'material-ui-dropzone';
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import { ListItemIcon } from "@mui/material";
-import { DropzoneDialog } from 'material-ui-dropzone';
 import "./UserItem.css";
 import { Badge } from "@mui/material";
 import { createStyles, makeStyles } from '@material-ui/core/styles';
@@ -148,26 +148,14 @@ function UserItem({ dataItem }) {
         showFileNamesInPreview={true}
       />
 
-        {/* Resume import dialogue */}
-        <DropzoneDialog
-          showPreviews={true}
-          showPreviewsInDropzone={false}
-          useChipsForPreview
-          previewGridProps={{container: { spacing: 1, direction: 'row' }}}
-          previewChipProps={{classes: { root: classes.previewChip } }}
-          previewText="Selected files"
-          cancelButtonText={"cancel"}
-          submitButtonText={"submit"}
-          maxFileSize={5000000}
-          open={resumeOpen}
-          onClose={() => setResumeOpen(false)}
-          onSave={(files) => {
-            console.log('Files:', files[0]);
-            setResumeOpen(false);
-            handleEditResume(files[0]);
-          }}
-        />
-        {/* <DropzoneDialog
+      {/* Resume import dialogue */}
+      <DropzoneDialog
+        showPreviews={true}
+        showPreviewsInDropzone={false}
+        useChipsForPreview
+        previewGridProps={{container: { spacing: 1, direction: 'row' }}}
+        previewChipProps={{classes: { root: classes.previewChip } }}
+        previewText="Selected files"
         cancelButtonText={"cancel"}
         submitButtonText={"submit"}
         maxFileSize={5000000}
@@ -178,9 +166,7 @@ function UserItem({ dataItem }) {
           setResumeOpen(false);
           handleEditResume(files[0]);
         }}
-        showPreviews={true}
-        showFileNamesInPreview={true}
-      /> */}
+      />
 
       <div className="about">
         <h3 className="about-text">About</h3>
