@@ -13,7 +13,6 @@ import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
-import { Grid } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -106,20 +105,21 @@ function Skills() {
             >
                 <center>
                     <Box sx={style}>
-                    
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Add A Skill
-                    </Typography>
-                    
-                    <input 
-                    value={skill}
-                    onChange={(event) => setSkill(event.target.value)}
-                    />
-                    
-                    <button onClick={handleSaveSkillButton}>
-                        Add Skill
-                    </button>
-
+                        <div className='interior-box'>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Add a Skill
+                            </Typography>
+                            <img className="login-gradient" src="gradient_bar.png" draggable={false} />
+                            <input 
+                                className='skill-input'
+                                value={skill}
+                                onChange={(event) => setSkill(event.target.value)}
+                            />
+                            <br />
+                            <button onClick={handleSaveSkillButton}>
+                                Add Skill
+                            </button>
+                        </div>
                     </Box>
                 </center>
             </Modal>     
