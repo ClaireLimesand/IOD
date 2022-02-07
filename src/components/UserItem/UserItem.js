@@ -12,6 +12,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { IconButton } from "@mui/material";
 import CheckIcon from '@mui/icons-material/Check';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 function UserItem({ dataItem }) {
   const useStyles = makeStyles(theme => createStyles({
@@ -81,7 +82,7 @@ function UserItem({ dataItem }) {
           <Badge
             badgeContent={
               <ListItemIcon>
-                <EditIcon 
+                <AddPhotoAlternateIcon 
                   id="edit-banner-icon" 
                   onClick={() => setBannerOpen(true)}
                 />
@@ -102,7 +103,7 @@ function UserItem({ dataItem }) {
           <Badge
             badgeContent={
               <ListItemIcon>
-                <EditIcon 
+                <AddPhotoAlternateIcon 
                   id="edit-picture-icon" 
                   onClick={() => setPictureOpen(true)}
                 />
