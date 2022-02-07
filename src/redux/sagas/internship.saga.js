@@ -57,7 +57,7 @@ function* editInternship(action) {
             data: action.payload
         })
         yield put({
-            type: 'FETCH_INTERNSHIP'
+            type: 'FETCH_INTERNSHIPS'
         })
     }   catch (error) {
         console.log(error)

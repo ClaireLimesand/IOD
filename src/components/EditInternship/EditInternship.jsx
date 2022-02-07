@@ -73,20 +73,21 @@ function EditInternship() {
         const id = editInternshipReducer.id;
         const name = editInternshipReducer.name;
         const subtitle = editInternshipReducer.subtitle;
-        const logo = editInternshipReducer.logo;
         const description = editInternshipReducer.description;
         const startDate = editInternshipReducer.start_date;
         const endDate = editInternshipReducer.end_date;
+        const logo = editInternshipReducer.logo;
 
         const editedInternship = {
             id,
             name,
             subtitle,
-            logo,
             description,
             startDate,
-            endDate
+            endDate,
+            logo
         }
+        console.log('HEY', editedInternship)
 
         dispatch({
             type: 'EDIT_INTERNSHIP',
@@ -115,15 +116,15 @@ function EditInternship() {
             <input 
                 value={editInternshipReducer.subtitle|| ""}
                 onChange={handleSubtitleChange}
-            />
-
-            <input 
-                value={editInternshipReducer.logo|| ""}
-                onChange={handleDescriptionChange}
-            />              
+            />           
 
             <input 
                 value={editInternshipReducer.description|| ""}
+                onChange={handleDescriptionChange}
+            />  
+
+            <input 
+                value={editInternshipReducer.logo|| ""}
                 onChange={handleLogoChange}
             />  
 

@@ -82,4 +82,35 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+    const sqlText = `
+        UPDATE "internships"
+            SET "company_name" = $1,
+                "company_subtitle" = $2,
+                "start_date" = $3,
+                "end_date" = $4,
+                "company_description" = $5,
+                "company_logo" = $6
+            WHERE id = $7;
+    `;
+    const sqlValues = [
+        req.body.payload.name,
+        req.body.payload.subtitle,
+        req.body.payload.startDate,
+        req.body.payload.endDate,
+        req.body.payload.description,
+        req.body.payload.logo,
+        req.params.id
+    ];
+
+    pool.query(sqlText, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(200);
+        })
+        .catch((dbErr) => {
+            console.log('PUT internship error', dbErr);
+            res.sendStatus(500);
+        })
+});
+
 module.exports = router;
