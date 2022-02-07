@@ -82,7 +82,7 @@ function Skills() {
                 id="edit-skill-icon" 
                 onClick={() => {
                     history.push(`/editskill/${skill.id}`);
-                    }}
+                }}
             >
                 <EditIcon />
             </IconButton>
