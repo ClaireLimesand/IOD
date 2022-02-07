@@ -16,8 +16,23 @@ function* fetchAnnouncements() {
     };
 };
 
+function* deleteAnnouncement(action) {
+    try {
+        const response = yield axios({
+            method: 'DELETE',
+            url: `/api/announcements/${action.payload}`,
+        })
+        yield put({
+            type: 'FETCH_ANNOUNCEMENTS'
+        })
+    } catch (error) {
+        console.log('DELETE announcement error', error);
+    }
+}
+
 function* announcementsSaga() {
     yield takeLatest('FETCH_ANNOUNCEMENTS', fetchAnnouncements);
+    yield takeLatest('DELETE_ANNOUNCEMENT', deleteAnnouncement);
 };
 
 export default announcementsSaga;

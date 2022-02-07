@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
-        SELECT "announcements"."message", "message_types"."title" FROM "announcements"
+        SELECT "announcements"."message", "message_types"."title", "message_id" FROM "announcements"
         JOIN "message_types"
         ON "announcements"."message_id" = "message_types"."id";
     `;
@@ -18,6 +18,26 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             res.send(dbRes.rows);
         })
         .catch((dbErr) => {
+            res.sendStatus(500);
+        })
+});
+
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    const sqlQuery = `
+    DELETE FROM "announcements" 
+        WHERE "message_id"=$1;
+    `;
+
+    const sqlValues = [
+        req.params.id
+    ]
+
+    pool.query(sqlQuery, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(201);
+        })
+        .catch((dbErr) => {
+            console.error('DELETE announcement error', dbErr);
             res.sendStatus(500);
         })
 });

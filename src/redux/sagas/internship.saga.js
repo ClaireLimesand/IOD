@@ -49,10 +49,26 @@ function* deleteInternship(action) {
     }
 }
 
+function* fetchSingleInternship(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/internship/${action.payload}`,
+        })
+        yield put ({
+            type: 'SET_INTERNSHIP_TO_EDIT',
+            payload: response.data
+        })
+    }   catch (error) {
+        console.log(error)
+    }
+}
+
 function* internshipSaga() {
     yield takeLatest('FETCH_INTERNSHIPS', fetchInternships);
     yield takeLatest('ADD_INTERNSHIP', addInternship);
     yield takeLatest('DELETE_INTERNSHIP', deleteInternship);
+    yield takeEvery('FETCH_SINGLE_INTERNSHIP', fetchSingleInternship);
 }
 
 export default internshipSaga;
