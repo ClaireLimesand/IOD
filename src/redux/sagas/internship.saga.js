@@ -84,7 +84,7 @@ function* internshipSaga() {
     yield takeLatest('ADD_INTERNSHIP', addInternship);
     yield takeLatest('DELETE_INTERNSHIP', deleteInternship);
     yield takeEvery('EDIT_INTERNSHIP', editInternship);
-    yield takeEvery('FETCH_SINGLE_INTERNSHIP', fetchSingleInternship);
+    yield takeLatest('FETCH_SINGLE_INTERNSHIP', fetchSingleInternship);
 }
 
 export default internshipSaga;

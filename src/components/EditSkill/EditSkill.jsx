@@ -49,28 +49,29 @@ function EditSkill() {
 
     return (
         <div className="container">
-            <div className="edit-skill">
+            <center>
+                <form className="edit-skill" onSubmit={handleSubmit}>
+                    <h3 className='skills-title'>Edit Skill</h3>
+                    <img className="login-gradient" src="gradient_bar.png" draggable={false} />
+                    <input
+                        className="skill-input"
+                        value={editSkillReducer.skill || ""}
+                        onChange={handleSkillChange}
+                        required
+                    >
+                    </input>
+                    <br />
+                    
+                    <IconButton type='submit'>
+                        <CheckIcon />
+                    </IconButton>
 
-            <input
-                className="edit-skill-input"
-                value={editSkillReducer.skill || ""}
-                onChange={handleSkillChange}
-            >
-            </input>
+                    <IconButton onClick={handleBack}>
+                        <ArrowBackIcon />
+                    </IconButton>
 
-            <IconButton
-                onClick={handleSubmit}
-            >
-                    <CheckIcon />
-            </IconButton>
-
-            <IconButton
-                onClick={handleBack}
-            >
-                    <ArrowBackIcon />
-            </IconButton>
-            
-            </div>
+                </form>
+            </center>
         </div>
     );
 }
