@@ -31,7 +31,7 @@
 }
 
 .register-inputs {
-    margin-bottom: 13px;
+    margin-bottom: 5px;
 }
 
 .register-inputs input {
@@ -84,7 +84,7 @@
     box-shadow: 0 4px 2px rgba(98, 98, 98, 0.493);
     cursor: pointer;
     transition: ease 0.3s;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .register-button:hover {

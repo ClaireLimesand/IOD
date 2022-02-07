@@ -32,9 +32,9 @@ function LoginForm() {
     <div className="container">
       <center>
         <form id="loginPanel" onSubmit={login}>
-            <img className="login-globe" src="globe.png" />
+            <img className="login-globe" src="globe.png" draggable={false} />
             <center id="login-text">INTERNSHIP ON DEMAND</center>
-            <img className="login-gradient" src="gradient_bar.png" />
+            <img className="login-gradient" src="gradient_bar.png" draggable={false} />
             {errors.loginMessage && (
               <h3 className="alert" role="alert">
                 {errors.loginMessage}
