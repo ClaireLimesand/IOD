@@ -30,6 +30,13 @@
     padding: 5px;
 }
 
+#edit-skill-icon:hover {
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    cursor: pointer;
+    transform: scale(1.02,1.02);
+    background-color: #d6d7d8;
+}
+
 #delete-skill-icon {
     margin-left: 10px;
     transition: ease 0.3s;
@@ -38,12 +45,26 @@
     padding: 5px;
 }
 
+#delete-skill-icon:hover {
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    cursor: pointer;
+    transform: scale(1.02,1.02);
+    background-color: #d6d7d8;
+}
+
 #add-skill-icon {
     margin-left: 10px;
     transition: ease 0.3s;
     border: 1px solid rgba(0, 0, 0, 0.295);
     border-radius: 30px;
     padding: 5px;
+}
+
+#add-skill-icon:hover {
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    cursor: pointer;
+    transform: scale(1.02,1.02);
+    background-color: #d6d7d8;
 }
 
 .interior-box {

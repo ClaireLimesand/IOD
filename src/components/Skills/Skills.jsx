@@ -78,27 +78,26 @@ function Skills() {
             </h3>
 
             {store.skills.map((skill, i) => (
-            <Typography className="skills-list" key={i}>{skill.skill}
-            
-            <IconButton
-                id="edit-skill-icon" 
-                onClick={() => {
-                    history.push(`/editskill/${skill.id}`);
-                }}
-            >
-                <EditIcon />
-            </IconButton>
+                <Typography className="skills-list" key={i}>{skill.skill}
+                
+                    <IconButton
+                        id="edit-skill-icon" 
+                        onClick={() => {
+                            history.push(`/editskill/${skill.id}`);
+                        }}
+                    >
+                        <EditIcon />
+                    </IconButton>
 
-            <IconButton
-                id="delete-skill-icon" 
-                onClick={() => handleDeleteSkillButton(skill.id)}
-            >
-                <ClearIcon />
-            </IconButton>
-            
-            </Typography>
-            ))
-            }
+                    <IconButton
+                        id="delete-skill-icon" 
+                        onClick={() => handleDeleteSkillButton(skill.id)}
+                    >
+                        <ClearIcon />
+                    </IconButton>
+                
+                </Typography>
+            ))}
             
             <Modal
                 open={open}
