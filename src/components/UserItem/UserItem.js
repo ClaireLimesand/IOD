@@ -26,6 +26,8 @@ function UserItem({ dataItem }) {
   const [bannerOpen, setBannerOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
 
+  const [editAbout, setEditAbout] = useState(false);
+
   const handleSubmit = () => {
     dispatch({
       type: 'FETCH_RESUME'
@@ -175,11 +177,15 @@ function UserItem({ dataItem }) {
 
       <div className="about">
         <h3 className="about-text">About     
-          <IconButton id="edit-about-icon">
+          <IconButton id="edit-about-icon" onClick={() => setEditAbout(!editAbout)}>
               <EditIcon />
           </IconButton>
         </h3>
-        <p className="about-data">{dataItem.about}</p>
+        {!editAbout ?
+          <p className="about-data">{dataItem.about}</p>
+        :
+          <input className="edit-about-input" value={dataItem.about} />
+        }
       </div>
     </div>
   );

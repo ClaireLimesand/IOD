@@ -183,3 +183,9 @@
 .profile-link:hover {
     transform: scale(1.05,1.05);
 }
+
+.edit-about-input {
+    margin-left: 30px;
+    border: none;
+    font-size: 16px;
+}
