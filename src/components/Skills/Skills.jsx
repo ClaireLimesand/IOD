@@ -17,7 +17,7 @@ import EditIcon from '@mui/icons-material/Edit';
 const style = {
     position: 'absolute',
     top: '50%',
-    left: '60%',
+    left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
     boxShadow: 24,
