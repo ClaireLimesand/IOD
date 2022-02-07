@@ -9,8 +9,9 @@ import { ListItemIcon } from "@mui/material";
 import "./UserItem.css";
 import { Badge } from "@mui/material";
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Typography } from "@mui/material";
 import { IconButton } from "@mui/material";
+import CheckIcon from '@mui/icons-material/Check';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function UserItem({ dataItem }) {
   const useStyles = makeStyles(theme => createStyles({
@@ -27,6 +28,7 @@ function UserItem({ dataItem }) {
   const [resumeOpen, setResumeOpen] = useState(false);
 
   const [editAbout, setEditAbout] = useState(false);
+  const [about, setAbout] = useState(dataItem.about);
 
   const handleSubmit = () => {
     dispatch({
@@ -184,7 +186,27 @@ function UserItem({ dataItem }) {
         {!editAbout ?
           <p className="about-data">{dataItem.about}</p>
         :
-          <input className="edit-about-input" value={dataItem.about} />
+          <form onSubmit={() => {
+            dispatch({ type: 'EDIT_ABOUT', payload: about });
+            setEditAbout(!editAbout);
+            setAbout(dataItem.about);
+          }}>
+            <input 
+              className="edit-about-input"
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
+            />
+            <IconButton type='submit'>
+              <CheckIcon />
+            </IconButton>
+
+            <IconButton onClick={() => {
+              setEditAbout(!editAbout);
+              setAbout(dataItem.about);
+            }}>
+              <ArrowBackIcon />
+            </IconButton>
+          </form>
         }
       </div>
     </div>
