@@ -34,6 +34,8 @@ function UserItem({ dataItem }) {
   const [editTop, setEditTop] = useState(false);
   const [name, setName] = useState(dataItem.name);
   const [email, setEmail] = useState(dataItem.email);
+  const [linkedin, setLinkedin] = useState(dataItem.linkedin);
+  const [pronouns, setPronouns] = useState(dataItem.pronouns);
 
   const [editAbout, setEditAbout] = useState(false);
   const [about, setAbout] = useState(dataItem.about);
@@ -163,10 +165,43 @@ function UserItem({ dataItem }) {
                         Edit Profile
                     </Typography>
                     <img className="login-gradient" src="gradient_bar.png" draggable={false} />
+                    <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
+                      Name
+                    </Typography>
                     <input 
                         className='skill-input'
                         value={name}
                         onChange={(event) => setName(event.target.value)}
+                        required
+                    />
+                    <br />
+                    <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
+                      Email
+                    </Typography>
+                    <input 
+                        className='skill-input'
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                        required
+                    />
+                    <br />
+                    <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
+                      LinkedIn
+                    </Typography>
+                    <input 
+                        className='skill-input'
+                        value={linkedin}
+                        onChange={(event) => setLinkedin(event.target.value)}
+                        required
+                    />
+                    <br />
+                    <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
+                      Pronouns
+                    </Typography>
+                    <input 
+                        className='skill-input'
+                        value={pronouns}
+                        onChange={(event) => setPronouns(event.target.value)}
                         required
                     />
                     <br />
