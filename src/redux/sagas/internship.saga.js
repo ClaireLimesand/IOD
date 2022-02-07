@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 
 function* fetchInternships(action) {
     try {
@@ -49,6 +49,21 @@ function* deleteInternship(action) {
     }
 }
 
+function* editInternship(action) {
+    try {
+        yield axios({
+            method: 'PUT',
+            url: `/api/internship/${action.payload.id}`,
+            data: action.payload
+        })
+        yield put({
+            type: 'FETCH_INTERNSHIP'
+        })
+    }   catch (error) {
+        console.log(error)
+    }
+}
+
 function* fetchSingleInternship(action) {
     try {
         const response = yield axios({
@@ -68,6 +83,7 @@ function* internshipSaga() {
     yield takeLatest('FETCH_INTERNSHIPS', fetchInternships);
     yield takeLatest('ADD_INTERNSHIP', addInternship);
     yield takeLatest('DELETE_INTERNSHIP', deleteInternship);
+    yield takeEvery('EDIT_INTERNSHIP', editInternship);
     yield takeEvery('FETCH_SINGLE_INTERNSHIP', fetchSingleInternship);
 }
 
