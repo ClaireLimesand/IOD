@@ -8,8 +8,9 @@ function StudentPortfolio() {
 
     return (
         <div className="container">
-            {Object.keys(portfolio).map((data) => {
-                return <PortfolioItem key={data.id} data={portfolio[data]}/>
+            <h1>Portfolio</h1>
+            {Object.keys(portfolio).map((internship_id) => {
+                return <PortfolioItem key={internship_id} projects={portfolio[internship_id]}/>
             })}
         </div>
     )
