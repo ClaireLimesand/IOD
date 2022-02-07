@@ -16,8 +16,26 @@ function* fetchProfile() {
     };
 }
 
+function* editAbout(action) {
+    try {
+        yield axios({
+            method: 'PUT',
+            url: '/api/profile/about',
+            data: {text: action.payload}
+        });
+        yield put({
+            type: 'FETCH_PROFILE'
+        });
+    }   catch (error) {
+        console.log(error)
+    }
+}
+
+
+
 function* profileSaga() {
     yield takeLatest('FETCH_PROFILE', fetchProfile);
+    yield takeLatest('EDIT_ABOUT', editAbout);
 };
 
 export default profileSaga;

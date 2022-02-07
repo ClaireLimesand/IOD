@@ -9,6 +9,9 @@ import { ListItemIcon } from "@mui/material";
 import "./UserItem.css";
 import { Badge } from "@mui/material";
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { IconButton } from "@mui/material";
+import CheckIcon from '@mui/icons-material/Check';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function UserItem({ dataItem }) {
   const useStyles = makeStyles(theme => createStyles({
@@ -23,6 +26,9 @@ function UserItem({ dataItem }) {
   const [pictureOpen, setPictureOpen] = useState(false);
   const [bannerOpen, setBannerOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
+
+  const [editAbout, setEditAbout] = useState(false);
+  const [about, setAbout] = useState(dataItem.about);
 
   const handleSubmit = () => {
     dispatch({
@@ -60,6 +66,12 @@ function UserItem({ dataItem }) {
   const handleLinkedClick = () => {
     window.open(dataItem.linkedin);
   };
+
+  const handleEditAbout = () => {
+    dispatch({ type: 'EDIT_ABOUT', payload: about });
+    setEditAbout(!editAbout);
+    setAbout(dataItem.about);
+  }
 
   return (
     <div>
@@ -172,8 +184,32 @@ function UserItem({ dataItem }) {
       />
 
       <div className="about">
-        <h3 className="about-text">About</h3>
-        <p className="about-data">{dataItem.about}</p>
+        <h3 className="about-text">About     
+          <IconButton id="edit-about-icon" onClick={() => setEditAbout(!editAbout)}>
+              <EditIcon />
+          </IconButton>
+        </h3>
+        {!editAbout ?
+          <p className="about-data">{dataItem.about}</p>
+        :
+          <form onSubmit={handleEditAbout}>
+            <input 
+              className="edit-about-input"
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
+            />
+            <IconButton type='submit'>
+              <CheckIcon />
+            </IconButton>
+
+            <IconButton onClick={() => {
+              setEditAbout(!editAbout);
+              setAbout(dataItem.about);
+            }}>
+              <ArrowBackIcon />
+            </IconButton>
+          </form>
+        }
       </div>
     </div>
   );
