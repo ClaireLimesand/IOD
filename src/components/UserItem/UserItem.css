@@ -56,6 +56,7 @@
 .about {
     background-color: #E8E9EE;
     box-shadow: 0 6px 3px -2px rgba(0, 0, 0, 0.301);
+    margin-top: 18px;
 }
 
 .about-text {
@@ -154,6 +155,21 @@
     box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
     cursor: pointer;
     transform: scale(1.05,1.05);
+    background-color: #d6d7d8;
+}
+
+#edit-about-icon {
+    transition: ease 0.3s;
+    border: 1px solid rgba(0, 0, 0, 0.295);
+    border-radius: 30px;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+#edit-about-icon:hover {
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    cursor: pointer;
+    transform: scale(1.02,1.02);
     background-color: #d6d7d8;
 }
 

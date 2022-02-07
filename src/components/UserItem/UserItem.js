@@ -9,6 +9,8 @@ import { ListItemIcon } from "@mui/material";
 import "./UserItem.css";
 import { Badge } from "@mui/material";
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Typography } from "@mui/material";
+import { IconButton } from "@mui/material";
 
 function UserItem({ dataItem }) {
   const useStyles = makeStyles(theme => createStyles({
@@ -172,7 +174,11 @@ function UserItem({ dataItem }) {
       />
 
       <div className="about">
-        <h3 className="about-text">About</h3>
+        <h3 className="about-text">About     
+          <IconButton id="edit-about-icon">
+              <EditIcon />
+          </IconButton>
+        </h3>
         <p className="about-data">{dataItem.about}</p>
       </div>
     </div>
