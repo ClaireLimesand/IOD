@@ -13,6 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
+import { Grid } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -73,7 +74,7 @@ function Skills() {
                 <AddIcon />
             </IconButton>
             </h3>
-            
+
             {store.skills.map((skill, i) => (
             <p className="skills-list" key={i}>{skill.skill}
             
