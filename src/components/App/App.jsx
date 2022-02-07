@@ -21,6 +21,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import InternshipsPage from '../InternshipsPage/InternshipsPage';
 import HomePage from '../HomePage/HomePage';
 import EditSkill from '../EditSkill/EditSkill';
+import EditInternship from '../EditInternship/EditInternship';
 
 import './App.css';
 
@@ -81,11 +82,17 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/editskill/:id"
           >
             <EditSkill />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/editinternship/:id"
+          >
+            <EditInternship />
           </ProtectedRoute>
 
           <Route

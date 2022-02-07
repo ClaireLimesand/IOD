@@ -63,7 +63,6 @@ function* fetchSingleSkill(action) {
             method: 'GET',
             url: `api/skills/${action.payload}`
         })
-        console.log('fetch skill!', response.data)
         yield put ({
             type: 'SET_SKILL_TO_EDIT',
             payload: response.data
