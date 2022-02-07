@@ -6,6 +6,7 @@
     background-color: #E8E9EE;
     width: 50%;
     box-shadow: 0 6px 3px -2px rgba(0, 0, 0, 0.301);
+    padding-bottom: 8px;
 }
 
 .skills-text {
@@ -19,8 +20,6 @@
 .skills-list {
     margin-left: 30px;
     padding-top: 10px;
-    padding-bottom: 10px;
-    width: 500px;
 }
 
 #edit-skill-icon {
@@ -31,6 +30,13 @@
     padding: 5px;
 }
 
+#edit-skill-icon:hover {
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    cursor: pointer;
+    transform: scale(1.02,1.02);
+    background-color: #d6d7d8;
+}
+
 #delete-skill-icon {
     margin-left: 10px;
     transition: ease 0.3s;
@@ -39,10 +45,76 @@
     padding: 5px;
 }
 
+#delete-skill-icon:hover {
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    cursor: pointer;
+    transform: scale(1.02,1.02);
+    background-color: #d6d7d8;
+}
+
 #add-skill-icon {
     margin-left: 10px;
     transition: ease 0.3s;
     border: 1px solid rgba(0, 0, 0, 0.295);
     border-radius: 30px;
     padding: 5px;
+}
+
+#add-skill-icon:hover {
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    cursor: pointer;
+    transform: scale(1.02,1.02);
+    background-color: #d6d7d8;
+}
+
+.interior-box {
+    background-color: #efefef;
+    padding: 20px;
+    border-radius: 10px;
+    animation: gradient 0.5s ease both;
+    animation-delay: 0.1s;
+    border: 3px solid rgba(128, 128, 128, 0.616);
+}
+
+#modal-modal-title {
+    font-size: 40px;
+}
+
+.skill-input {
+    font-size: 18px;
+    font-weight: bold;
+    cursor: text;
+    padding-bottom: 4px;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 3px -2px rgba(0, 0, 0, 0.301);
+    transition: ease 0.3s;
+}
+
+.skill-input:hover {
+    transform: scale(1.08, 1.08);
+    background-color: #26e9c95d;
+}
+
+.skill-input:focus {
+    background-color: #19c9ac1e;
+}
+
+.interior-box button {
+    padding: 10px;
+    background-color: #cf3123;
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    transition: ease 0.3s;
+    border: none;
+}
+
+.interior-box button:hover {
+    background-color: #e92c1b;
+    box-shadow: 0 6px 3px -2px rgba(202, 36, 36, 0.514);
+    transform: scale(1.05, 1.05);
+    cursor: pointer;
 }

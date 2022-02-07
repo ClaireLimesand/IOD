@@ -99,12 +99,6 @@ function UserItem({ dataItem }) {
           >
           </Badge>
           </Stack>
-          {/* <ListItemIcon>
-            <EditIcon 
-              id="edit-picture-icon" 
-              onClick={() => setPictureOpen(true)}
-            />
-          </ListItemIcon> */}
           <div>
             <div className="name-pros">
               <h2 className="student-name">{dataItem.name}</h2>
@@ -117,8 +111,6 @@ function UserItem({ dataItem }) {
           </div>
 
           <div className="resume">
-            {/* <label htmlFor="resume-upload">Upload Resume</label>
-            <input className="resume-input" type="file" onChange={handleUpload} id="resume-upload" /> */}
             <button className="resume-input" onClick={() => setResumeOpen(true)}>Upload Resume</button>
             <button className="resume-button" onClick={handleSubmit}>View Resume</button>
           </div>

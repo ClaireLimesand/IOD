@@ -45,7 +45,10 @@ function Skills() {
         dispatch({ type: 'FETCH_SKILLS' });
     }, []);
 
-    const handleSaveSkillButton = () => {
+    const handleSaveSkillButton = (event) => {
+        event.preventDefault();
+        setSkill('');
+        setOpen(false);
         const newSkill = {
             skill: skill
         }
@@ -73,29 +76,28 @@ function Skills() {
                 <AddIcon />
             </IconButton>
             </h3>
-            
-            {store.skills.map((skill, i) => (
-            <p className="skills-list" key={i}>{skill.skill}
-            
-            <IconButton
-                id="edit-skill-icon" 
-                onClick={() => {
-                    history.push(`/editskill/${skill.id}`);
-                    }}
-            >
-                <EditIcon />
-            </IconButton>
 
-            <IconButton
-                id="delete-skill-icon" 
-                onClick={() => handleDeleteSkillButton(skill.id)}
-            >
-                <ClearIcon />
-            </IconButton>
-            
-            </p>
-            ))
-            }
+            {store.skills.map((skill, i) => (
+                <Typography className="skills-list" key={i}>{skill.skill}
+                
+                    <IconButton
+                        id="edit-skill-icon" 
+                        onClick={() => {
+                            history.push(`/editskill/${skill.id}`);
+                        }}
+                    >
+                        <EditIcon />
+                    </IconButton>
+
+                    <IconButton
+                        id="delete-skill-icon" 
+                        onClick={() => handleDeleteSkillButton(skill.id)}
+                    >
+                        <ClearIcon />
+                    </IconButton>
+                
+                </Typography>
+            ))}
             
             <Modal
                 open={open}
@@ -105,20 +107,22 @@ function Skills() {
             >
                 <center>
                     <Box sx={style}>
-                    
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Add A Skill
-                    </Typography>
-                    
-                    <input 
-                    value={skill}
-                    onChange={(event) => setSkill(event.target.value)}
-                    />
-                    
-                    <button onClick={handleSaveSkillButton}>
-                        Add Skill
-                    </button>
-
+                        <form className='interior-box' onSubmit={handleSaveSkillButton}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Add a Skill
+                            </Typography>
+                            <img className="login-gradient" src="gradient_bar.png" draggable={false} />
+                            <input 
+                                className='skill-input'
+                                value={skill}
+                                onChange={(event) => setSkill(event.target.value)}
+                                required
+                            />
+                            <br />
+                            <button type='submit'>
+                                Add Skill
+                            </button>
+                        </form>
                     </Box>
                 </center>
             </Modal>     
