@@ -87,13 +87,24 @@ function UserItem({ dataItem }) {
               src={dataItem.picture}
               sx={{ width: 200, height: 200 }}
             />
+          <Badge
+            badgeContent={
+              <ListItemIcon>
+                <EditIcon 
+                  id="edit-picture-icon" 
+                  onClick={() => setPictureOpen(true)}
+                />
+              </ListItemIcon>
+            }
+          >
+          </Badge>
           </Stack>
-          <ListItemIcon>
+          {/* <ListItemIcon>
             <EditIcon 
               id="edit-picture-icon" 
               onClick={() => setPictureOpen(true)}
             />
-          </ListItemIcon>
+          </ListItemIcon> */}
           <div>
             <div className="name-pros">
               <h2 className="student-name">{dataItem.name}</h2>
