@@ -57,6 +57,7 @@ function EditSkill() {
                         className="skill-input"
                         value={editSkillReducer.skill || ""}
                         onChange={handleSkillChange}
+                        required
                     >
                     </input>
                     <br />

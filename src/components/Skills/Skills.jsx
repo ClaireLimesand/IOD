@@ -47,6 +47,8 @@ function Skills() {
 
     const handleSaveSkillButton = (event) => {
         event.preventDefault();
+        setSkill('');
+        setOpen(false);
         const newSkill = {
             skill: skill
         }
@@ -76,7 +78,7 @@ function Skills() {
             </h3>
 
             {store.skills.map((skill, i) => (
-            <p className="skills-list" key={i}>{skill.skill}
+            <Typography className="skills-list" key={i}>{skill.skill}
             
             <IconButton
                 id="edit-skill-icon" 
@@ -94,7 +96,7 @@ function Skills() {
                 <ClearIcon />
             </IconButton>
             
-            </p>
+            </Typography>
             ))
             }
             
