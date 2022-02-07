@@ -50,7 +50,7 @@ function EditSkill() {
     return (
         <div className="container">
             <center>
-                <form className="edit-skill">
+                <form className="edit-skill" onSubmit={handleSubmit}>
                     <h3 className='skills-title'>Edit Skill</h3>
                     <img className="login-gradient" src="gradient_bar.png" draggable={false} />
                     <input
@@ -60,16 +60,13 @@ function EditSkill() {
                     >
                     </input>
                     <br />
-                    <IconButton
-                        onClick={handleSubmit}
-                    >
-                            <CheckIcon />
+                    
+                    <IconButton type='submit'>
+                        <CheckIcon />
                     </IconButton>
 
-                    <IconButton
-                        onClick={handleBack}
-                    >
-                            <ArrowBackIcon />
+                    <IconButton onClick={handleBack}>
+                        <ArrowBackIcon />
                     </IconButton>
 
                 </form>
