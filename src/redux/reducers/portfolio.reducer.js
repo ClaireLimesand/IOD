@@ -1,4 +1,4 @@
-const portfolio = (state = [], action) => {
+const portfolio = (state = {}, action) => {
     switch (action.type) {
         case 'SET_PORTFOLIO':
             console.log('Reducer portfolio data', action.payload);

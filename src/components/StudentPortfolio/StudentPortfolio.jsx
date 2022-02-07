@@ -8,8 +8,8 @@ function StudentPortfolio() {
 
     return (
         <div className="container">
-            {portfolio.map((data) => {
-                return <PortfolioItem key={data.id} data={data}/>
+            {Object.keys(portfolio).map((data) => {
+                return <PortfolioItem key={data.id} data={portfolio[data]}/>
             })}
         </div>
     )
