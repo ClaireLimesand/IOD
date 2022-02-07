@@ -45,7 +45,8 @@ function Skills() {
         dispatch({ type: 'FETCH_SKILLS' });
     }, []);
 
-    const handleSaveSkillButton = () => {
+    const handleSaveSkillButton = (event) => {
+        event.preventDefault();
         const newSkill = {
             skill: skill
         }
@@ -105,7 +106,7 @@ function Skills() {
             >
                 <center>
                     <Box sx={style}>
-                        <div className='interior-box'>
+                        <form className='interior-box' onSubmit={handleSaveSkillButton}>
                             <Typography id="modal-modal-title" variant="h6" component="h2">
                                 Add a Skill
                             </Typography>
@@ -114,12 +115,13 @@ function Skills() {
                                 className='skill-input'
                                 value={skill}
                                 onChange={(event) => setSkill(event.target.value)}
+                                required
                             />
                             <br />
-                            <button onClick={handleSaveSkillButton}>
+                            <button type='submit'>
                                 Add Skill
                             </button>
-                        </div>
+                        </form>
                     </Box>
                 </center>
             </Modal>     
