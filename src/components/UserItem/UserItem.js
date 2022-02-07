@@ -67,6 +67,12 @@ function UserItem({ dataItem }) {
     window.open(dataItem.linkedin);
   };
 
+  const handleEditAbout = () => {
+    dispatch({ type: 'EDIT_ABOUT', payload: about });
+    setEditAbout(!editAbout);
+    setAbout(dataItem.about);
+  }
+
   return (
     <div>
       <div className="head">
@@ -186,11 +192,7 @@ function UserItem({ dataItem }) {
         {!editAbout ?
           <p className="about-data">{dataItem.about}</p>
         :
-          <form onSubmit={() => {
-            dispatch({ type: 'EDIT_ABOUT', payload: about });
-            setEditAbout(!editAbout);
-            setAbout(dataItem.about);
-          }}>
+          <form onSubmit={handleEditAbout}>
             <input 
               className="edit-about-input"
               value={about}
