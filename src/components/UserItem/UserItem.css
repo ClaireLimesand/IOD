@@ -82,6 +82,10 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    left: 110px;
+    margin-left: 190px;
     margin-top: 30px;
     gap: 10px;
     font-family: sans-serif;
@@ -109,6 +113,27 @@
     border-radius: 20px;
     background-color: #cf3123;
     color: white;
+}
+
+.portfolio-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 190px;
+    width: 150px;
+}
+
+.portfolio-button {
+    border: none;
+    height: 20%;
+    position: relative;
+    bottom: 7px;
+    padding-left: 10%;
+    padding-right: 10%;
+    border-radius: 10px;
+    background-color: #4F89B7;
+    color: white;
+
     padding: 10px;
     box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
     cursor: pointer;

@@ -86,7 +86,13 @@ function UserItem({ dataItem }) {
   }
 
   const handleLinkedClick = () => {
-    window.open(dataItem.linkedin);
+    const pdfWindow = window.open();
+    pdfWindow.location.href = fileURL;
+    history.push("/user");
+  };
+
+  const handlePortfolio = () => {
+    history.push("/portfolio");
   };
 
   const handleEditAbout = () => {
@@ -150,6 +156,11 @@ function UserItem({ dataItem }) {
               </IconButton>
             </div>
             <p className="email">{dataItem.email}</p>
+          </div>
+          <div className="portfolio-div">
+            <button className="portfolio-button" onClick={handlePortfolio}>
+              Portfolio
+            </button>
             {dataItem.linkedin &&
             <img src="linkedIn-icon.png" onClick={handleLinkedClick} className="profile-link" draggable={false} />
             }
