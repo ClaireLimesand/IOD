@@ -110,74 +110,74 @@ function InternshipsPage() {
             >
                 <Box sx={style}>
                 
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    New Intership
-                </Typography>
-                
-                <input 
-                className="internship-input"
-                placeholder="company name"
-                value={companyName}
-                onChange={(event) => setCompanyName(event.target.value)}
-                />
-
-                <input 
-                className="internship-input"
-                placeholder="internship subtitle"
-                value={subtitle}
-                onChange={(event) => setSubtitle(event.target.value)}
-                />
-
-                <input 
-                className="internship-input"
-                placeholder="logo picture"
-                value={logo}
-                onChange={(event) => setLogo(event.target.value)}
-                />
-
-                <textarea 
-                rows="5"
-                className="internship-description"
-                placeholder="internship description"
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
-                />  
-
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DateRangePicker
-                        startText="Start Date"
-                        endText="End Date"
-                        value={dateRange}
-                        onChange={(newValue) => {
-                        setDateRange(newValue);
-                        }}
-                        renderInput={(startProps, endProps) => (
-                        <React.Fragment>
-                            <TextField {...startProps} />
-                            <Box sx={{ mx: 2 }}> to </Box>
-                            <TextField {...endProps} />
-                        </React.Fragment>
-                        )}
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        New Intership
+                    </Typography>
+                    
+                    <input 
+                    className="internship-input"
+                    placeholder="company name"
+                    value={companyName}
+                    onChange={(event) => setCompanyName(event.target.value)}
                     />
-                </LocalizationProvider>
-                
-                <Button 
-                    size="small" 
-                    variant='contained' 
-                    sx={{ backgroundColor: '#15B097' }}
-                    onClick={handleSaveButton}
-                >
-                    Save
-                </Button>
-                
-                <Button 
-                    size="small" 
-                    variant='contained' 
-                    sx={{ backgroundColor: '#15B097' }}
-                    onClick={handleClose}
-                >
-                    Cancel
-                </Button>
+
+                    <input 
+                    className="internship-input"
+                    placeholder="internship subtitle"
+                    value={subtitle}
+                    onChange={(event) => setSubtitle(event.target.value)}
+                    />
+
+                    <input 
+                    className="internship-input"
+                    placeholder="logo picture"
+                    value={logo}
+                    onChange={(event) => setLogo(event.target.value)}
+                    />
+
+                    <textarea 
+                    rows="5"
+                    className="internship-description"
+                    placeholder="internship description"
+                    value={description}
+                    onChange={(event) => setDescription(event.target.value)}
+                    />  
+
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DateRangePicker
+                            startText="Start Date"
+                            endText="End Date"
+                            value={dateRange}
+                            onChange={(newValue) => {
+                            setDateRange(newValue);
+                            }}
+                            renderInput={(startProps, endProps) => (
+                            <React.Fragment>
+                                <TextField {...startProps} />
+                                <Box sx={{ mx: 2 }}> to </Box>
+                                <TextField {...endProps} />
+                            </React.Fragment>
+                            )}
+                        />
+                    </LocalizationProvider>
+                    
+                    <Button 
+                        size="small" 
+                        variant='contained' 
+                        sx={{ backgroundColor: '#15B097' }}
+                        onClick={handleSaveButton}
+                    >
+                        Save
+                    </Button>
+                    
+                    <Button 
+                        size="small" 
+                        variant='contained' 
+                        sx={{ backgroundColor: '#15B097' }}
+                        onClick={handleClose}
+                    >
+                        Cancel
+                    </Button>
 
                 </Box>
             </Modal>    

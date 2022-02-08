@@ -129,25 +129,3 @@ input {
 .edit-input {
   border: 0;
 }
-
-/* Internships page */
-.company-logo {
-  width: 200px;
-  padding-bottom: 10px;
-  padding-top: 20px;
-}
-
-.company-logo-border {
-  border-bottom: 2px solid black;
-  margin-left: 10%;
-  margin-right: 10%;
-}
-
-#internships-page-title {
-  color: #15B097;
-  font-size: 42px;
-}
-
-#internships-container {
-  padding-top: 3rem;
-}
