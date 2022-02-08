@@ -31,11 +31,31 @@ function* editAbout(action) {
     }
 }
 
+function* editTop(action) {
+    try {
+        yield axios({
+            method: 'PUT',
+            url: '/api/profile/top',
+            data: {
+                name: action.payload.name, 
+                email: action.payload.email, 
+                linkedin: action.payload.linkedin, 
+                pronouns: action.payload.pronouns
+            }
+        });
+        yield put({
+            type: 'FETCH_PROFILE'
+        });
+    }   catch (error) {
+        console.log(error)
+    }
+}
 
 
 function* profileSaga() {
     yield takeLatest('FETCH_PROFILE', fetchProfile);
     yield takeLatest('EDIT_ABOUT', editAbout);
+    yield takeLatest('EDIT_TOP', editTop);
 };
 
 export default profileSaga;

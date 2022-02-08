@@ -88,8 +88,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         UPDATE skills
-            SET skill = $1
-            WHERE id = $2;
+        SET skill = $1
+        WHERE id = $2;
     `;
     const sqlValues = [
         req.body.skill,

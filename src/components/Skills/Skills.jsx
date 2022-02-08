@@ -13,17 +13,17 @@ import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
+import CheckIcon from '@mui/icons-material/Check';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const style = {
     position: 'absolute',
     top: '50%',
-    left: '60%',
+    left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
     boxShadow: 24,
     borderRadius: 3,
-    p: 4,
 };
 
 function Skills() {
@@ -35,7 +35,10 @@ function Skills() {
     const skills = useSelector((store) => store.skillsReducer);
     const user = useSelector((store) => store.user);
 
+    const [editSkill, setEditSkill] = useState('');
     const [skill, setSkill] = useState('');
+    const [selectedSkill, setSelectedSkill] = useState('');
+
     const [open, setOpen] = React.useState(false);
     const [editOpen, editSetOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -65,39 +68,70 @@ function Skills() {
         })
     };  
 
+    const handleEditSkill = () => {
+        dispatch({ type: 'EDIT_SKILL', payload: {skill: skill, id: selectedSkill.id} });
+        setEditSkill(!editSkill);
+        setSkill('');
+    }
+
     return (
         <div className="skills">
             
             <h3 className="skills-text">Skills
-            <IconButton
-                id="add-skill-icon" 
-                onClick={handleOpen}
-            >
-                <AddIcon />
-            </IconButton>
+                <IconButton
+                    id="add-skill-icon" 
+                    onClick={handleOpen}
+                >
+                    <AddIcon />
+                </IconButton>
             </h3>
 
-            {store.skills.map((skill, i) => (
-                <Typography className="skills-list" key={i}>{skill.skill}
-                
-                    <IconButton
-                        id="edit-skill-icon" 
-                        onClick={() => {
-                            history.push(`/editskill/${skill.id}`);
-                        }}
-                    >
-                        <EditIcon />
+            {!editSkill ?
+                store.skills.map((skillItem, i) => (
+                    <Typography className="skills-list" key={i}>{skillItem.skill}
+                    
+                        <IconButton
+                            id="edit-skill-icon" 
+                            onClick={() => {
+                                setEditSkill(!editSkill);
+                                setSelectedSkill(skillItem);
+                                setSkill(skillItem.skill);
+                            }}
+                        >
+                            <EditIcon />
+                        </IconButton>
+
+                        <IconButton
+                            id="delete-skill-icon" 
+                            onClick={() => {
+                                handleDeleteSkillButton(skillItem.id);
+                            }}
+                        >
+                            <ClearIcon />
+                        </IconButton>
+                    
+                    </Typography>
+                ))
+            :
+                <form onSubmit={handleEditSkill}>
+                    <input 
+                        className="edit-about-input"
+                        value={skill}
+                        onChange={(e) => setSkill(e.target.value)}
+                    />
+
+                    <IconButton onClick={handleEditSkill}>
+                        <CheckIcon />
                     </IconButton>
 
-                    <IconButton
-                        id="delete-skill-icon" 
-                        onClick={() => handleDeleteSkillButton(skill.id)}
-                    >
-                        <ClearIcon />
+                    <IconButton onClick={() => {
+                        setEditSkill(!editSkill);
+                        setSkill('');
+                    }}>
+                        <ArrowBackIcon />
                     </IconButton>
-                
-                </Typography>
-            ))}
+                </form>
+            }
             
             <Modal
                 open={open}
