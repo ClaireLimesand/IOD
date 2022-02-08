@@ -95,6 +95,13 @@ function UserItem({ dataItem }) {
     setAbout(dataItem.about);
   }
 
+  const handleTopSubmit = () => {
+    dispatch({
+      type: 'EDIT_TOP',
+      payload: {name: name, email, email, linkedin: linkedin, pronouns: pronouns}
+    })
+  }
+
   return (
     <div>
       <div className="head">
@@ -160,7 +167,7 @@ function UserItem({ dataItem }) {
       >
         <center>
             <Box sx={style}>
-                <form className='interior-box'>
+                <form className='interior-box' onSubmit={handleTopSubmit}>
                     <Typography id="edit-top-title" variant="h6" component="h2">
                         Edit Profile
                     </Typography>
@@ -172,7 +179,6 @@ function UserItem({ dataItem }) {
                         className='skill-input'
                         value={name}
                         onChange={(event) => setName(event.target.value)}
-                        required
                     />
                     <br />
                     <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
@@ -182,7 +188,6 @@ function UserItem({ dataItem }) {
                         className='skill-input'
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
-                        required
                     />
                     <br />
                     <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
@@ -192,7 +197,6 @@ function UserItem({ dataItem }) {
                         className='skill-input'
                         value={linkedin}
                         onChange={(event) => setLinkedin(event.target.value)}
-                        required
                     />
                     <br />
                     <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
@@ -202,7 +206,6 @@ function UserItem({ dataItem }) {
                         className='skill-input'
                         value={pronouns}
                         onChange={(event) => setPronouns(event.target.value)}
-                        required
                     />
                     <br />
                     <div className="modal-btn-container">
