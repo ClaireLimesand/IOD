@@ -121,6 +121,14 @@ function InternshipsPage() {
                 onChange={(event) => setLogo(event.target.value)}
                 />
 
+                <textarea 
+                rows="5"
+                className="internship-description"
+                placeholder="internship description"
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
+                />  
+
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DateRangePicker
                         startText="internship start date"
@@ -138,14 +146,6 @@ function InternshipsPage() {
                         )}
                     />
                 </LocalizationProvider>
-
-                <textarea 
-                rows="5"
-                className="internship-description"
-                placeholder="internship description"
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
-                />
                 
                 <Button 
                     size="small" 

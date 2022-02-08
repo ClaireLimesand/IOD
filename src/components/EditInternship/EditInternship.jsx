@@ -113,23 +113,28 @@ function EditInternship() {
                 <img className="login-gradient" src="gradient_bar.png" draggable={false} />
 
             <input 
+                className="internship-edit-input"
                 value={editInternshipReducer.name|| ""}
                 onChange={handleNameChange}
             />
             
             <input 
+                className="internship-edit-input"
                 value={editInternshipReducer.subtitle|| ""}
                 onChange={handleSubtitleChange}
-            />           
-
+            />         
+        
             <input 
-                value={editInternshipReducer.description|| ""}
-                onChange={handleDescriptionChange}
-            />  
-
-            <input 
+                className="internship-edit-input"
                 value={editInternshipReducer.logo|| ""}
                 onChange={handleLogoChange}
+            />    
+
+            <textarea 
+                rows="8"
+                className="internship-edit-description"
+                value={editInternshipReducer.description|| ""}
+                onChange={handleDescriptionChange}
             />  
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
