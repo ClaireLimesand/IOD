@@ -6,6 +6,9 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import ClearIcon from '@mui/icons-material/Clear';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Internship({internship}) {
     
@@ -32,7 +35,7 @@ function Internship({internship}) {
                     <Typography gutterBottom variant="h5" component="div">
                         {internship.company_name}
                     </Typography>
-                    <Typography sx={{ paddingBottom: 1, fontStyle: 'italic' }}>
+                    <Typography sx={{ fontStyle: 'italic' }}>
                         {internship.company_subtitle}
                     </Typography>
                     <Typography sx={{ paddingBottom: 1, fontStyle: 'italic' }}>
@@ -44,28 +47,23 @@ function Internship({internship}) {
                 </CardContent>
                 <CardActions>
                     <Button size="small" variant='contained' sx={{ backgroundColor: '#15B097' }}>Apply</Button>
-                    
+
                     {user.access_level == 3 &&
-                        <Button  
+                        <IconButton  
                             onClick={() => {
-                                history.push(`/editinternship/${internship.id}`);
-                                }}
-                            size="small" 
-                            variant='contained' 
-                            sx={{ backgroundColor: '#15B097' }}>
-                                Edit
-                        </Button>
+                            history.push(`/editinternship/${internship.id}`);
+                            }}>
+                            <EditIcon />
+                        </IconButton>
                     }
 
                     {user.access_level == 3 &&
-                        <Button  
-                            onClick={() => handleDeleteButton(internship.id)} 
-                            size="small" 
-                            variant='contained' 
-                            sx={{ backgroundColor: '#15B097' }}>
-                                Delete
-                        </Button>
+                        <IconButton  
+                            onClick={() => handleDeleteButton(internship.id)}>
+                            <ClearIcon />
+                        </IconButton>
                     }
+                
                 </CardActions>
             </Card>
         </div>

@@ -93,7 +93,7 @@ function Skills() {
                         id="delete-skill-icon" 
                         onClick={() => handleDeleteSkillButton(skill.id)}
                     >
-                        <ClearIcon />
+                        <EditIcon />
                     </IconButton>
                 
                 </Typography>

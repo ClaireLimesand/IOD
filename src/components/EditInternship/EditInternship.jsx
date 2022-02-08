@@ -139,8 +139,8 @@ function EditInternship() {
 
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DateRangePicker
-                        startText="internship start date"
-                        endText="internship end date"
+                        startText="Start Date"
+                        endText="End Date"
                         value={[editInternshipReducer.start_date, editInternshipReducer.end_date] || [null, null]}
                         onChange={(newValues) => {
                             handleDateChange(newValues);
