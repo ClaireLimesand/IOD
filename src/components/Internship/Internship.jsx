@@ -25,7 +25,7 @@ function Internship({internship}) {
     }; 
 
     return (
-        <Card sx={{ maxWidth: 345, backgroundColor: '#E8E9EE' }}>
+        <Card sx={{ maxWidth: 345, minWidth: 340, backgroundColor: '#E8E9EE' }}>
             <center>
                 <img src={internship.company_logo} className='company-logo' draggable='false' />
             </center>

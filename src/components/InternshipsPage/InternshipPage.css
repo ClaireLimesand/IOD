@@ -45,7 +45,8 @@
 #internships-container {
   padding-top: 3rem;
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
 .apply-btn {
