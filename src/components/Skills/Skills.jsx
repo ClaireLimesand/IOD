@@ -78,12 +78,14 @@ function Skills() {
         <div className="skills">
             
             <h3 className="skills-text">Skills
-                <IconButton
-                    id="add-skill-icon" 
-                    onClick={handleOpen}
-                >
-                    <AddIcon />
-                </IconButton>
+                {!editSkill &&
+                    <IconButton
+                        id="add-skill-icon" 
+                        onClick={handleOpen}
+                    >
+                        <AddIcon />
+                    </IconButton>
+                }
             </h3>
 
             {!editSkill ?
