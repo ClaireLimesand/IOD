@@ -31,7 +31,7 @@ function* addInternship(action) {
             type: 'FETCH_INTERNSHIPS'
         })
     } catch (err) {
-        console.log('POST internhsip error:', err);
+        console.log('POST internship error:', err);
     }
 }
 
