@@ -12,8 +12,29 @@
     width: 7%;
     margin-top: 40px;
     margin-left: 20px;
+    border-bottom: 4px solid #C1C2C7;
+    padding-right: 89%;
+    padding-bottom: 10px;
+}
+
+.projects-sub {
+    margin-left: 30px;
+}
+
+.projects-info {
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 2%;
+    padding-bottom: 4%;
+    border-bottom: 2px solid #C1C2C7;
+    width: 96%;
+}
+
+.projects-name {
+    font-size: xx-large;
 }
 
 .project-img {
     width: 30%;
+    box-shadow: 6px 5px 10px 1px rgba(0, 0, 0, 0.301);
 }
