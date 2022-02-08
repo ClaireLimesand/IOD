@@ -12,6 +12,10 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { IconButton } from "@mui/material";
 import CheckIcon from '@mui/icons-material/Check';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import { Modal } from "@mui/material";
+import { Box } from "@mui/system";
+import { Typography } from "@mui/material";
 
 function UserItem({ dataItem }) {
   const useStyles = makeStyles(theme => createStyles({
@@ -27,8 +31,26 @@ function UserItem({ dataItem }) {
   const [bannerOpen, setBannerOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
 
+  const [editTop, setEditTop] = useState(false);
+  const [name, setName] = useState(dataItem.name);
+  const [email, setEmail] = useState(dataItem.email);
+  const [linkedin, setLinkedin] = useState(dataItem.linkedin);
+  const [pronouns, setPronouns] = useState(dataItem.pronouns);
+
   const [editAbout, setEditAbout] = useState(false);
   const [about, setAbout] = useState(dataItem.about);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    borderRadius: 3,
+    p: 4,
+  };
 
   const handleSubmit = () => {
     dispatch({
@@ -64,13 +86,27 @@ function UserItem({ dataItem }) {
   }
 
   const handleLinkedClick = () => {
-    window.open(dataItem.linkedin);
+    const pdfWindow = window.open();
+    pdfWindow.location.href = fileURL;
+    history.push("/user");
+  };
+
+  const handlePortfolio = () => {
+    history.push("/portfolio");
   };
 
   const handleEditAbout = () => {
     dispatch({ type: 'EDIT_ABOUT', payload: about });
     setEditAbout(!editAbout);
     setAbout(dataItem.about);
+  }
+
+  const handleTopSubmit = () => {
+    dispatch({
+      type: 'EDIT_TOP',
+      payload: {name: name, email, email, linkedin: linkedin, pronouns: pronouns}
+    })
+    setEditTop(false);
   }
 
   return (
@@ -81,7 +117,7 @@ function UserItem({ dataItem }) {
           <Badge
             badgeContent={
               <ListItemIcon>
-                <EditIcon 
+                <AddPhotoAlternateIcon 
                   id="edit-banner-icon" 
                   onClick={() => setBannerOpen(true)}
                 />
@@ -102,7 +138,7 @@ function UserItem({ dataItem }) {
           <Badge
             badgeContent={
               <ListItemIcon>
-                <EditIcon 
+                <AddPhotoAlternateIcon 
                   id="edit-picture-icon" 
                   onClick={() => setPictureOpen(true)}
                 />
@@ -115,8 +151,16 @@ function UserItem({ dataItem }) {
             <div className="name-pros">
               <h2 className="student-name">{dataItem.name}</h2>
               <p className="pronouns">{dataItem.pronouns}</p>
+              <IconButton id="edit-top-icon" onClick={() => setEditTop(true)}>
+                  <EditIcon />
+              </IconButton>
             </div>
             <p className="email">{dataItem.email}</p>
+          </div>
+          <div className="portfolio-div">
+            <button className="portfolio-button" onClick={handlePortfolio}>
+              Portfolio
+            </button>
             {dataItem.linkedin &&
             <img src="linkedIn-icon.png" onClick={handleLinkedClick} className="profile-link" draggable={false} />
             }
@@ -128,6 +172,62 @@ function UserItem({ dataItem }) {
           </div>
         </div>
       </div>
+
+      <Modal
+        open={editTop}
+        onClose={() => setEditTop(false)}
+      >
+        <center>
+            <Box sx={style}>
+                <form className='interior-box' onSubmit={handleTopSubmit}>
+                    <Typography id="edit-top-title" variant="h6" component="h2">
+                        Edit Profile
+                    </Typography>
+                    <img className="login-gradient" src="gradient_bar.png" draggable={false} />
+                    <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
+                      Name
+                    </Typography>
+                    <input 
+                        className='skill-input'
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
+                    />
+                    <br />
+                    <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
+                      Email
+                    </Typography>
+                    <input 
+                        className='skill-input'
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                    />
+                    <br />
+                    <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
+                      LinkedIn
+                    </Typography>
+                    <input 
+                        className='skill-input'
+                        value={linkedin}
+                        onChange={(event) => setLinkedin(event.target.value)}
+                    />
+                    <br />
+                    <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
+                      Pronouns
+                    </Typography>
+                    <input 
+                        className='skill-input'
+                        value={pronouns}
+                        onChange={(event) => setPronouns(event.target.value)}
+                    />
+                    <br />
+                    <div className="modal-btn-container">
+                      <button type='submit'>Save</button>
+                      <button id="cancel-btn" onClick={() => setEditTop(false)}>Cancel</button>
+                    </div>
+                </form>
+            </Box>
+        </center>
+      </Modal>     
 
       {/* Profile pic import dialogue */}
       <DropzoneDialog
