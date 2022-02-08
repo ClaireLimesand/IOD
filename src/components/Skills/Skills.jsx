@@ -69,7 +69,7 @@ function Skills() {
     };  
 
     const handleEditSkill = () => {
-        dispatch({ type: 'EDIT_SKILL', payload: skill });
+        dispatch({ type: 'EDIT_SKILL', payload: {skill: skill, id: selectedSkill.id} });
         setEditSkill(!editSkill);
         setSkill('');
     }
