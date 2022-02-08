@@ -35,6 +35,9 @@ function Internship({internship}) {
                     <Typography sx={{ paddingBottom: 1, fontStyle: 'italic' }}>
                         {internship.company_subtitle}
                     </Typography>
+                    <Typography sx={{ paddingBottom: 1, fontStyle: 'italic' }}>
+                        {internship.start_date} to {internship.end_date}
+                    </Typography>
                     <Typography variant="body2" color="text.secondary">
                         {internship.company_description}
                     </Typography>

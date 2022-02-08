@@ -11,7 +11,15 @@ const router = express.Router();
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = 
     `
-        SELECT * FROM "internships"
+        SELECT 
+            "internships"."id",
+            "internships"."company_name",
+            "internships"."company_subtitle",
+            TO_CHAR("start_date",'MM-DD-YYYY') AS "start_date", 
+            TO_CHAR("end_date",'MM-DD-YYYY') AS "end_date", 
+            "internships"."company_logo",
+            "internships"."company_description"
+        FROM "internships" 
     `;
 
     pool.query(sqlText)
@@ -21,6 +29,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500)
     })  
 });
+// SELECT * FROM "internships"
 
 router.post('/', rejectUnauthenticated, (req, res) => {
     const sqlQuery =`INSERT INTO "internships" ("company_name", "company_subtitle", "start_date", "end_date", "company_logo", "company_description")
