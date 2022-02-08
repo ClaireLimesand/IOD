@@ -12,6 +12,9 @@ import Modal from '@mui/material/Modal';
 
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import ClearIcon from '@mui/icons-material/Clear';
+import CheckIcon from '@mui/icons-material/Check';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { makeStyles } from '@material-ui/core/styles';
 
 import TextField from '@mui/material/TextField';
@@ -85,6 +88,7 @@ function InternshipsPage() {
 
     return (
         <div className="container">
+    
             <h1 id='internships-page-title'>Internships
                 {user.access_level == 3 &&
                 <IconButton
@@ -104,6 +108,7 @@ function InternshipsPage() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
+                <center>
                 <Box sx={style}>
                     <center className="modal-box">
                         <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -164,7 +169,9 @@ function InternshipsPage() {
                         </div>
                     </center>
                 </Box>
-            </Modal>    
+            </center> 
+            </Modal>   
+            
 
             <section id='internships-container'>
                 {internships.map((internship) => {

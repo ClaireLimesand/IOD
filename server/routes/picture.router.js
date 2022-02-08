@@ -6,7 +6,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 require('dotenv').config();
 // Cloudinary
-const cloudinary = require("cloudinary").v2;
+// const cloudinary = require("cloudinary").v2;
 const cloudinaryUpload = require('../modules/cloudinary-config');
 
 router.put('/', rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {

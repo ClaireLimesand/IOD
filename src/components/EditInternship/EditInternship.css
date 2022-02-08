@@ -44,3 +44,7 @@
     border: 1.5px solid #bcbcbc;
     padding: 6px;
 }
+
+.edit-inputs {
+    padding-right: 16px;
+}
