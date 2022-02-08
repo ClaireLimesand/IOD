@@ -16,6 +16,7 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { Modal } from "@mui/material";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
+import { useHistory } from "react-router-dom";
 
 function UserItem({ dataItem }) {
   const useStyles = makeStyles(theme => createStyles({
@@ -25,8 +26,9 @@ function UserItem({ dataItem }) {
     },
   }));
   const classes = useStyles();
-
   const dispatch = useDispatch();
+  const history = useHistory(); 
+
   const [pictureOpen, setPictureOpen] = useState(false);
   const [bannerOpen, setBannerOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
@@ -156,14 +158,12 @@ function UserItem({ dataItem }) {
               </IconButton>
             </div>
             <p className="email">{dataItem.email}</p>
-          </div>
-          <div className="portfolio-div">
-            <button className="portfolio-button" onClick={handlePortfolio}>
-              Portfolio
-            </button>
             {dataItem.linkedin &&
-            <img src="linkedIn-icon.png" onClick={handleLinkedClick} className="profile-link" draggable={false} />
+              <img src="linkedIn-icon.png" onClick={handleLinkedClick} className="profile-link" draggable={false} />
             }
+              <button className="portfolio-button" onClick={handlePortfolio}>
+                Portfolio
+              </button>
           </div>
 
           <div className="resume">
