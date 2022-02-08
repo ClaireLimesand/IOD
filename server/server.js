@@ -12,6 +12,9 @@ const userRouter = require('./routes/user.router');
 const skillsRouter = require('./routes/skills.router');
 const internshipRouter = require('./routes/internship.router');
 const profileRouter = require('./routes/profile.router');
+const pictureRouter = require('./routes/picture.router');
+const bannerRouter = require('./routes/banner.router');
+const resumeRouter = require('./routes/resume.router');
 const announcementsRouter = require('./routes/announcements.router');
 const portfolioRouter = require('./routes/portfolio.router');
 
@@ -31,6 +34,9 @@ app.use('/api/user', userRouter);
 app.use('/api/skills', skillsRouter);
 app.use('/api/internship', internshipRouter);
 app.use('/api/profile', profileRouter);
+app.use('/api/picture', pictureRouter);
+app.use('/api/banner', bannerRouter);
+app.use('/api/resume', resumeRouter);
 app.use('/api/announcements', announcementsRouter);
 app.use('/api/portfolio', portfolioRouter);
 

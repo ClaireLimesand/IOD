@@ -15,8 +15,12 @@ CREATE TABLE "user" (
 
 CREATE TABLE "internships" (
 	"id" SERIAL PRIMARY KEY,
-	"company_name" VARCHAR(300),
-	"date" TEXT
+	"company_name" VARCHAR(255),
+	"company_subtitle" TEXT,
+	"start_date" DATE,
+	"end_date" DATE,
+	"company_logo" TEXT,
+	"company_description" TEXT
 );
 
 CREATE TABLE "message_types" (
@@ -28,7 +32,7 @@ CREATE TABLE "announcements" (
 	"id" SERIAL PRIMARY KEY,
 	"message" TEXT,
 	"message_id" INT REFERENCES "message_types" ON DELETE CASCADE ON UPDATE CASCADE
-	);
+);
 
 CREATE TABLE "students" (
 	"id" SERIAL PRIMARY KEY,
@@ -63,3 +67,42 @@ CREATE TABLE "skills" (
 	"skill" TEXT,
 	"user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
+-- test data
+
+INSERT INTO "internships" ("id", "company_name", "start_date", "end_date", "company_logo", "company_subtitle", "company_description") 
+VALUES ('1', '3M', '2022-06-24', '2022-08-24', '3m_logo.png', 'Design Research and Innovation', 'Paired with leading scientists and 
+resources, you’ll have the opportunity to learn new methods and gain experience on key equipment.');
+
+INSERT INTO "students" ("email", "pronouns", "name", "picture", "banner", "about", "linkedin", "user_id")
+VALUES (
+	'smrdelb@gmail.com', 
+	'He/Him', 
+	'Bennett Smrdel', 
+	NULL, 
+	NULL, 
+	'not existant', 
+	'https://www.linkedin.com/in/bennett-smrdel-634893212/', 
+	1
+);
+
+INSERT INTO "projects" ("project_name", "description", "user_id", "internship_id")
+VALUES
+('Failed Product', 'Identified failures and bugs in a project, then fixed them to make the project working.', 1, 2),
+('Secure Safety', 'Built the backend of a safety project and practiced best ways to secure routes and login information', 1, 1),
+('Think like an Industrial Designer', 'Designed and drew out a basic T.V. stand', 1, 2);
+
+INSERT INTO "message_types" ("title")
+VALUES
+('Update'),
+('Feedback'),
+('Important'),
+('Congratulations');
+
+INSERT INTO "announcements" ("message", "message_id")
+VALUES
+('We are currently in the building process of creating the future of internships!', 1),
+('There is a lot of work to be done still but we are doing great, keep up the good work!', 2),
+('This is NOT a finished product, not all features are implemented', 3),
+('We are recognizing the IOD team in their outstanding work and dedicationg to this project!', 4);

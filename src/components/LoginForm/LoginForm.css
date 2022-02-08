@@ -1,37 +1,49 @@
-.formPanel {
+#loginPanel {
     box-sizing: border-box;
     width: 300px;
     height: 500px;
     max-width: 100%;
     padding: 25px;
-    margin: 130px auto 20px;
-    margin-left: 640px;
     background-color: #efefef;
     border-radius: 45px;
     box-shadow: 0 12px 4px rgba(255, 255, 255, 0.4);
-  }
-  
+    margin-top: 30px;
+}
+
 .login-globe {
-    position: relative;
-    bottom: 50px;
-  }
+    height: 200px;
+    animation: globe 0.8s ease both;
+    animation-delay: 0.3s;
+}
 
 #login-text {
-    position: relative;
-    bottom: 110px;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: bold;
+    cursor: text;
+    padding-bottom: 4px;
 }
 
 .login-gradient {
-    position: relative;
-    bottom: 110px;
     height: 10px;
+    padding-bottom: 15px;
+    animation: gradient 0.8s ease both;
+    animation-delay: 0.3s;
 }
 
 .login-inputs {
-    position: relative;
-    bottom: 100px;
+    margin-bottom: 13px;
+}
+
+.login-inputs input {
+    box-shadow: 0 6px 3px -2px rgba(0, 0, 0, 0.301);
+}
+
+.login-inputs input:hover {
+    transform: scale(1.03, 1.03);
+}
+
+.login-inputs input:focus {
+    background-color: #19c9ac1e;
 }
 
 .login-username {
@@ -70,9 +82,35 @@
     border: none;
     background-color: #18C9AB;
     box-shadow: 0 4px 2px rgba(98, 98, 98, 0.493);
-    margin-bottom: 10px;
+    cursor: pointer;
+    transition: ease 0.3s;
+    margin-bottom: 16px;
+}
+
+.login-button:hover {
+    transform: scale(1.03, 1.03);
 }
 
 .login-button:hover {
     background-color: #15B097;
+}
+
+@keyframes globe {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+    transform: rotate(360deg);
+    }
+}
+
+@keyframes gradient {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+    transform: scaleX(1);
+    }
 }

@@ -14,6 +14,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import WorkIcon from '@mui/icons-material/Work';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from '@mui/icons-material/Login';
 import { useDispatch } from 'react-redux';
 
 const drawerWidth = 240;
@@ -29,7 +30,7 @@ function Nav() {
       <img src='globe.png' draggable='false' />
       <center id='sidebar-logo-text'>INTERNSHIP ON DEMAND</center>
       <img src='gradient_bar.png' draggable='false' />
-      <List>
+      <List id="nav-list">
         {/* Home link */}
         {user.id &&
           <ListItem button onClick={() => history.push('/home')}>
@@ -84,7 +85,7 @@ function Nav() {
         :
           <ListItem button onClick={() => history.push('/user')}>
               <ListItemIcon>
-                <LogoutIcon sx={{ color: 'white' }} />
+                <LoginIcon sx={{ color: 'white' }} />
               </ListItemIcon>
               <ListItemText primary="Login"/>
           </ListItem>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router";
+import { useDispatch, useSelector } from 'react-redux';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -7,7 +8,18 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 function Internship({internship}) {
+    
+    const history = useHistory();
     const dispatch = useDispatch();
+    
+    const user = useSelector((store) => store.user);
+
+    const handleDeleteButton = (id) => {
+        dispatch({
+            type: 'DELETE_INTERNSHIP',
+            payload: id
+        })
+    }; 
 
     return (
         <div className="container">
@@ -29,6 +41,28 @@ function Internship({internship}) {
                 </CardContent>
                 <CardActions>
                     <Button size="small" variant='contained' sx={{ backgroundColor: '#15B097' }}>Apply</Button>
+                    
+                    {user.access_level == 3 &&
+                        <Button  
+                            onClick={() => {
+                                history.push(`/editinternship/${internship.id}`);
+                                }}
+                            size="small" 
+                            variant='contained' 
+                            sx={{ backgroundColor: '#15B097' }}>
+                                Edit
+                        </Button>
+                    }
+
+                    {user.access_level == 3 &&
+                        <Button  
+                            onClick={() => handleDeleteButton(internship.id)} 
+                            size="small" 
+                            variant='contained' 
+                            sx={{ backgroundColor: '#15B097' }}>
+                                Delete
+                        </Button>
+                    }
                 </CardActions>
             </Card>
         </div>

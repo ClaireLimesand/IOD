@@ -3,16 +3,18 @@ import { useHistory } from "react-router";
 import {useDispatch, useSelector} from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import { useState } from 'react';
+
 import './Skills.css';
 
-import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const style = {
     position: 'absolute',
@@ -20,10 +22,8 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    borderRadius: 3,
 };
 
 function Skills() {
@@ -33,9 +33,14 @@ function Skills() {
     const store = useReduxStore();
 
     const skills = useSelector((store) => store.skillsReducer);
+    const user = useSelector((store) => store.user);
 
+    const [editSkill, setEditSkill] = useState('');
     const [skill, setSkill] = useState('');
+    const [selectedSkill, setSelectedSkill] = useState('');
+
     const [open, setOpen] = React.useState(false);
+    const [editOpen, editSetOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     
@@ -43,96 +48,120 @@ function Skills() {
         dispatch({ type: 'FETCH_SKILLS' });
     }, []);
 
-    const handleSaveSkillButton = () => {
+    const handleSaveSkillButton = (event) => {
+        event.preventDefault();
+        setSkill('');
+        setOpen(false);
         const newSkill = {
             skill: skill
         }
-        console.log('new skill!!!', newSkill)
         dispatch({
             type: 'ADD_SKILL',
             payload: newSkill
         })
     }; 
 
-    const handleEditSkillButton = (id) => {
-        console.log('skill change!!', id)
-        // dispatch({
-        //     type: 'EDIT_SKILL',
-        //     payload: event.target.value
-        // })
-    };
-
-    const handleIdeaChange = () => {
-        console.log('skill change!!')
-    };
-    
     const handleDeleteSkillButton = (id) => {
-        console.log('skill ID', id)
         dispatch({
             type: 'DELETE_SKILL',
             payload: id
         })
     };  
 
+    const handleEditSkill = () => {
+        dispatch({ type: 'EDIT_SKILL', payload: {skill: skill, id: selectedSkill.id} });
+        setEditSkill(!editSkill);
+        setSkill('');
+    }
+
     return (
-        <div>
+        <div className="skills">
             
-            <h4>Skills</h4>
-            {store.skills.map((skill, i) => (
-            <p key={i}>{skill.skill}</p>
-            ))
+            <h3 className="skills-text">Skills
+                {!editSkill &&
+                    <IconButton
+                        id="add-skill-icon" 
+                        onClick={handleOpen}
+                    >
+                        <AddIcon />
+                    </IconButton>
+                }
+            </h3>
+
+            {!editSkill ?
+                store.skills.map((skillItem, i) => (
+                    <Typography className="skills-list" key={i}>{skillItem.skill}
+                    
+                        <IconButton
+                            id="edit-skill-icon" 
+                            onClick={() => {
+                                setEditSkill(!editSkill);
+                                setSelectedSkill(skillItem);
+                                setSkill(skillItem.skill);
+                            }}
+                        >
+                            <EditIcon />
+                        </IconButton>
+
+                        <IconButton
+                            id="delete-skill-icon" 
+                            onClick={() => {
+                                handleDeleteSkillButton(skillItem.id);
+                            }}
+                        >
+                            <ClearIcon />
+                        </IconButton>
+                    
+                    </Typography>
+                ))
+            :
+                <form onSubmit={handleEditSkill}>
+                    <input 
+                        className="edit-about-input"
+                        value={skill}
+                        onChange={(e) => setSkill(e.target.value)}
+                    />
+
+                    <IconButton onClick={handleEditSkill}>
+                        <CheckIcon />
+                    </IconButton>
+
+                    <IconButton onClick={() => {
+                        setEditSkill(!editSkill);
+                        setSkill('');
+                    }}>
+                        <ArrowBackIcon />
+                    </IconButton>
+                </form>
             }
-            <Button onClick={handleOpen}>Edit Skills</Button>
+            
             <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
-                
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Add A Skill
-                </Typography>
-                
-                <TextField 
-                value={skill}
-                onChange={(event) => setSkill(event.target.value)}
-                />
-                
-                <button onClick={handleSaveSkillButton}>
-                    Add Skill
-                </button>
-                
-                {store.skills.map((skill, i) => (
-                    <div>
-                    <input
-                    class="skill_input"
-                    key={i}
-                    value={skill.skill}
-                    onClick
-                    onChange={handleIdeaChange}
-                    />
-                        <IconButton
-                        onClick={() => handleEditSkillButton(skill.id)}
-                        >
-                            <CheckIcon />
-                        </IconButton>
-                        
-                        <IconButton
-                        onClick={() => handleDeleteSkillButton(skill.id)}
-                        >
-                            <ClearIcon />
-                        </IconButton>
-                    
-                    </div>
-                
-                    ))
-                }
-
-                </Box>
-            </Modal>
-
+                <center>
+                    <Box sx={style}>
+                        <form className='interior-box' onSubmit={handleSaveSkillButton}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Add a Skill
+                            </Typography>
+                            <img className="login-gradient" src="gradient_bar.png" draggable={false} />
+                            <input 
+                                className='skill-input'
+                                value={skill}
+                                onChange={(event) => setSkill(event.target.value)}
+                                required
+                            />
+                            <br />
+                            <button type='submit'>
+                                Add Skill
+                            </button>
+                        </form>
+                    </Box>
+                </center>
+            </Modal>     
         </div>
     );
 
