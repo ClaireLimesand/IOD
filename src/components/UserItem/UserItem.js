@@ -88,9 +88,7 @@ function UserItem({ dataItem }) {
   }
 
   const handleLinkedClick = () => {
-    const pdfWindow = window.open();
-    pdfWindow.location.href = fileURL;
-    history.push("/user");
+    window.open(dataItem.linkedin);
   };
 
   const handlePortfolio = () => {
