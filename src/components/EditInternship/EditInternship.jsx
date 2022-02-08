@@ -13,6 +13,8 @@ import DateRangePicker from '@mui/lab/DateRangePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
+import "./EditInternship.css";
+
 function EditInternship() {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -69,7 +71,7 @@ function EditInternship() {
     }
 
     const handleSubmit = (e) => {
-
+        e.preventDefault();
         const id = editInternshipReducer.id;
         const name = editInternshipReducer.name;
         const subtitle = editInternshipReducer.subtitle;
@@ -87,7 +89,6 @@ function EditInternship() {
             endDate,
             logo
         }
-        console.log('HEY', editedInternship)
 
         dispatch({
             type: 'EDIT_INTERNSHIP',
@@ -106,7 +107,10 @@ function EditInternship() {
 
     return (
         <div className="container">
-            <div>
+            <center>
+                <form className="edit-internship" onSubmit={handleSubmit}>
+                <h3 className="internship-title">Edit Internship</h3>
+                <img className="login-gradient" src="gradient_bar.png" draggable={false} />
 
             <input 
                 value={editInternshipReducer.name|| ""}
@@ -146,9 +150,7 @@ function EditInternship() {
                     />
             </LocalizationProvider>
 
-            <IconButton
-                onClick={handleSubmit}
-            >
+            <IconButton type='submit'>
                     <CheckIcon />
             </IconButton>
 
@@ -158,7 +160,9 @@ function EditInternship() {
                     <ArrowBackIcon />
             </IconButton>
             
-            </div>
+            </form>
+            </center>
+        
         </div>
     );
 }
