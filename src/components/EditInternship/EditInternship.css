@@ -18,6 +18,9 @@
     display: block;
     width: 100%;
     margin-top: 1em;
+    margin-bottom: auto;
+    margin-right: auto;
+    margin-left: auto;
     background-color: #efefef;
     border-radius: 5px;
     border: 1.5px solid #bcbcbc;
