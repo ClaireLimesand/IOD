@@ -6,7 +6,6 @@ import { useState } from 'react';
 import Internship from '../Internship/Internship';
 import './InternshipPage.css';
 
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -26,13 +25,10 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 const style = {
     position: 'absolute',
     top: '50%',
-    left: '60%',
+    left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
-    p: 6,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -114,74 +110,64 @@ function InternshipsPage() {
             >
                 <center>
                 <Box sx={style}>
-                
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Add An Internship
-                </Typography>
-                
-                <div>
-                <input 
-                className="internship-input"
-                placeholder="company name"
-                value={companyName}
-                onChange={(event) => setCompanyName(event.target.value)}
-                />
+                    <center className="modal-box">
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            New Internship
+                        </Typography>
+                        <img className="register-gradient" src="gradient_bar.png" draggable={false} />
 
-                <input 
-                className="internship-input"
-                placeholder="internship subtitle"
-                value={subtitle}
-                onChange={(event) => setSubtitle(event.target.value)}
-                />
+                        <label>Company Name</label>
+                        <input 
+                            className="internship-input"
+                            value={companyName}
+                            onChange={(event) => setCompanyName(event.target.value)}
+                        />
 
-                <input 
-                className="internship-input"
-                placeholder="logo picture"
-                value={logo}
-                onChange={(event) => setLogo(event.target.value)}
-                />
+                        <label>Internship Subtitle</label>
+                        <input 
+                            className="internship-input"
+                            value={subtitle}
+                            onChange={(event) => setSubtitle(event.target.value)}
+                        />
 
-                <textarea 
-                rows="5"
-                className="internship-description"
-                placeholder="internship description"
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
-                />  
-                </div>
+                        <label>Logo Picture</label>
+                        <input 
+                            className="internship-input"
+                            value={logo}
+                            onChange={(event) => setLogo(event.target.value)}
+                        />
 
-                <div className='edit-datepicker'>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DateRangePicker
-                        startText="Start Date"
-                        endText="End Date"
-                        value={dateRange}
-                        onChange={(newValue) => {
-                        setDateRange(newValue);
-                        }}
-                        renderInput={(startProps, endProps) => (
-                        <React.Fragment>
-                            <TextField {...startProps} />
-                            <Box sx={{ mx: 2 }}> to </Box>
-                            <TextField {...endProps} />
-                        </React.Fragment>
-                        )}
-                    />
-                </LocalizationProvider>
-                </div>
-                
-                <IconButton 
-                    onClick={handleSaveButton}
-                >
-                    <CheckIcon /> 
-                </IconButton>
-                
-                <IconButton 
-                    onClick={handleClose}
-                >
-                    <ArrowBackIcon />
-                </IconButton>
+                        <label>Internship Description</label>
+                        <textarea 
+                            rows="5"
+                            className="internship-input internship-description"
+                            value={description}
+                            onChange={(event) => setDescription(event.target.value)}
+                        />  
 
+                        <LocalizationProvider dateAdapter={AdapterDateFns}> 
+                            <DateRangePicker
+                                startText="Start Date"
+                                endText="End Date"
+                                value={dateRange}
+                                onChange={(newValue) => {
+                                setDateRange(newValue);
+                                }}
+                                renderInput={(startProps, endProps) => (
+                                <React.Fragment>
+                                    <TextField {...startProps} />
+                                        <Box sx={{ mx: 2 }}> to </Box>
+                                    <TextField {...endProps} />
+                                </React.Fragment>
+                                )}
+                            />
+                        </LocalizationProvider>
+                        
+                        <div className='add-internship-btn-container'>
+                            <button className='save-btn' onClick={handleSaveButton}>Save</button>               
+                            <button className='cancel-btn' onClick={handleClose}>Cancel</button>
+                        </div>
+                    </center>
                 </Box>
             </center> 
             </Modal>   

@@ -4,10 +4,16 @@
     background-color: #efefef;
     border-radius: 45px;
     box-shadow: 0 12px 4px rgba(255, 255, 255, 0.4);
-    margin-top: 85px;
+    margin-top: 35px;
     width: 40%;
     animation: gradient 0.5s ease both;
     animation-delay: 0.1s;
+}
+
+.edit-internship-btn-container {
+    display: inline-flex;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .internship-title {

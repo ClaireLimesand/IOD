@@ -109,67 +109,62 @@ function EditInternship() {
         <div className="container">
             <center>
                 <form className="edit-internship" onSubmit={handleSubmit}>
-                <h3 className="internship-title">Edit Internship</h3>
-                <img className="login-gradient" src="gradient_bar.png" draggable={false} />
+                    <h3 className="internship-title">Edit Internship</h3>
+                    <img className="login-gradient" src="gradient_bar.png" draggable={false} />
 
-            <div className="edit-inputs">
-            <input 
-                className="internship-edit-input"
-                value={editInternshipReducer.name|| ""}
-                onChange={handleNameChange}
-            />
-            
-            <input 
-                className="internship-edit-input"
-                value={editInternshipReducer.subtitle|| ""}
-                onChange={handleSubtitleChange}
-            />         
-        
-            <input 
-                className="internship-edit-input"
-                value={editInternshipReducer.logo|| ""}
-                onChange={handleLogoChange}
-            />    
-
-            <textarea 
-                rows="8"
-                className="internship-edit-description"
-                value={editInternshipReducer.description|| ""}
-                onChange={handleDescriptionChange}
-            />  
-            </div>
-            
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DateRangePicker
-                        startText="Start Date"
-                        endText="End Date"
-                        value={[editInternshipReducer.start_date, editInternshipReducer.end_date] || [null, null]}
-                        onChange={(newValues) => {
-                            handleDateChange(newValues);
-                        }}
-                        renderInput={(startProps, endProps) => (
-                        <React.Fragment>
-                            <TextField {...startProps} />
-                            <Box sx={{ mx: 2 }}> to </Box>
-                            <TextField {...endProps} />
-                        </React.Fragment>
-                        )}
+                    <input 
+                        className="internship-edit-input"
+                        value={editInternshipReducer.name|| ""}
+                        onChange={handleNameChange}
                     />
-            </LocalizationProvider>
+                    
+                    <input 
+                        className="internship-edit-input"
+                        value={editInternshipReducer.subtitle|| ""}
+                        onChange={handleSubtitleChange}
+                    />         
+                
+                    <input 
+                        className="internship-edit-input"
+                        value={editInternshipReducer.logo|| ""}
+                        onChange={handleLogoChange}
+                    />    
 
-            <IconButton type='submit'>
-                    <CheckIcon />
-            </IconButton>
+                    <textarea 
+                        rows="8"
+                        className="internship-edit-description"
+                        value={editInternshipReducer.description|| ""}
+                        onChange={handleDescriptionChange}
+                    />  
 
-            <IconButton
-                onClick={handleBack}
-            >
-                    <ArrowBackIcon />
-            </IconButton>
-            
-            </form>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DateRangePicker
+                                startText="Start Date"
+                                endText="End Date"
+                                value={[editInternshipReducer.start_date, editInternshipReducer.end_date] || [null, null]}
+                                onChange={(newValues) => {
+                                    handleDateChange(newValues);
+                                }}
+                                renderInput={(startProps, endProps) => (
+                                <React.Fragment>
+                                    <TextField {...startProps} />
+                                    <Box sx={{ mx: 2 }}> to </Box>
+                                    <TextField {...endProps} />
+                                </React.Fragment>
+                                )}
+                            />
+                    </LocalizationProvider>
+                    
+                    <div className='edit-internship-btn-container'>
+                        <IconButton type='submit'>
+                                <CheckIcon />
+                        </IconButton>
+                        <IconButton onClick={handleBack}>
+                            <ArrowBackIcon />
+                        </IconButton>
+                    </div>
+                </form>
             </center>
-        
         </div>
     );
 }
