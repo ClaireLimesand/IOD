@@ -84,20 +84,6 @@ function Skills() {
                 >
                     <AddIcon />
                 </IconButton>
-                {editSkill &&
-                    <>
-                        <IconButton onClick={handleEditSkill}>
-                            <CheckIcon />
-                        </IconButton>
-
-                        <IconButton onClick={() => {
-                            setEditSkill(!editSkill);
-                            setSkill('');
-                        }}>
-                            <ArrowBackIcon />
-                        </IconButton>
-                    </>
-                }
             </h3>
 
             {!editSkill ?
@@ -114,6 +100,15 @@ function Skills() {
                         >
                             <EditIcon />
                         </IconButton>
+
+                        <IconButton
+                            id="delete-skill-icon" 
+                            onClick={() => {
+                                handleDeleteSkillButton(skillItem.id);
+                            }}
+                        >
+                            <ClearIcon />
+                        </IconButton>
                     
                     </Typography>
                 ))
@@ -125,14 +120,15 @@ function Skills() {
                         onChange={(e) => setSkill(e.target.value)}
                     />
 
-                    <IconButton
-                        id="delete-skill-icon" 
-                        onClick={() => {
-                            handleDeleteSkillButton(selectedSkill.id);
-                            setEditSkill(false);
-                        }}
-                    >
-                        <ClearIcon />
+                    <IconButton onClick={handleEditSkill}>
+                        <CheckIcon />
+                    </IconButton>
+
+                    <IconButton onClick={() => {
+                        setEditSkill(!editSkill);
+                        setSkill('');
+                    }}>
+                        <ArrowBackIcon />
                     </IconButton>
                 </form>
             }
