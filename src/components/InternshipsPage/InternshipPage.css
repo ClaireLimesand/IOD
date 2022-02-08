@@ -22,11 +22,10 @@
 
 .internship-description {
     font-family: Arial, Helvetica, sans-serif;
-
     display: block;
-    width: 100%;
     margin-top: 1em;
     margin-bottom: 1em;
+    resize: none;
 }
 
 .edit-datepicker {
