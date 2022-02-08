@@ -13,6 +13,8 @@ import DateRangePicker from '@mui/lab/DateRangePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
+import "./EditInternship.css";
+
 function EditInternship() {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -69,7 +71,7 @@ function EditInternship() {
     }
 
     const handleSubmit = (e) => {
-
+        e.preventDefault();
         const id = editInternshipReducer.id;
         const name = editInternshipReducer.name;
         const subtitle = editInternshipReducer.subtitle;
@@ -87,7 +89,6 @@ function EditInternship() {
             endDate,
             logo
         }
-        console.log('HEY', editedInternship)
 
         dispatch({
             type: 'EDIT_INTERNSHIP',
@@ -106,32 +107,40 @@ function EditInternship() {
 
     return (
         <div className="container">
-            <div>
+            <center>
+                <form className="edit-internship" onSubmit={handleSubmit}>
+                <h3 className="internship-title">Edit Internship</h3>
+                <img className="login-gradient" src="gradient_bar.png" draggable={false} />
 
             <input 
+                className="internship-edit-input"
                 value={editInternshipReducer.name|| ""}
                 onChange={handleNameChange}
             />
             
             <input 
+                className="internship-edit-input"
                 value={editInternshipReducer.subtitle|| ""}
                 onChange={handleSubtitleChange}
-            />           
-
+            />         
+        
             <input 
+                className="internship-edit-input"
+                value={editInternshipReducer.logo|| ""}
+                onChange={handleLogoChange}
+            />    
+
+            <textarea 
+                rows="8"
+                className="internship-edit-description"
                 value={editInternshipReducer.description|| ""}
                 onChange={handleDescriptionChange}
             />  
 
-            <input 
-                value={editInternshipReducer.logo|| ""}
-                onChange={handleLogoChange}
-            />  
-
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DateRangePicker
-                        startText="internship start date"
-                        endText="internship end date"
+                        startText="Start Date"
+                        endText="End Date"
                         value={[editInternshipReducer.start_date, editInternshipReducer.end_date] || [null, null]}
                         onChange={(newValues) => {
                             handleDateChange(newValues);
@@ -146,9 +155,7 @@ function EditInternship() {
                     />
             </LocalizationProvider>
 
-            <IconButton
-                onClick={handleSubmit}
-            >
+            <IconButton type='submit'>
                     <CheckIcon />
             </IconButton>
 
@@ -158,7 +165,9 @@ function EditInternship() {
                     <ArrowBackIcon />
             </IconButton>
             
-            </div>
+            </form>
+            </center>
+        
         </div>
     );
 }

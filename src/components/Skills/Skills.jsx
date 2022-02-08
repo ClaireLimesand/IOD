@@ -131,6 +131,7 @@ function Skills() {
                         setSkill('');
                     }}>
                         <ArrowBackIcon />
+
                     </IconButton>
                 </form>
             }

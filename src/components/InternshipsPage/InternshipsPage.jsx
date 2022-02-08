@@ -11,6 +11,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import { makeStyles } from '@material-ui/core/styles';
+
 import TextField from '@mui/material/TextField';
 import DateRangePicker from '@mui/lab/DateRangePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -28,9 +32,18 @@ const style = {
     p: 6,
 };
 
+const useStyles = makeStyles((theme) => ({
+    addIcon: {
+        '& svg': {
+            fontSize: 40
+        }
+    }
+}));
+
 function InternshipsPage() {
     
     const dispatch = useDispatch();
+    const classes = useStyles();
 
     const internships = useSelector((store) => store.internshipReducer);
     const user = useSelector((store) => store.user);
@@ -78,16 +91,17 @@ function InternshipsPage() {
         <div className="container">
             <h1 id='internships-page-title'>Internships
                 {user.access_level == 3 &&
-                <Button
+                <IconButton
+                    className={classes.addIcon}
                     onClick={handleOpen}
-                    size="small" 
+                    fontSize="large" 
                     variant='contained' 
-                    sx={{ backgroundColor: '#15B097' }}
                 >
-                    + New Internship
-                </Button>
+                    <AddIcon />
+                </IconButton>
                 }
             </h1>
+            
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -121,10 +135,18 @@ function InternshipsPage() {
                 onChange={(event) => setLogo(event.target.value)}
                 />
 
+                <textarea 
+                rows="5"
+                className="internship-description"
+                placeholder="internship description"
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
+                />  
+
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DateRangePicker
-                        startText="internship start date"
-                        endText="internship end date"
+                        startText="Start Date"
+                        endText="End Date"
                         value={dateRange}
                         onChange={(newValue) => {
                         setDateRange(newValue);
@@ -138,14 +160,6 @@ function InternshipsPage() {
                         )}
                     />
                 </LocalizationProvider>
-
-                <textarea 
-                rows="5"
-                className="internship-description"
-                placeholder="internship description"
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
-                />
                 
                 <Button 
                     size="small" 
