@@ -100,6 +100,7 @@ function UserItem({ dataItem }) {
       type: 'EDIT_TOP',
       payload: {name: name, email, email, linkedin: linkedin, pronouns: pronouns}
     })
+    setEditTop(false);
   }
 
   return (
