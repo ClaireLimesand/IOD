@@ -2,6 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 
+import IconButton from '@mui/material/IconButton';
+import ClearIcon from '@mui/icons-material/Clear';
+
 import './HomeItem.css';
 
 function HomeItem({messageItem}) {
@@ -19,17 +22,15 @@ function HomeItem({messageItem}) {
     return(
         <div>
             <div className="home-messages">
-                <h3 className="home-title">{messageItem.title}</h3>
-                <p className="home-message">{messageItem.message}</p>
+                <h3 className="home-title">{messageItem.title}
                 {user.access_level == 3 &&
-                    <Button  
-                        onClick={() => handleDeleteButton(messageItem.message_id)} 
-                        size="small" 
-                        variant='contained' 
-                        sx={{ backgroundColor: '#15B097' }}>
-                            Delete
-                    </Button>
+                    <IconButton  
+                        onClick={() => handleDeleteButton(messageItem.message_id)}>
+                            <ClearIcon />
+                    </IconButton>
                 }
+                </h3>
+                <p className="home-message">{messageItem.message}</p>
             </div>
         </div>
     )

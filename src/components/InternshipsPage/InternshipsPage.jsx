@@ -13,6 +13,9 @@ import Modal from '@mui/material/Modal';
 
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import ClearIcon from '@mui/icons-material/Clear';
+import CheckIcon from '@mui/icons-material/Check';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { makeStyles } from '@material-ui/core/styles';
 
 import TextField from '@mui/material/TextField';
@@ -89,6 +92,7 @@ function InternshipsPage() {
 
     return (
         <div className="container">
+    
             <h1 id='internships-page-title'>Internships
                 {user.access_level == 3 &&
                 <IconButton
@@ -108,12 +112,14 @@ function InternshipsPage() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
+                <center>
                 <Box sx={style}>
                 
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                    New Intership
+                    Add An Internship
                 </Typography>
                 
+                <div>
                 <input 
                 className="internship-input"
                 placeholder="company name"
@@ -142,7 +148,9 @@ function InternshipsPage() {
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
                 />  
+                </div>
 
+                <div className='edit-datepicker'>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DateRangePicker
                         startText="Start Date"
@@ -160,27 +168,24 @@ function InternshipsPage() {
                         )}
                     />
                 </LocalizationProvider>
+                </div>
                 
-                <Button 
-                    size="small" 
-                    variant='contained' 
-                    sx={{ backgroundColor: '#15B097' }}
+                <IconButton 
                     onClick={handleSaveButton}
                 >
-                    Save
-                </Button>
+                    <CheckIcon /> 
+                </IconButton>
                 
-                <Button 
-                    size="small" 
-                    variant='contained' 
-                    sx={{ backgroundColor: '#15B097' }}
+                <IconButton 
                     onClick={handleClose}
                 >
-                    Cancel
-                </Button>
+                    <ArrowBackIcon />
+                </IconButton>
 
                 </Box>
-            </Modal>    
+            </center> 
+            </Modal>   
+            
 
             <section id='internships-container'>
                 {internships.map((internship) => {

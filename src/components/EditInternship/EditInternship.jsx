@@ -112,6 +112,7 @@ function EditInternship() {
                 <h3 className="internship-title">Edit Internship</h3>
                 <img className="login-gradient" src="gradient_bar.png" draggable={false} />
 
+            <div className="edit-inputs">
             <input 
                 className="internship-edit-input"
                 value={editInternshipReducer.name|| ""}
@@ -136,7 +137,8 @@ function EditInternship() {
                 value={editInternshipReducer.description|| ""}
                 onChange={handleDescriptionChange}
             />  
-
+            </div>
+            
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DateRangePicker
                         startText="Start Date"
