@@ -15,7 +15,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import InternshipsPage from '../InternshipsPage/InternshipsPage';
@@ -137,7 +136,11 @@ function App() {
             exact
             path="/home"
           >
+            {user.id ?
               <HomePage />
+            :
+              <LoginPage />
+            }
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
