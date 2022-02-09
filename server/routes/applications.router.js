@@ -55,4 +55,24 @@ router.put('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
+router.delete('/', rejectUnauthenticated, (req, res) => {
+    const sqlText = `
+        DELETE FROM "applications" 
+        WHERE "id"=$1;
+    `;
+    const sqlValues = [
+        req.body.id
+    ];
+
+    pool.query(sqlText)
+        .then((dbRes) => {
+            res.sendStatus(201);
+        })
+        .catch((dbErr) => {
+            console.error('POST friends error', dbErr);
+            res.sendStatus(500);
+        })
+});
+
+
 module.exports = router;

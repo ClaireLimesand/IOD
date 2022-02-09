@@ -36,12 +36,14 @@ function* sendApplication(action) {
 
 function* removeNotification(action) {
     try {
-        const response = yield axios({
+        yield axios({
             method: 'DELETE',
-            url: '/api/applications'
+            url: '/api/applications',
+            data: {id: action.payload}
         })
+
         yield put({
-            type: 'FETCH_INTERNSHIPS'
+            type: 'FETCH_APPLICATIONS'
         })
     } catch (error) {
         console.log('DELETE internship error', error);
