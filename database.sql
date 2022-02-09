@@ -72,6 +72,7 @@ CREATE TABLE "skills" (
 CREATE TABLE "applications" (
     "id" SERIAL PRIMARY KEY,
     "company" TEXT,
+	"student_name" TEXT,
     "user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE
 );
 

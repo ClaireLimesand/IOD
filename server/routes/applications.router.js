@@ -24,4 +24,24 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.post('/', rejectUnauthenticated, (req, res) => {
+    const sqlText = `
+        INSERT INTO "applications" ("company", "student_name", "user_id")
+        VALUES ($1, $2, $3);
+    `;
+    const sqlValues = [
+        req.body.company,
+        req.body.name,
+        req.user.id
+    ];
+    pool.query(sqlText, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(201);
+        })
+        .catch((dbErr) => {
+            console.error('POST friends error', dbErr);
+            res.sendStatus(500);
+        })
+});
+
 module.exports = router;

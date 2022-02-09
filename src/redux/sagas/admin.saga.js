@@ -8,7 +8,7 @@ function* fetchApplications(action) {
             url: '/api/applications'
         })
         
-        console.log(response.data)
+        console.log(response.data);
         yield put({
             type: 'SET_APPLICATIONS',
             payload: response.data
@@ -18,9 +18,26 @@ function* fetchApplications(action) {
     }
 }
 
+function* sendApplication(action) {
+    try {
+        yield axios({
+            method: 'POST',
+            url: '/api/applications',
+            data: {company: action.payload.company, name: action.payload.name}
+        })
+        
+        yield put({
+            type: 'FETCH_APPLICATIONS'
+        });
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
+
 
 function* adminSaga() {
     yield takeLatest('FETCH_APPLICATIONS', fetchApplications);
+    yield takeLatest('SEND_APPLICATION', sendApplication);
 }
 
 export default adminSaga;

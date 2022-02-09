@@ -1,10 +1,11 @@
 import React from 'react';
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -16,13 +17,27 @@ function Internship({internship}) {
     const dispatch = useDispatch();
     
     const user = useSelector((store) => store.user);
+    const profile = useSelector((store) => store.profile);
+
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_PROFILE'
+        });
+    }, [])
 
     const handleDeleteButton = (id) => {
         dispatch({
             type: 'DELETE_INTERNSHIP',
             payload: id
-        })
+        });
     }; 
+
+    const handleApply = () => {
+        dispatch({
+            type: 'SEND_APPLICATION',
+            payload: {company: internship.company_name, name: profile[0].name}
+        });
+    }
 
     return (
         <Card sx={{ maxWidth: 345, minWidth: 340, backgroundColor: '#E8E9EE' }}>
@@ -45,7 +60,7 @@ function Internship({internship}) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <button className='apply-btn'>Apply</button>
+                <button className='apply-btn' onClick={handleApply}>Apply</button>
                 {user.access_level == 3 &&
                     <IconButton  
                         onClick={() => {

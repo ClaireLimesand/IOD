@@ -26,7 +26,7 @@ function AdminPage() {
                     {applications.map((application) => {
                         return (
                             <div key={application.id}>
-                                <p>Person has applied at {application.company}</p>
+                                <p>{application.student_name} has applied at {application.company}</p>
                             </div>
                         );
                     })}
