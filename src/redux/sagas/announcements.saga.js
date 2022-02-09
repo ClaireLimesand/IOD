@@ -30,9 +30,25 @@ function* deleteAnnouncement(action) {
     }
 }
 
+function* addAnnouncement(action) {
+    try {
+        const response = yield axios({
+            method: 'POST',
+            url: '/api/announcements',
+            data: action.payload
+        })
+        yield put({
+            type: 'FETCH_ANNOUNCEMENTS'
+        })
+    } catch (err) {
+        console.log('POST announcement error:', err);
+    }
+}
+
 function* announcementsSaga() {
     yield takeLatest('FETCH_ANNOUNCEMENTS', fetchAnnouncements);
     yield takeLatest('DELETE_ANNOUNCEMENT', deleteAnnouncement);
+    yield takeLatest('ADD_ANNOUNCEMENT', addAnnouncement);
 };
 
 export default announcementsSaga;

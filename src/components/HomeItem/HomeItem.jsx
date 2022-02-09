@@ -25,7 +25,7 @@ function HomeItem({messageItem}) {
                 <h3 className="home-title">{messageItem.title}
                 {user.access_level == 3 &&
                     <IconButton  
-                        onClick={() => handleDeleteButton(messageItem.message_id)}>
+                        onClick={() => handleDeleteButton(messageItem.id)}>
                             <ClearIcon />
                     </IconButton>
                 }
