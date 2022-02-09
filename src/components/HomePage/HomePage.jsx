@@ -77,7 +77,7 @@ const handleSaveButton = () => {
   }
   console.log('new message', newMessage);
   dispatch({
-    type: 'ADD_MESSAGE',
+    type: 'ADD_ANNOUNCEMENT',
     payload: newMessage
   });
   setOpen(false);

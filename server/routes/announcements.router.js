@@ -42,4 +42,23 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+router.post('/', rejectUnauthenticated, (req, res) => {
+    
+    const sqlQuery =`INSERT INTO "announcements" ("message", "message_id")
+        VALUES ($1, $2);`
+    const sqlValues = [
+        req.body.text,
+        req.body.type
+    ];
+    
+    pool.query(sqlQuery, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(201);
+        })
+        .catch((dbErr) => {
+            console.error('POST announcement error', dbErr);
+            res.sendStatus(500);
+        })
+});
+
 module.exports = router;
