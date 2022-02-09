@@ -12,7 +12,7 @@ function AdminPage() {
 
     useEffect(() => {
         dispatch({
-            type: 'FETCH_INTERNSHIPS'
+            type: 'FETCH_APPLICATIONS'
         });
     }, [])
 
@@ -23,6 +23,13 @@ function AdminPage() {
                     <center>
                         <h2>Internship Applications</h2>
                     </center>
+                    {applications.map((application) => {
+                        return (
+                            <div key={application.id}>
+                                <p>Person has applied at {application.company}</p>
+                            </div>
+                        );
+                    })}
                 </Grid>
           </Grid>
       </div>

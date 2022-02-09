@@ -5,14 +5,16 @@ const {
     rejectUnauthenticated,
     } = require('../modules/authentication-middleware');
 
-    
+
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `
-        SELECT * FROM "skills"
+        SELECT * FROM "applications"
         WHERE "user_id"=$1
-        ORDER BY "id" ASC;
     `;
-    const sqlValues = [req.user.id];
+    const sqlValues = [
+        req.user.id
+    ];
+
     pool.query(sqlQuery, sqlValues)
     .then((dbRes) => {
         res.send(dbRes.rows);
