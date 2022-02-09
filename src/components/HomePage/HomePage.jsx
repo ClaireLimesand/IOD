@@ -45,12 +45,14 @@ function HomePage() {
   const user = useSelector((store) => store.user);
   const types = useSelector(store => store.types);
   
-  const [messageType, setMessageType] = useState('');
+  const [messageType, setMessageType] = useState('0');
   const [messageText, setMessageText] = useState('');
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
+    setMessageType('');
+    setMessageText('');
   };
 
 useEffect(() => {
@@ -82,6 +84,7 @@ const handleSaveButton = () => {
   });
   setOpen(false);
   setMessageText('');
+  setMessageType('0');
 }
 
 
@@ -113,28 +116,41 @@ const handleSaveButton = () => {
                 <center>
                 <Box sx={style}>
                     <center className="modal-box">
-                        <h3>Make An Announcement:</h3>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            New Annoucement
+                        </Typography> 
+                        <img className="register-gradient" src="gradient_bar.png" draggable={false} />
                           
-                          <select 
-                            value={messageType} 
-                            onChange={(event) => setMessageType(event.target.value)}
-                            >
+                        <select 
+                          className="category-dropdown"
+                          value={messageType} 
+                          onChange={(event) => setMessageType(event.target.value)}
+                        >
+                            <option disabled value='0'>
+                              Announcement Type
+                            </option>
                             {categories.map((item) =>  {
                               return  (
-                              <option value={item.id}>
-                                  {item.title}
-                              </option>
-                              )
-                            })}
-                          </select>
+                            <option key={item.id} value={item.id}>
+                              {item.title}
+                            </option>
+                            )
+                          })}
+                        </select>
+                        
                         <div>
                         <textarea
+                            className="internship-input internship-description"
                             rows={4}
                             value={messageText}
                             onChange={(event) => setMessageText(event.target.value)}
                         />
                         </div>
-                        <button className='save-btn' onClick={handleSaveButton}>Save</button> 
+                        
+                        <div className='add-internship-btn-container'>
+                          <button className='save-btn' onClick={handleSaveButton}>Save</button> 
+                          <button className='cancel-btn' onClick={handleClose}>Cancel</button>
+                        </div>
                     </center>
                 </Box>
             </center> 
