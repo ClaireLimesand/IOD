@@ -41,22 +41,36 @@ function HomePage() {
   const classes = useStyles();
 
   const announcements = useSelector((store) => store.announcements);
+  const categories = useSelector((store) => store.categories);
   const user = useSelector((store) => store.user);
-
+  const types = useSelector(store => store.types);
+  
+  const [messageType, setMessageType] = useState('');
+  const [messageText, setMessageText] = useState('');
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-};
+  };
 
 useEffect(() => {
-  dispatch({ type: 'FETCH_ANNOUNCEMENTS' });
+    getCategories()
+    getAnnouncements()
 }, []);
 
-const [messageType, setMessageType] = useState('');
-const [messageText, setMessageText] = useState('');
+const getCategories = () => {
+  dispatch({
+      type: 'FETCH_CATEGORIES'
+  })
+}
 
-const handleSave = () => {
+const getAnnouncements = () => {
+  dispatch({
+      type: 'FETCH_ANNOUNCEMENTS'
+  })
+}
+
+const handleSaveButton = () => {
   const newMessage = {
       type: messageType,
       text: messageText
@@ -65,8 +79,9 @@ const handleSave = () => {
   dispatch({
     type: 'ADD_MESSAGE',
     payload: newMessage
-  })
-      // history.push('/');
+  });
+  setOpen(false);
+  setMessageText('');
 }
 
 
@@ -99,31 +114,27 @@ const handleSave = () => {
                 <Box sx={style}>
                     <center className="modal-box">
                         <h3>Make An Announcement:</h3>
-                        <FormControl sx={{ m: 1, minWidth: 200 }}>
-                          <InputLabel id="dropdown">Category</InputLabel>
-                          <Select
-                              value={messageType}
-                              label="Message Category"
-                              onChange={(event) => console.log('hey!', event.target.value)}
-                              // onChange={(event) => setMessageType(event.target.value)}
-                          >
-                              {announcements.map((item) => {
-                                  return (
-                                      <MenuItem>{item.title}</MenuItem>
-                                  );
-                              })}
-                          </Select>
-                      </FormControl>
-                      <div>
-                    <TextField
-                        id="textField"
-                        label="Description"
-                        multiline
-                        rows={4}
-                        value={messageText}
-                        onChange={(event) => setMessageText(event.target.value)}
-                    />
-                    </div>
+                          
+                          <select 
+                            value={messageType} 
+                            onChange={(event) => setMessageType(event.target.value)}
+                            >
+                            {categories.map((item) =>  {
+                              return  (
+                              <option value={item.id}>
+                                  {item.title}
+                              </option>
+                              )
+                            })}
+                          </select>
+                        <div>
+                        <textarea
+                            rows={4}
+                            value={messageText}
+                            onChange={(event) => setMessageText(event.target.value)}
+                        />
+                        </div>
+                        <button className='save-btn' onClick={handleSaveButton}>Save</button> 
                     </center>
                 </Box>
             </center> 
