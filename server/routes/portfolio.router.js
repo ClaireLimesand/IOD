@@ -50,4 +50,26 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       })
   });
 
+  router.post('/', rejectUnauthenticated, (req, res) => {
+    const sqlText = `
+    INSERT INTO "projects" ("project_name", "description", "image", "user_id", "internship_id")
+    VALUES
+    ($1, $2, $3, $4, $5);
+    `;
+    const sqlValues = [ 
+      req.body.title,
+      req.body.description,
+      req.body.image,
+      req.user.id,
+      req.body.internship_id
+    ];
+    pool.query(sqlText, sqlValues)
+      .then((dbRes) => {
+        res.sendStatus(201);
+      })
+      .catch((dbErr) => {
+        res.sendStatus(500);
+      })
+  });
+
 module.exports = router;

@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch } from "react-redux";
 
 import PortfolioItem from "../PortfolioItem/PortfolioItem";
+import './StudentPortfolio.css';
 
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -22,9 +23,13 @@ const style = {
 };
 
 function StudentPortfolio() {
+  const dispatch = useDispatch();
   const portfolio = useSelector((store) => store.portfolio);
 
-  const [project, setProject] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+  const [internship_id, setInternship_id] = useState("");
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -32,22 +37,28 @@ function StudentPortfolio() {
 
   const handleSaveProjectButton = (event) => {
     event.preventDefault();
-        setProject('');
-        setOpen(false);
-        const newProject = {
-            project: project
-        }
-        dispatch({
-            type: 'ADD_PROJECT',
-            payload: newProject
-        })
+    setTitle("");
+    setDescription("");
+    setImage("");
+    setInternship_id("");
+    setOpen(false);
+    const newProject = {
+      title: title,
+      description: description,
+      image: image,
+      internship_id: internship_id
+    };
+    dispatch({
+      type: "ADD_PROJECT",
+      payload: newProject,
+    });
   };
 
   return (
     <div className="container">
       <h1>Portfolio</h1>
       <div>
-        <IconButton id="add-skill-icon" onClick={handleOpen}>
+        <IconButton id="add-project-icon" onClick={handleOpen}>
           <AddIcon />
         </IconButton>
         <Modal
@@ -70,24 +81,32 @@ function StudentPortfolio() {
                 <input
                   className="skill-input"
                   placeholder="Title"
-                  value={project}
-                  onChange={(event) => setProject(event.target.value)}
+                  value={title}
+                  onChange={(event) => setTitle(event.target.value)}
                   required
                 />
 
                 <input
                   className="skill-input"
                   placeholder="Description"
-                  value={project}
-                  onChange={(event) => setProject(event.target.value)}
+                  value={description}
+                  onChange={(event) => setDescription(event.target.value)}
                   required
                 />
 
                 <input
                   className="skill-input"
                   placeholder="Image URL"
-                  value={project}
-                  onChange={(event) => setProject(event.target.value)}
+                  value={image}
+                  onChange={(event) => setImage(event.target.value)}
+                  required
+                />
+
+                <input
+                  className="skill-input"
+                  placeholder="Internship ID"
+                  value={internship_id}
+                  onChange={(event) => setInternship_id(event.target.value)}
                   required
                 />
                 <br />
