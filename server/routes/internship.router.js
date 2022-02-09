@@ -2,6 +2,9 @@ const express = require('express');
 const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+const {
+    isAdmin,
+} = require('../modules/admin-middleware');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
@@ -31,7 +34,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 // SELECT * FROM "internships"
 
-router.post('/', rejectUnauthenticated, (req, res) => {
+router.post('/', rejectUnauthenticated, isAdmin, (req, res) => {
     const sqlQuery =`INSERT INTO "internships" ("company_name", "company_subtitle", "start_date", "end_date", "company_logo", "company_description")
         VALUES ($1, $2, $3, $4, $5, $6);`
     const sqlValues = [
@@ -53,7 +56,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
-router.delete('/:id', rejectUnauthenticated, (req, res) => {
+router.delete('/:id', rejectUnauthenticated, isAdmin, (req, res) => {
     const sqlQuery = `
         DELETE FROM "internships" 
         WHERE "id"=$1;
@@ -91,7 +94,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
-router.put('/:id', rejectUnauthenticated, (req, res) => {
+router.put('/:id', rejectUnauthenticated, isAdmin, (req, res) => {
     const sqlText = `
         UPDATE "internships"
             SET "company_name" = $1,

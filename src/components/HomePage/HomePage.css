@@ -17,3 +17,12 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-bottom: 0;
 }
+
+.category-dropdown {
+    width: 90%;
+    outline: none;
+}
+
+.category-dropdown:focus {
+    background-color: #19c9ac1e;
+}
