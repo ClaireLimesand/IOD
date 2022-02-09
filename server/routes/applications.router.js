@@ -8,31 +8,27 @@ const {
 
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `
-        SELECT * FROM "applications"
-        WHERE "user_id"=$1
+        SELECT * FROM "applications";
     `;
-    const sqlValues = [
-        req.user.id
-    ];
 
-    pool.query(sqlQuery, sqlValues)
+    pool.query(sqlQuery)
     .then((dbRes) => {
         res.send(dbRes.rows);
     })
     .catch((dbErr) => {
+        console.log('Error: ', dbErr);
         res.sendStatus(500);
     })
 });
 
 router.post('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
-        INSERT INTO "applications" ("company", "student_name", "user_id")
-        VALUES ($1, $2, $3);
+        INSERT INTO "applications" ("company", "student_name")
+        VALUES ($1, $2);
     `;
     const sqlValues = [
         req.body.company,
-        req.body.name,
-        req.user.id
+        req.body.name
     ];
     pool.query(sqlText, sqlValues)
         .then((dbRes) => {
