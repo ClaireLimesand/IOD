@@ -8,6 +8,7 @@ import editSkill from './edit.skill.reducer';
 import announcements from './announcements.reducer';
 import portfolio from './portfolio.reducer';
 import editInternship from './edit.internship.reducer';
+import applicationsReducer from './applications.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   announcements,
   portfolio,
   editInternship,
+  applicationsReducer
 });
 
 export default rootReducer;

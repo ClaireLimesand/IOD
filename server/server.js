@@ -17,6 +17,7 @@ const bannerRouter = require('./routes/banner.router');
 const resumeRouter = require('./routes/resume.router');
 const announcementsRouter = require('./routes/announcements.router');
 const portfolioRouter = require('./routes/portfolio.router');
+const applicationsRouter = require('./routes/applications.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -39,6 +40,7 @@ app.use('/api/banner', bannerRouter);
 app.use('/api/resume', resumeRouter);
 app.use('/api/announcements', announcementsRouter);
 app.use('/api/portfolio', portfolioRouter);
+app.use('/api/applications', applicationsRouter);
 
 // Serve static files
 app.use(express.static('build'));

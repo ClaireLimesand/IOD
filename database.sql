@@ -69,6 +69,12 @@ CREATE TABLE "skills" (
 	"user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE "applications" (
+    "id" SERIAL PRIMARY KEY,
+    "company" TEXT,
+    "user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 
 -- test data
 
