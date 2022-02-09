@@ -27,6 +27,7 @@ const profileRouter = require('./routes/profile.router');
 const pictureRouter = require('./routes/picture.router');
 const bannerRouter = require('./routes/banner.router');
 const announcementsRouter = require('./routes/announcements.router');
+const studentsRouter = require('./routes/profile.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -47,6 +48,7 @@ app.use('/api/profile', profileRouter);
 app.use('/api/picture', pictureRouter);
 app.use('/api/banner', bannerRouter);
 app.use('/api/announcements', announcementsRouter);
+app.use('/api/students', studentsRouter);
 
 // Serve static files
 app.use(express.static('build'));

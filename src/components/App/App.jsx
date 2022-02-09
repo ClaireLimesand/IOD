@@ -21,7 +21,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import InternshipsPage from '../InternshipsPage/InternshipsPage';
 import HomePage from '../HomePage/HomePage';
 import EditSkill from '../EditSkill/EditSkill';
-import '../StudentTable/StudentTable';
+import StudentsTable from '../StudentsPage/StudentsPage';
 
 import './App.css';
 
@@ -73,12 +73,12 @@ function App() {
             <InternshipsPage />
           </ProtectedRoute>
 
-        {/* Students page */}
+        Students page
         <ProtectedRoute
             exact
             path="/students"
           >
-            <StudentTable />
+            <StudentsTable />
           </ProtectedRoute>
 
           <ProtectedRoute
