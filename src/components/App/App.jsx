@@ -22,6 +22,7 @@ import HomePage from '../HomePage/HomePage';
 import StudentPortfolio from '../StudentPortfolio/StudentPortfolio';
 import EditSkill from '../EditSkill/EditSkill';
 import EditInternship from '../EditInternship/EditInternship';
+import AdminPage from '../AdminPage/AdminPage';
 
 import './App.css';
 
@@ -80,6 +81,14 @@ function App() {
             path="/internships"
           >
             <InternshipsPage />
+          </ProtectedRoute>
+
+          {/* Admin page */}
+          <ProtectedRoute
+            exact
+            path="/admin"
+          >
+            <AdminPage />
           </ProtectedRoute>
 
           <ProtectedRoute
