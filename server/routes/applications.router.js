@@ -44,4 +44,19 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
+router.put('/', rejectUnauthenticated, (req, res) => {
+    const sqlText = `
+        UPDATE "applications"
+        SET "new_notification" = false;
+    `;
+    pool.query(sqlText)
+        .then((dbRes) => {
+            res.sendStatus(201);
+        })
+        .catch((dbErr) => {
+            console.error('POST friends error', dbErr);
+            res.sendStatus(500);
+        })
+});
+
 module.exports = router;

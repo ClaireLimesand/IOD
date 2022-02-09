@@ -34,10 +34,37 @@ function* sendApplication(action) {
     }
 }
 
+function* removeNotification(action) {
+    try {
+        const response = yield axios({
+            method: 'DELETE',
+            url: '/api/applications'
+        })
+        yield put({
+            type: 'FETCH_INTERNSHIPS'
+        })
+    } catch (error) {
+        console.log('DELETE internship error', error);
+    }
+}
+
+function* seenNotification(action) {
+    try {
+        yield axios({
+            method: 'PUT',
+            url: '/api/applications'
+        })
+    }   catch (error) {
+        console.log(error)
+    }
+}
+
 
 function* adminSaga() {
     yield takeLatest('FETCH_APPLICATIONS', fetchApplications);
     yield takeLatest('SEND_APPLICATION', sendApplication);
+    yield takeLatest('REMOVE_NOTIFICATION', removeNotification);
+    yield takeLatest('SEEN_NOTIFICATION', seenNotification);
 }
 
 export default adminSaga;

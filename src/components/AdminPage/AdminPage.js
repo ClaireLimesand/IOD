@@ -16,6 +16,9 @@ function AdminPage() {
         dispatch({
             type: 'FETCH_APPLICATIONS'
         });
+        dispatch({
+            type: 'SEEN_NOTIFICATION'
+        });
     }, [])
 
     return (
@@ -29,14 +32,14 @@ function AdminPage() {
                         return (
                             <div key={application.id}>
                                 {application.new_notification ?
-                                    <p className='new-notification'>
-                                        - <span className='application-name move-right'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
+                                    <p className='new-notification notification-text'>
+                                        - <span className='application-name'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
                                         <IconButton>
                                             <ClearIcon />
                                         </IconButton>
                                     </p>
                                 :
-                                    <p>
+                                    <p className='notification-text'>
                                         - <span className='application-name'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
                                         <IconButton>
                                             <ClearIcon />

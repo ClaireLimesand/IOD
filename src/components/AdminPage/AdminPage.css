@@ -11,6 +11,10 @@
     border-radius: 10px;
 }
 
+.notification-text {
+    padding: 3px 0 3px 10px;
+}
+
 .application-name {
     color: #0f8874;
 }
@@ -21,26 +25,12 @@
 
 .new-notification {
     animation: notification 2s both;
-    padding: 3px 0 3px 10px;
-}
-
-.move-right {
-    animation: moveRight 0s both;
 }
 
 @keyframes notification {
     from {
         opacity: 0;
-        transform: translateX(-100px);
         background-color: rgba(64, 255, 47, 0.452);
-    }
-    to {
-        transform: translateX(0px);
-    }
-}
-
-@keyframes moveRight {
-    from {
         transform: translateX(-100px);
     }
     to {
