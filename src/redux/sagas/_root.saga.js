@@ -31,7 +31,7 @@ export default function* rootSaga() {
     announcementsSaga(),
     studentsSaga(),
     portfolioSaga(),
-    adminSaga()
+    adminSaga(),
     categoriesSaga()
   ]);
 }

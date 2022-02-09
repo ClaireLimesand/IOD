@@ -29,7 +29,7 @@ const rootReducer = combineReducers({
   students,
   portfolio,
   editInternship,
-  applicationsReducer
+  applicationsReducer,
   categories
 });
 
