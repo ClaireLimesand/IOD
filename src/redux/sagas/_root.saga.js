@@ -7,6 +7,7 @@ import internshipSaga from './internship.saga';
 import profileSaga from './profile.saga';
 import cloudinarySaga from './cloudinary.saga';
 import announcementsSaga from './announcements.saga';
+import studentsSaga from './students.saga';
 import portfolioSaga from './portfolio.saga';
 import categoriesSaga from './categories.saga';
 
@@ -27,6 +28,7 @@ export default function* rootSaga() {
     profileSaga(),
     cloudinarySaga(),
     announcementsSaga(),
+    studentsSaga(),
     portfolioSaga(),
     categoriesSaga()
   ]);

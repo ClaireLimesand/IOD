@@ -6,6 +6,7 @@ import internshipReducer from './internship.reducer';
 import profile from './profile.reducer';
 import editSkill from './edit.skill.reducer';
 import announcements from './announcements.reducer';
+import students from './students.reducer';
 import portfolio from './portfolio.reducer';
 import editInternship from './edit.internship.reducer';
 import categories from './categories.reducer';
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   profile,
   editSkill,
   announcements,
+  students,
   portfolio,
   editInternship,
   categories
