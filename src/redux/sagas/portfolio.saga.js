@@ -30,9 +30,24 @@ function* addProject(action) {
     }
 };
 
+function* deleteProject(action) {
+    try {
+        yield axios({
+            method: 'DELETE',
+            url: `/api/portfolio/${action.payload}`,
+        })
+        yield put({
+            type: 'FETCH_PORTFOLIO'
+        })
+    } catch(err) {
+        console.log('Error in deleteProject Saga', err);
+    }
+}
+
 function* portfolioSaga() {
     yield takeLatest('FETCH_PORTFOLIO', fetchPortfolio);
     yield takeLatest('ADD_PROJECT', addProject);
+    yield takeLatest('DELETE_PROJECT', deleteProject);
 };
 
 export default portfolioSaga;
