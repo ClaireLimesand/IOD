@@ -1,12 +1,125 @@
+/* Internships page */
 .internship-input {
     display: block;
-    width: 100%;
     margin-top: 1em;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    width: 90%;
+    cursor: text;
+    box-shadow: 0 6px 3px -2px rgba(0, 0, 0, 0.301);
+    transition: ease 0.3s;
+}
+
+.internship-input:hover {
+    transform: scale(1.08, 1.08);
+    background-color: #26e9c95d;
+}
+
+.internship-input:focus {
+    background-color: #19c9ac1e;
 }
 
 .internship-description {
+    font-family: Arial, Helvetica, sans-serif;
     display: block;
-    width: 100%;
     margin-top: 1em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
+    resize: none;
+}
+
+.edit-datepicker {
+    padding-bottom: 1em;
+    margin-bottom: 25px;
+}
+
+.company-logo {
+    width: 200px;
+    padding-bottom: 10px;
+    padding-top: 20px;
+}
+
+.company-logo-border {
+  border-bottom: 2px solid black;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+#internships-page-title {
+  color: #15B097;
+  font-size: 42px;
+}
+
+#internships-container {
+  padding-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.apply-btn {
+    transition: ease 0.3s;
+    background-color: #15B097;
+    color: white;
+    padding: 8px 18px;
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+  
+.apply-btn:hover {
+    background-color: rgb(25, 189, 161);
+    box-shadow: 0 6px 3px -2px rgba(36, 202, 202, 0.514);
+    transform: scale(1.05,1.05);
+}
+
+.modal-box {
+    background-color: #efefef;
+    padding: 20px;
+    border-radius: 10px;
+    animation: gradient 0.5s ease both;
+    animation-delay: 0.1s;
+    border: 3px solid rgba(128, 128, 128, 0.616);
+}
+
+.add-internship-btn-container {
+    display: inline-flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.cancel-btn {
+    background-color: gray;
+    padding: 10px;
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    transition: ease 0.3s;
+    border: none;
+}
+
+.cancel-btn:hover {
+    background-color: rgb(156, 156, 156);
+    box-shadow: 0 6px 3px -2px rgba(110, 110, 110, 0.459);
+    transform: scale(1.05, 1.05);
+    cursor: pointer;
+}
+
+.save-btn {
+    border: none;
+    border-radius: 15px;
+    background-color: #cf3123;
+    color: white;
+    padding: 10px;
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    cursor: pointer;
+    transition: ease 0.3s;
+}
+
+.save-btn:hover {
+    background-color: #e92c1b;
+    box-shadow: 0 6px 3px -2px rgba(202, 36, 36, 0.514);
+    transform: scale(1.05,1.05);
 }

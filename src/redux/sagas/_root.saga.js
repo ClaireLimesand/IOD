@@ -8,6 +8,8 @@ import profileSaga from './profile.saga';
 import cloudinarySaga from './cloudinary.saga';
 import announcementsSaga from './announcements.saga';
 import studentsSaga from './students.saga';
+import portfolioSaga from './portfolio.saga';
+import categoriesSaga from './categories.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,5 +29,7 @@ export default function* rootSaga() {
     cloudinarySaga(),
     announcementsSaga(),
     studentsSaga(),
+    portfolioSaga(),
+    categoriesSaga()
   ]);
 }

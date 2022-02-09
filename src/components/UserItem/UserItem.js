@@ -1,46 +1,63 @@
 import React from "react";
+import { DropzoneDialog } from 'material-ui-dropzone';
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import { ListItemIcon } from "@mui/material";
-import { DropzoneDialog } from 'material-ui-dropzone';
-import { useHistory } from "react-router-dom";
 import "./UserItem.css";
 import { Badge } from "@mui/material";
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { IconButton } from "@mui/material";
+import CheckIcon from '@mui/icons-material/Check';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import { Modal } from "@mui/material";
+import { Box } from "@mui/system";
+import { Typography } from "@mui/material";
+import { useHistory } from "react-router-dom";
 
 function UserItem({ dataItem }) {
+  const useStyles = makeStyles(theme => createStyles({
+    previewChip: {
+      minWidth: 160,
+      maxWidth: 210
+    },
+  }));
+  const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory(); 
 
   const [pictureOpen, setPictureOpen] = useState(false);
   const [bannerOpen, setBannerOpen] = useState(false);
-  
-  let resumeUrl;
+  const [resumeOpen, setResumeOpen] = useState(false);
 
-  const inputPicture = useRef(null);
-  
-  let fileURL;
-  const history = useHistory();
+  const [editTop, setEditTop] = useState(false);
+  const [name, setName] = useState(dataItem.name);
+  const [email, setEmail] = useState(dataItem.email);
+  const [linkedin, setLinkedin] = useState(dataItem.linkedin);
+  const [pronouns, setPronouns] = useState(dataItem.pronouns);
 
-  const handleUpload = (event) => {
-    let file = event.target.files[0];
-    console.log(file);
+  const [editAbout, setEditAbout] = useState(false);
+  const [about, setAbout] = useState(dataItem.about);
 
-    // if (file.type != "application/pdf") {
-    //   console.error(file.name, "is not a pdf file.");
-    // } else {
-      console.log(file.name, "Successful upload");
-      resumeUrl = URL.createObjectURL(file);
-    // }
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    borderRadius: 3,
+    p: 4,
   };
 
   const handleSubmit = () => {
-    //Open the URL on new Window
-    if (resumeUrl) {
-      const pdfWindow = window.open();
-      pdfWindow.location.href = resumeUrl;
-    }
+    dispatch({
+      type: 'FETCH_RESUME'
+    });
   };
 
   const handleEditPicture = (file) => {
@@ -61,11 +78,36 @@ function UserItem({ dataItem }) {
     });
   }
 
+  const handleEditResume = (file) => {
+    console.log(file);
+
+    dispatch({
+      type: 'UPLOAD_RESUME',
+      payload: {file: file}
+    });
+  }
+
   const handleLinkedClick = () => {
-    const pdfWindow = window.open();
-    pdfWindow.location.href = fileURL;
-    history.push('/user');
+    window.open(dataItem.linkedin);
   };
+
+  const handlePortfolio = () => {
+    history.push("/portfolio");
+  };
+
+  const handleEditAbout = () => {
+    dispatch({ type: 'EDIT_ABOUT', payload: about });
+    setEditAbout(!editAbout);
+    setAbout(dataItem.about);
+  }
+
+  const handleTopSubmit = () => {
+    dispatch({
+      type: 'EDIT_TOP',
+      payload: {name: name, email, email, linkedin: linkedin, pronouns: pronouns}
+    })
+    setEditTop(false);
+  }
 
   return (
     <div>
@@ -75,14 +117,13 @@ function UserItem({ dataItem }) {
           <Badge
             badgeContent={
               <ListItemIcon>
-                <EditIcon 
+                <AddPhotoAlternateIcon 
                   id="edit-banner-icon" 
                   onClick={() => setBannerOpen(true)}
                 />
               </ListItemIcon>
             }
           >
-            
           </Badge>
         </div>
 
@@ -94,30 +135,97 @@ function UserItem({ dataItem }) {
               src={dataItem.picture}
               sx={{ width: 200, height: 200 }}
             />
+          <Badge
+            badgeContent={
+              <ListItemIcon>
+                <AddPhotoAlternateIcon 
+                  id="edit-picture-icon" 
+                  onClick={() => setPictureOpen(true)}
+                />
+              </ListItemIcon>
+            }
+          >
+          </Badge>
           </Stack>
-          <ListItemIcon>
-            <EditIcon 
-              id="edit-picture-icon" 
-              onClick={() => setPictureOpen(true)}
-            />
-          </ListItemIcon>
           <div>
             <div className="name-pros">
               <h2 className="student-name">{dataItem.name}</h2>
               <p className="pronouns">{dataItem.pronouns}</p>
+              <IconButton id="edit-top-icon" onClick={() => setEditTop(true)}>
+                  <EditIcon />
+              </IconButton>
             </div>
             <p className="email">{dataItem.email}</p>
-            <a href={dataItem.linkedin} onClick={handleLinkedClick}>Link to LinkedIn</a>
+            {dataItem.linkedin &&
+              <img src="linkedIn-icon.png" onClick={handleLinkedClick} className="profile-link" draggable={false} />
+            }
+              <button className="portfolio-button" onClick={handlePortfolio}>
+                Portfolio
+              </button>
           </div>
 
           <div className="resume">
-            <label htmlFor="resume-upload">Upload Resume</label>
-            <input className="resume-input" type="file" onChange={handleUpload} id="resume-upload" />
-            <br />
+            <button className="resume-input" onClick={() => setResumeOpen(true)}>Upload Resume</button>
             <button className="resume-button" onClick={handleSubmit}>View Resume</button>
           </div>
         </div>
       </div>
+
+      <Modal
+        open={editTop}
+        onClose={() => setEditTop(false)}
+      >
+        <center>
+            <Box sx={style}>
+                <form className='interior-box' onSubmit={handleTopSubmit}>
+                    <Typography id="edit-top-title" variant="h6" component="h2">
+                        Edit Profile
+                    </Typography>
+                    <img className="login-gradient" src="gradient_bar.png" draggable={false} />
+                    <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
+                      Name
+                    </Typography>
+                    <input 
+                        className='skill-input'
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
+                    />
+                    <br />
+                    <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
+                      Email
+                    </Typography>
+                    <input 
+                        className='skill-input'
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                    />
+                    <br />
+                    <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
+                      LinkedIn
+                    </Typography>
+                    <input 
+                        className='skill-input'
+                        value={linkedin}
+                        onChange={(event) => setLinkedin(event.target.value)}
+                    />
+                    <br />
+                    <Typography sx={{ fontWeight: 'bold', textAlign: 'start', marginLeft: 9 }} variant="h6" component="div">
+                      Pronouns
+                    </Typography>
+                    <input 
+                        className='skill-input'
+                        value={pronouns}
+                        onChange={(event) => setPronouns(event.target.value)}
+                    />
+                    <br />
+                    <div className="modal-btn-container">
+                      <button type='submit'>Save</button>
+                      <button id="cancel-btn" onClick={() => setEditTop(false)}>Cancel</button>
+                    </div>
+                </form>
+            </Box>
+        </center>
+      </Modal>     
 
       {/* Profile pic import dialogue */}
       <DropzoneDialog
@@ -153,9 +261,53 @@ function UserItem({ dataItem }) {
         showFileNamesInPreview={true}
       />
 
+      {/* Resume import dialogue */}
+      <DropzoneDialog
+        showPreviews={true}
+        showPreviewsInDropzone={false}
+        useChipsForPreview
+        previewGridProps={{container: { spacing: 1, direction: 'row' }}}
+        previewChipProps={{classes: { root: classes.previewChip } }}
+        previewText="Selected files"
+        cancelButtonText={"cancel"}
+        submitButtonText={"submit"}
+        maxFileSize={5000000}
+        open={resumeOpen}
+        onClose={() => setResumeOpen(false)}
+        onSave={(files) => {
+          console.log('Files:', files[0]);
+          setResumeOpen(false);
+          handleEditResume(files[0]);
+        }}
+      />
+
       <div className="about">
-        <h3 className="about-text">About</h3>
-        <p className="about-data">{dataItem.about}</p>
+        <h3 className="about-text">About     
+          <IconButton id="edit-about-icon" onClick={() => setEditAbout(!editAbout)}>
+              <EditIcon />
+          </IconButton>
+        </h3>
+        {!editAbout ?
+          <p className="about-data">{dataItem.about}</p>
+        :
+          <form onSubmit={handleEditAbout}>
+            <input 
+              className="edit-about-input"
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
+            />
+            <IconButton type='submit'>
+              <CheckIcon />
+            </IconButton>
+
+            <IconButton onClick={() => {
+              setEditAbout(!editAbout);
+              setAbout(dataItem.about);
+            }}>
+              <ArrowBackIcon />
+            </IconButton>
+          </form>
+        }
       </div>
     </div>
   );

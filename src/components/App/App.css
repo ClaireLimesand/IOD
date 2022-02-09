@@ -15,13 +15,26 @@ img {
   max-width: 100%;
 }
 
+
 /* --------------------------------------------------------------------------------
 Container
 -------------------------------------------------------------------------------- */
 
-.container {
-  padding-left: 265px;
-  padding-right: 25px;
+@media only screen and (max-width: 999px) {
+  #sidebar {
+      opacity: 0;
+  }
+  .container {
+    padding-left: 20px;
+    padding-right: 32px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .container {
+    padding-left: 260px;
+    padding-right: 32px;
+  }
 }
 
 /* --------------------------------------------------------------------------------
@@ -115,26 +128,4 @@ input {
 
 .edit-input {
   border: 0;
-}
-
-/* Internships page */
-.company-logo {
-  width: 200px;
-  padding-bottom: 10px;
-  padding-top: 20px;
-}
-
-.company-logo-border {
-  border-bottom: 2px solid black;
-  margin-left: 10%;
-  margin-right: 10%;
-}
-
-#internships-page-title {
-  color: #15B097;
-  font-size: 42px;
-}
-
-#internships-container {
-  padding-top: 3rem;
 }

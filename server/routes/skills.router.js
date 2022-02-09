@@ -48,7 +48,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 // DELETE for a user's skills 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-
     const sqlQuery = `
     DELETE FROM "skills" 
         WHERE "id"=$1;
@@ -89,8 +88,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         UPDATE skills
-            SET skill = $1
-            WHERE id = $2;
+        SET skill = $1
+        WHERE id = $2;
     `;
     const sqlValues = [
         req.body.skill,

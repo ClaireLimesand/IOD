@@ -16,6 +16,7 @@ import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import { useDispatch } from 'react-redux';
+import SecurityIcon from '@mui/icons-material/Security';
 
 const drawerWidth = 240;
 
@@ -25,12 +26,22 @@ function Nav() {
 
   const user = useSelector((store) => store.user);
 
+  const adminContent = (
+    user.access_level == 3 &&
+    <ListItem button onClick={() => history.push('/admin')}>
+      <ListItemIcon>
+        <SecurityIcon sx={{ color: 'white' }} />
+      </ListItemIcon>
+      <ListItemText primary="Admin"/>
+    </ListItem>
+  );
+
   const drawer = (
     <div>
       <img src='globe.png' draggable='false' />
       <center id='sidebar-logo-text'>INTERNSHIP ON DEMAND</center>
       <img src='gradient_bar.png' draggable='false' />
-      <List>
+      <List id="nav-list">
         {/* Home link */}
         {user.id &&
           <ListItem button onClick={() => history.push('/home')}>
@@ -67,13 +78,17 @@ function Nav() {
               <ListItemText primary="Students"/>
           </ListItem>
         }
+        {/* Admin link */}
+        {user.id &&
+          adminContent
+        }
         {/* About link */}
-          <ListItem button onClick={() => history.push('/about')}>
+          {/* <ListItem button onClick={() => history.push('/about')}>
               <ListItemIcon>
                 <HelpCenterIcon sx={{ color: 'white' }} />
               </ListItemIcon>
               <ListItemText primary="About"/>
-          </ListItem>
+          </ListItem> */}
         {/* Logout link */}
         {user.id ?
           <ListItem button onClick={() => dispatch({ type: 'LOGOUT' })}>

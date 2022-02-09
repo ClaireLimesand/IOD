@@ -1,0 +1,50 @@
+
+.edit-internship {
+    padding: 25px;
+    background-color: #efefef;
+    border-radius: 45px;
+    box-shadow: 0 12px 4px rgba(255, 255, 255, 0.4);
+    margin-top: 35px;
+    width: 40%;
+    animation: gradient 0.5s ease both;
+    animation-delay: 0.1s;
+}
+
+.edit-internship-btn-container {
+    display: inline-flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.internship-title {
+    font-size: 40px;
+}
+
+.internship-edit-input {
+    display: block;
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: auto;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #efefef;
+    border-radius: 5px;
+    border: 1.5px solid #bcbcbc;
+    padding: 6px;
+}
+
+.internship-edit-description {
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    background-color: #efefef;
+    border-radius: 5px;
+    border: 1.5px solid #bcbcbc;
+    padding: 6px;
+}
+
+.edit-inputs {
+    padding-right: 16px;
+}

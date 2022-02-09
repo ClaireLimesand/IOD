@@ -5,6 +5,8 @@ const {
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
+const notifyWebhook = require('../modules/zapier');
+require('dotenv').config();
 
 const router = express.Router();
 
@@ -19,7 +21,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // is that the password gets encrypted before being inserted
 router.post('/register', (req, res, next) => {
   const username = req.body.username;
+  const email = req.body.email;
   const password = encryptLib.encryptPassword(req.body.password);
+
+  // Zapier webhook
+  notifyWebhook(`${process.env.ZAPIER_REGISTER_URL}`, {email: email, name: username});
 
   const queryText = `INSERT INTO "user" (username, password)
     VALUES ($1, $2) RETURNING id`;
