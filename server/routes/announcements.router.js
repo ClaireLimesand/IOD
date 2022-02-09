@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
-        SELECT "announcements"."message", "message_types"."title", "message_id" FROM "announcements"
+        SELECT "announcements"."message", "announcements"."id", "message_types"."title", "message_id" FROM "announcements"
         JOIN "message_types"
         ON "announcements"."message_id" = "message_types"."id";
     `;
@@ -25,7 +25,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `
     DELETE FROM "announcements" 
-        WHERE "message_id"=$1;
+        WHERE "id"=$1;
     `;
 
     const sqlValues = [
