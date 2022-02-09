@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import ClearIcon from '@mui/icons-material/Clear';
 import IconButton from '@mui/material/IconButton';
+import { Typography } from '@mui/material';
 
 function AdminPage() {
     const dispatch = useDispatch();
@@ -32,19 +33,19 @@ function AdminPage() {
                         return (
                             <div key={application.id}>
                                 {application.new_notification ?
-                                    <p className='new-notification notification-text'>
+                                    <Typography className='new-notification notification-text'>
                                         - <span className='application-name'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
                                         <IconButton>
                                             <ClearIcon />
                                         </IconButton>
-                                    </p>
+                                    </Typography>
                                 :
-                                    <p className='notification-text'>
+                                    <Typography className='notification-text'>
                                         - <span className='application-name'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
                                         <IconButton>
                                             <ClearIcon />
                                         </IconButton>
-                                    </p>
+                                    </Typography>
                                 }
                             </div>
                         );
