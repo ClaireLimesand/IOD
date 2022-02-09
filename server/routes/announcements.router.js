@@ -2,6 +2,9 @@ const express = require('express');
 const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+const {
+    isAdmin,
+} = require('../modules/admin-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
@@ -22,7 +25,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
-router.delete('/:id', rejectUnauthenticated, (req, res) => {
+router.delete('/:id', rejectUnauthenticated, isAdmin, (req, res) => {
     const sqlQuery = `
     DELETE FROM "announcements" 
         WHERE "id"=$1;
@@ -42,7 +45,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
         })
 });
 
-router.post('/', rejectUnauthenticated, (req, res) => {
+router.post('/', rejectUnauthenticated, isAdmin, (req, res) => {
     
     const sqlQuery =`INSERT INTO "announcements" ("message", "message_id")
         VALUES ($1, $2);`
