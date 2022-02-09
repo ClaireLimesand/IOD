@@ -21,6 +21,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import InternshipsPage from '../InternshipsPage/InternshipsPage';
 import HomePage from '../HomePage/HomePage';
 import EditSkill from '../EditSkill/EditSkill';
+import '../StudentTable/StudentTable';
 
 import './App.css';
 
@@ -70,6 +71,14 @@ function App() {
             path="/internships"
           >
             <InternshipsPage />
+          </ProtectedRoute>
+
+        {/* Students page */}
+        <ProtectedRoute
+            exact
+            path="/students"
+          >
+            <StudentTable />
           </ProtectedRoute>
 
           <ProtectedRoute

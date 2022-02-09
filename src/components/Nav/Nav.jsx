@@ -60,7 +60,7 @@ function Nav() {
         }
         {/* Students link */}
         {user.id &&
-          <ListItem button onClick={() => history.push('/')}>
+          <ListItem button onClick={() => history.push('/students')}>
               <ListItemIcon>
                 <PeopleIcon sx={{ color: 'white' }} />
               </ListItemIcon>
