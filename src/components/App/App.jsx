@@ -88,7 +88,13 @@ function App() {
             exact
             path="/admin"
           >
-            <AdminPage />
+            {user.access_level == 3 ?
+              <AdminPage />
+            :
+              <div className='container'>
+                <h1>404</h1>
+              </div>
+            }
           </ProtectedRoute>
 
           <ProtectedRoute
