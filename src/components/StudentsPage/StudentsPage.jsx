@@ -28,7 +28,9 @@ function StudentsTable() {
 
     useEffect(() => {
         dispatch({
-        type: 'FETCH_STUDENTS'}),[]})
+            type: 'FETCH_STUDENTS'
+        });
+    }, [])
 
     // const handleLoadProfileClick = () => {
     // useEffect(() => {
@@ -65,9 +67,6 @@ function StudentsTable() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-
-
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -78,47 +77,49 @@ function StudentsTable() {
     };
         
     return (
-        <TableContainer component={Paper} className={classes.tableContainer}>
-            <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-                <TableRow>
-                    <TableCell className={classes.tableHeaderCell}>Name</TableCell>
-                    <TableCell className={classes.tableHeaderCell}>Cohort</TableCell>
-                    <TableCell className={classes.tableHeaderCell}>Email</TableCell>
-                    <TableCell className={classes.tableHeaderCell}>Profile</TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-            {students.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-            <TableRow key={row.name}>
-                <TableCell>
-                    <Grid container>
-                        <Grid item lg={10}>
-                            <Typography className={classes.name}>{row.name}</Typography>
-                        </Grid>
-                    </Grid>
-                    </TableCell>
-                <TableCell>
-                    <Typography color="textSecondary" variant="body2">{row.cohort}</Typography>
-                    <Typography color="primary" variant="subtitle2">{row.email}</Typography>
-                    {/* <Button variant="contained" size="small" sx={{ float: 'right', marginRight: '40px' }} onClick={()=>{handleLoadProfileClick()}}>Load Profile</Button> */}
-                </TableCell>
-            </TableRow>
-        })}
-        </TableBody>
-        <TableFooter>
-        <TablePagination
-            rowsPerPageOptions={[5, 10, 15]}
-            component="tr"
-            count={students.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-        </TableFooter>
-    </Table>
-    </TableContainer>
+        <div className='container'>
+            <TableContainer component={Paper} className={classes.tableContainer}>
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell className={classes.tableHeaderCell}>Name</TableCell>
+                            <TableCell className={classes.tableHeaderCell}>Cohort</TableCell>
+                            <TableCell className={classes.tableHeaderCell}>Email</TableCell>
+                            <TableCell className={classes.tableHeaderCell}>Profile</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {students.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                            <TableRow key={row.name}>
+                                <TableCell>
+                                    <Grid container>
+                                        <Grid item lg={10}>
+                                            <Typography className={classes.name}>{row.name}</Typography>
+                                        </Grid>
+                                    </Grid>
+                                </TableCell>
+                                <TableCell>
+                                    <Typography color="textSecondary" variant="body2">{row.cohort}</Typography>
+                                    <Typography color="primary" variant="subtitle2">{row.email}</Typography>
+                                    {/* <Button variant="contained" size="small" sx={{ float: 'right', marginRight: '40px' }} onClick={()=>{handleLoadProfileClick()}}>Load Profile</Button> */}
+                                </TableCell>
+                            </TableRow>
+                        })}
+                    </TableBody>
+                    {/* <TableFooter>
+                        <TablePagination
+                            rowsPerPageOptions={[5, 10, 15]}
+                            component="div"
+                            count={students.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onPageChange={handleChangePage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                        />
+                    </TableFooter> */}
+                </Table>
+            </TableContainer>
+    </div>
 );
 }
 
