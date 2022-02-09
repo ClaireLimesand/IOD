@@ -7,6 +7,7 @@ function* fetchStudents() {
             method: 'GET',
             url: '/api/students'
         });
+
         yield put({
             type: 'SET_STUDENTS',
             payload: response.data

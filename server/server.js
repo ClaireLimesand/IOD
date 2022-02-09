@@ -27,7 +27,7 @@ const profileRouter = require('./routes/profile.router');
 const pictureRouter = require('./routes/picture.router');
 const bannerRouter = require('./routes/banner.router');
 const announcementsRouter = require('./routes/announcements.router');
-const studentsRouter = require('./routes/profile.router');
+const studentsRouter = require('./routes/students.router');
 
 // Body parser middleware
 app.use(bodyParser.json());

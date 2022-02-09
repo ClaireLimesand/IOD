@@ -32,7 +32,7 @@ function StudentsTable() {
         });
     }, [])
 
-    // const handleLoadProfileClick = () => {
+    const handleLoadProfileClick = () => {
     // useEffect(() => {
     //     console.log('params.id:', params.id)
     //     dispatch({
@@ -40,7 +40,8 @@ function StudentsTable() {
     //     // payload: params.id
     // });
     // }, [])
-    // history.push('/user')};
+        history.push('/user')
+    };
 
     const useStyles = makeStyles((theme) => ({
         table: {
@@ -89,21 +90,23 @@ function StudentsTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {students.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                            <TableRow key={row.name}>
-                                <TableCell>
-                                    <Grid container>
-                                        <Grid item lg={10}>
-                                            <Typography className={classes.name}>{row.name}</Typography>
-                                        </Grid>
-                                    </Grid>
-                                </TableCell>
-                                <TableCell>
-                                    <Typography color="textSecondary" variant="body2">{row.cohort}</Typography>
-                                    <Typography color="primary" variant="subtitle2">{row.email}</Typography>
-                                    {/* <Button variant="contained" size="small" sx={{ float: 'right', marginRight: '40px' }} onClick={()=>{handleLoadProfileClick()}}>Load Profile</Button> */}
-                                </TableCell>
-                            </TableRow>
+                        {students.map((student) => {
+                            return (
+                                <TableRow key={student.id}>
+                                    <TableCell>
+                                        <Typography>{student.name}</Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography>{student.cohort}</Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography>{student.email}</Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button variant="contained" size="small" sx={{ float: 'right', marginRight: '40px' }} onClick={()=>{handleLoadProfileClick()}}>Load Profile</Button>
+                                    </TableCell>
+                                </TableRow>
+                            );
                         })}
                     </TableBody>
                     {/* <TableFooter>

@@ -13,7 +13,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool.query(sqlText)
         .then((dbRes) => {
             console.log('Data', dbRes.rows);
-            
             res.send(dbRes.rows);
         })
         .catch((dbErr) => {
