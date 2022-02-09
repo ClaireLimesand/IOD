@@ -9,6 +9,7 @@ import announcements from './announcements.reducer';
 import students from './students.reducer';
 import portfolio from './portfolio.reducer';
 import editInternship from './edit.internship.reducer';
+import applicationsReducer from './applications.reducer';
 import categories from './categories.reducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   students,
   portfolio,
   editInternship,
+  applicationsReducer
   categories
 });
 
