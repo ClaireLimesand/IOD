@@ -15,7 +15,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import InternshipsPage from '../InternshipsPage/InternshipsPage';
@@ -23,6 +22,7 @@ import HomePage from '../HomePage/HomePage';
 import StudentPortfolio from '../StudentPortfolio/StudentPortfolio';
 import EditSkill from '../EditSkill/EditSkill';
 import EditInternship from '../EditInternship/EditInternship';
+import AdminPage from '../AdminPage/AdminPage';
 
 import './App.css';
 
@@ -83,6 +83,20 @@ function App() {
             <InternshipsPage />
           </ProtectedRoute>
 
+          {/* Admin page */}
+          <ProtectedRoute
+            exact
+            path="/admin"
+          >
+            {user.access_level == 3 ?
+              <AdminPage />
+            :
+              <div className='container'>
+                <h1>404</h1>
+              </div>
+            }
+          </ProtectedRoute>
+
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
@@ -137,7 +151,11 @@ function App() {
             exact
             path="/home"
           >
+            {user.id ?
               <HomePage />
+            :
+              <LoginPage />
+            }
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}

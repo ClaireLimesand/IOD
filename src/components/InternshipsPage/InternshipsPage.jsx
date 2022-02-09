@@ -59,7 +59,15 @@ function InternshipsPage() {
     const [open, setOpen] = React.useState(false);
     const [editOpen, editSetOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false);
+        setOpen(false);
+        setCompanyName('');
+        setSubtitle('');
+        setDescription('');
+        setLogo('');
+        setDateRange([null, null]);
+    };
 
     useEffect(() => {
         dispatch({
@@ -68,8 +76,8 @@ function InternshipsPage() {
     }, [])
 
     const handleSaveButton = () => {
-        console.log(startDate)
-        console.log(endDate)
+        console.log(startDate);
+        console.log(endDate);
         const newInternship = {
             companyName: companyName,
             subtitle: subtitle,
@@ -78,12 +86,17 @@ function InternshipsPage() {
             endDate: endDate,
             description: description,
         }
-        console.log(newInternship)
+        console.log(newInternship);
         dispatch({
             type: 'ADD_INTERNSHIP',
             payload: newInternship
-        })
-        setOpen(false)
+        });
+        setOpen(false);
+        setCompanyName('');
+        setSubtitle('');
+        setDescription('');
+        setLogo('');
+        setDateRange([null, null]);
     }; 
 
     return (
@@ -111,62 +124,64 @@ function InternshipsPage() {
                 <center>
                 <Box sx={style}>
                     <center className="modal-box">
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            New Internship
-                        </Typography>
-                        <img className="register-gradient" src="gradient_bar.png" draggable={false} />
+                        <form>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                New Internship
+                            </Typography>
+                            <img className="register-gradient" src="gradient_bar.png" draggable={false} />
 
-                        <label>Company Name</label>
-                        <input 
-                            className="internship-input"
-                            value={companyName}
-                            onChange={(event) => setCompanyName(event.target.value)}
-                        />
-
-                        <label>Internship Subtitle</label>
-                        <input 
-                            className="internship-input"
-                            value={subtitle}
-                            onChange={(event) => setSubtitle(event.target.value)}
-                        />
-
-                        <label>Logo Picture</label>
-                        <input 
-                            className="internship-input"
-                            value={logo}
-                            onChange={(event) => setLogo(event.target.value)}
-                        />
-
-                        <label>Internship Description</label>
-                        <textarea 
-                            rows="5"
-                            className="internship-input internship-description"
-                            value={description}
-                            onChange={(event) => setDescription(event.target.value)}
-                        />  
-
-                        <LocalizationProvider dateAdapter={AdapterDateFns}> 
-                            <DateRangePicker
-                                startText="Start Date"
-                                endText="End Date"
-                                value={dateRange}
-                                onChange={(newValue) => {
-                                setDateRange(newValue);
-                                }}
-                                renderInput={(startProps, endProps) => (
-                                <React.Fragment>
-                                    <TextField {...startProps} />
-                                        <Box sx={{ mx: 2 }}> to </Box>
-                                    <TextField {...endProps} />
-                                </React.Fragment>
-                                )}
+                            <label>Company Name</label>
+                            <input 
+                                className="internship-input"
+                                value={companyName}
+                                onChange={(event) => setCompanyName(event.target.value)}
                             />
-                        </LocalizationProvider>
-                        
-                        <div className='add-internship-btn-container'>
-                            <button className='save-btn' onClick={handleSaveButton}>Save</button>               
-                            <button className='cancel-btn' onClick={handleClose}>Cancel</button>
-                        </div>
+
+                            <label>Internship Subtitle</label>
+                            <input 
+                                className="internship-input"
+                                value={subtitle}
+                                onChange={(event) => setSubtitle(event.target.value)}
+                            />
+
+                            <label>Logo Picture</label>
+                            <input 
+                                className="internship-input"
+                                value={logo}
+                                onChange={(event) => setLogo(event.target.value)}
+                            />
+
+                            <label>Internship Description</label>
+                            <textarea 
+                                rows="5"
+                                className="internship-input internship-description"
+                                value={description}
+                                onChange={(event) => setDescription(event.target.value)}
+                            />  
+
+                            <LocalizationProvider dateAdapter={AdapterDateFns}> 
+                                <DateRangePicker
+                                    startText="Start Date"
+                                    endText="End Date"
+                                    value={dateRange}
+                                    onChange={(newValue) => {
+                                    setDateRange(newValue);
+                                    }}
+                                    renderInput={(startProps, endProps) => (
+                                    <React.Fragment>
+                                        <TextField {...startProps} />
+                                            <Box sx={{ mx: 2 }}> to </Box>
+                                        <TextField {...endProps} />
+                                    </React.Fragment>
+                                    )}
+                                />
+                            </LocalizationProvider>
+                            
+                            <div className='add-internship-btn-container'>
+                                <button className='save-btn' onClick={handleSaveButton}>Save</button>               
+                                <button className='cancel-btn' onClick={handleClose}>Cancel</button>
+                            </div>
+                        </form>
                     </center>
                 </Box>
             </center> 
