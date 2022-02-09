@@ -1,9 +1,11 @@
 import React from 'react';
+import './AdminPage.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
 import Grid from '@mui/material/Grid';
-import './AdminPage.css';
+import ClearIcon from '@mui/icons-material/Clear';
+import IconButton from '@mui/material/IconButton';
 
 function AdminPage() {
     const dispatch = useDispatch();
@@ -26,7 +28,21 @@ function AdminPage() {
                     {applications.map((application) => {
                         return (
                             <div key={application.id}>
-                                <p>{application.student_name} has applied at {application.company}</p>
+                                {application.new_notification ?
+                                    <p className='new-notification'>
+                                        - <span className='application-name move-right'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
+                                        <IconButton>
+                                            <ClearIcon />
+                                        </IconButton>
+                                    </p>
+                                :
+                                    <p>
+                                        - <span className='application-name'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
+                                        <IconButton>
+                                            <ClearIcon />
+                                        </IconButton>
+                                    </p>
+                                }
                             </div>
                         );
                     })}
