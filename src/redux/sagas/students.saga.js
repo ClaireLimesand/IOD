@@ -22,7 +22,7 @@ function* fetchStudentProfile(action) {
     try {
         const response = yield axios({
             method: 'GET',
-            url: `/api/students/${studentId}`
+            url: `/api/user/${studentId}`
         })
         yield put({
             type: 'SET_PROFILE',

@@ -22,20 +22,5 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 
-// Creating a GET that will load a specific student's profile
-router.get('/:id', (req, res) => {
-    const sqlText = `
-    SELECT * FROM "students"
-    WHERE "students"."id"=$1;
-    `;
-    pool.query(sqlText, [req.params.id])
-        .then((dbRes) => {
-            res.send(dbRes.rows);
-        }).catch(err => {
-            console.log('ERROR: GET student by id', err);
-            res.sendStatus(500);
-        })
-        
-});
 
 module.exports = router;
