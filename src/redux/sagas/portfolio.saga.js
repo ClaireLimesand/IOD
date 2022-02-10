@@ -17,6 +17,23 @@ function* fetchPortfolio() {
     };
 }
 
+function* fetchOneProject(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/portfolio/${action.payload}`
+        })
+        console.log('Project to Edit', response.data[0]);
+        yield put({
+            type: 'SET_EDITED_PROJECT',
+            payload: response.data[0]
+        });
+    } catch(err) {
+        console.log('Error in fetchOneProject Saga', err);
+        
+    }
+}
+
 function* addProject(action) {
     try {
         yield axios({
@@ -44,10 +61,26 @@ function* deleteProject(action) {
     }
 }
 
+function* updateProject(action) {
+    try {
+        yield axios({
+            method: 'PUT',
+            url: `/api/portfolio/${action.payload.id}`,
+            data: action.payload
+        })
+        yield put({ type: 'FETCH_PORTFOLIO '})
+    } catch(err) {
+        console.log('Error in updateProject Saga', err);
+        
+    }
+}
+
 function* portfolioSaga() {
     yield takeLatest('FETCH_PORTFOLIO', fetchPortfolio);
     yield takeLatest('ADD_PROJECT', addProject);
     yield takeLatest('DELETE_PROJECT', deleteProject);
+    yield takeLatest('FETCH_EDITED_PROJECT', fetchOneProject);
+    yield takeLatest('EDIT_PROJECT', updateProject);
 };
 
 export default portfolioSaga;
