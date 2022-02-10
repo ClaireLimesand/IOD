@@ -7,6 +7,8 @@ import Grid from '@mui/material/Grid';
 import ClearIcon from '@mui/icons-material/Clear';
 import IconButton from '@mui/material/IconButton';
 import { Typography } from '@mui/material';
+import AddModeratorIcon from '@mui/icons-material/AddModerator';
+import RemoveModeratorIcon from '@mui/icons-material/RemoveModerator';
 
 function AdminPage() {
     const dispatch = useDispatch();
@@ -22,7 +24,7 @@ function AdminPage() {
             type: 'SEEN_NOTIFICATION'
         });
         dispatch({
-            type: 'FETCH_STUDENTS'
+            type: 'FETCH_STUDENTS_ADMIN'
         });
     }, [])
 
@@ -59,8 +61,18 @@ function AdminPage() {
                     <center>
                         <h2>Manage Users</h2>
                     </center>
-                    {students.map((student) => {
-                        return <p>{student.name}</p>
+                    {students.map((student, i) => {
+                        return (
+                            <div key={i}>
+                                <Typography>{student.name} 
+                                    {student.access_level < 3 ?
+                                        <IconButton><AddModeratorIcon /></IconButton>
+                                    :
+                                        <IconButton><RemoveModeratorIcon /></IconButton>   
+                                    }
+                                </Typography>
+                            </div>
+                        );
                     })}
                 </Grid>
           </Grid>
