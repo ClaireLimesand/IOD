@@ -156,12 +156,12 @@ function UserItem({ dataItem }) {
               </IconButton>
             </div>
             <p className="email">{dataItem.email}</p>
+            <button className="portfolio-button" onClick={handlePortfolio}>
+                Portfolio
+            </button>
             {dataItem.linkedin &&
               <img src="linkedIn-icon.png" onClick={handleLinkedClick} className="profile-link" draggable={false} />
             }
-              <button className="portfolio-button" onClick={handlePortfolio}>
-                Portfolio
-              </button>
           </div>
 
           <div className="resume">
