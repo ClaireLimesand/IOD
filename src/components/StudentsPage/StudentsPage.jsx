@@ -100,7 +100,9 @@ function StudentsTable(student) {
                                             <Typography>{student.email}</Typography>
                                         </TableCell>
                                         <TableCell>
-                                            <Button variant="contained" size="small" sx={{ float: 'right', marginRight: '40px' }} onClick={()=>{handleLoadProfileClick()}}>Load Profile</Button>
+                                            <button className='apply-btn' onClick={()=>{handleLoadProfileClick()}}>
+                                                Load Profile
+                                            </button>
                                         </TableCell>
                                     </TableRow>
                                 );
