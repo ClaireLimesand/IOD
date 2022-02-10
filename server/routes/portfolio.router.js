@@ -49,7 +49,23 @@ router.get("/", rejectUnauthenticated, (req, res) => {
       res.send(transformedProjectData);
     })
     .catch((dbErr) => {
-      console.log('Error: ', dbErr);
+      console.log("Error: ", dbErr);
+      res.sendStatus(500);
+    });
+});
+
+router.get("/:id", rejectUnauthenticated, (req, res) => {
+  const sqlText = `
+    SELECT * FROM "projects"
+    WHERE "id" = $1;
+  `;
+  const sqlValues = [req.params.id];
+  pool
+    .query(sqlText, sqlValues)
+    .then((dbRes) => {
+      res.send(dbRes.rows);
+    })
+    .catch((dbErr) => {
       res.sendStatus(500);
     });
 });
@@ -73,7 +89,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
       res.sendStatus(201);
     })
     .catch((dbErr) => {
-      console.log('Error: ', dbErr);
+      console.log("Error: ", dbErr);
       res.sendStatus(500);
     });
 });
@@ -91,6 +107,32 @@ router.delete("/:id", rejectUnauthenticated, (req, res) => {
     })
     .catch((dbErr) => {
       console.error("DELETE projects error", dbErr);
+      res.sendStatus(500);
+    });
+});
+
+router.put("/:id", rejectUnauthenticated, (req, res) => {
+  const sqlText = `
+    UPDATE "projects"
+    SET
+      "project_name" = $1,
+      "description" = $2,
+      "image" = $3
+    WHERE "id" = $4;
+  `;
+  const sqlValues = [
+    req.body.name,
+    req.body.description,
+    req.body.image,
+    req.params.id,
+  ];
+
+  pool
+    .query(sqlText, sqlValues)
+    .then((dbRes) => {
+      res.sendStatus(201);
+    })
+    .catch((dbErr) => {
       res.sendStatus(500);
     });
 });
