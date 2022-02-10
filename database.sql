@@ -91,12 +91,12 @@ VALUES ('cactusfox', '123', '1');
 INSERT INTO "user" ("username", "password", "access_level")
 VALUES ('unicorn', '123', '3');
 
-INSERT INTO "internships" ("id", "company_name", "start_date", "end_date", "company_logo", "company_subtitle", "company_description") 
-VALUES ('1', '3M', '2022-06-24', '2022-08-24', '3m_logo.png', 'Design Research and Innovation', 'Paired with leading scientists and 
+INSERT INTO "internships" ("company_name", "start_date", "end_date", "company_logo", "company_subtitle", "company_description") 
+VALUES ('3M', '2022-06-24', '2022-08-24', '3m_logo.png', 'Design Research and Innovation', 'Paired with leading scientists and 
 resources, you’ll have the opportunity to learn new methods and gain experience on key equipment.');
 
-INSERT INTO "internships" ("id", "company_name", "start_date", "end_date", "company_logo", "company_subtitle", "company_description") 
-VALUES ('2', 'Spectrum', '2022-12-18', '2023-1-20', 'spectrum.png', 'Fast Connections, Great Entertainment', 'As an intern, you will learn about our industry 
+INSERT INTO "internships" ("company_name", "start_date", "end_date", "company_logo", "company_subtitle", "company_description") 
+VALUES ('Spectrum', '2022-12-18', '2023-1-20', 'spectrum.png', 'Fast Connections, Great Entertainment', 'As an intern, you will learn about our industry 
 and gain exposure to a real life business setting. All in an atmosphere that will broaden your professional understanding, encourage your sense of accomplishment and fuel your career development.');
 
 INSERT INTO "message_types" ("title")
