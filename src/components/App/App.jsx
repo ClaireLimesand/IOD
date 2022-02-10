@@ -92,6 +92,14 @@ function App() {
             <StudentsTable />
         </ProtectedRoute>
 
+        {/*Students page*/}
+        <ProtectedRoute
+            exact
+            path="/students/:id"
+          >
+            <StudentPortfolio />
+        </ProtectedRoute>
+
           {/* Admin page */}
           <ProtectedRoute
             exact

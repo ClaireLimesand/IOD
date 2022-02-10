@@ -17,8 +17,26 @@ function* fetchStudents() {
     };
 }
 
+function* fetchStudentProfile(action) {
+    const studentId= action.payload;
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/students/${studentId}`
+        })
+        yield put({
+            type: 'SET_PROFILE',
+            payload: response.data
+        })
+
+    } catch (err) {
+        console.error('GET profile by student id', err);
+    }
+}
+
 function* studentsSaga() {
     yield takeEvery('FETCH_STUDENTS', fetchStudents);
+    yield takeEvery('GET_STUDENT', fetchStudentProfile);
 };
 
 export default studentsSaga;

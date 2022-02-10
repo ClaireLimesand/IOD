@@ -10,9 +10,9 @@ const router = express.Router();
 
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
-        SELECT "announcements"."message", "announcements"."id", "message_types"."title", "message_id" FROM "announcements"
+        SELECT "announcements"."message", "announcements"."id", "message_types"."title", "message_types"."id" FROM "announcements"
         JOIN "message_types"
-        ON "announcements"."message_id" = "message_types"."id";
+        ON "announcements"."id" = "message_types"."id";
     `;
     pool.query(sqlText)
         .then((dbRes) => {

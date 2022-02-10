@@ -20,10 +20,10 @@ import {
 
 
 
-function StudentsTable() {
+function StudentsTable(student) {
     const history = useHistory();
     const students = useSelector((store) => store.students);
-    const params= useParams();
+    // const params= useParams();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -33,15 +33,10 @@ function StudentsTable() {
     }, [])
 
     const handleLoadProfileClick = () => {
-    // useEffect(() => {
-    //     console.log('params.id:', params.id)
-    //     dispatch({
-    //     type: 'FETCH_STUDENTS',
-    //     // payload: params.id
-    // });
-    // }, [])
-        history.push('/user')
-    };
+        dispatch({ type: 'GET_STUDENT', payload: student.id});
+        history.push(`/user/${student.id}`);
+        };
+    
 
     const useStyles = makeStyles((theme) => ({
         table: {
