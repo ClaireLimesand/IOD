@@ -21,9 +21,17 @@ function UserPage() {
 
   return (
     <div className="container">
-      {profile.map((data) => {
-        return <UserItem key={data.id} dataItem={data}/>
-      })}
+      {profile.length > 0 ?
+        profile.map((data) => {
+          return <UserItem key={data.id} dataItem={data}/>
+        })
+      :
+        setTimeout(() => {
+          profile.map((data) => {
+            return <UserItem key={data.id} dataItem={data}/>
+          })
+        }, 1000)
+      }
       <Skills /> 
     </div>
   );
