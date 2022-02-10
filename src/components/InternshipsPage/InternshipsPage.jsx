@@ -12,9 +12,6 @@ import Modal from '@mui/material/Modal';
 
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
-import ClearIcon from '@mui/icons-material/Clear';
-import CheckIcon from '@mui/icons-material/Check';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { makeStyles } from '@material-ui/core/styles';
 
 import TextField from '@mui/material/TextField';

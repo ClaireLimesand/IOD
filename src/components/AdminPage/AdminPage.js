@@ -6,7 +6,8 @@ import { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import ClearIcon from '@mui/icons-material/Clear';
 import IconButton from '@mui/material/IconButton';
-import { Typography } from '@mui/material';
+import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
 import AddModeratorIcon from '@mui/icons-material/AddModerator';
 import RemoveModeratorIcon from '@mui/icons-material/RemoveModerator';
 
@@ -63,15 +64,22 @@ function AdminPage() {
                     </center>
                     {students.map((student, i) => {
                         return (
-                            <div key={i}>
-                                <Typography>{student.name} 
-                                    {student.access_level < 3 ?
-                                        <IconButton onClick={() => dispatch({ type: 'ADD_ADMIN', payload: student.id })}><AddModeratorIcon /></IconButton>
-                                    :
-                                        <IconButton onClick={() => dispatch({ type: 'REMOVE_ADMIN', payload: student.id })}><RemoveModeratorIcon /></IconButton>   
-                                    }
-                                </Typography>
-                            </div>
+                            student.access_level < 3 ?
+                                <Card key={i} sx={{ marginBottom: '10px', padding: '6px' }}>
+                                    <Typography>{student.name} 
+                                        <IconButton onClick={() => dispatch({ type: 'ADD_ADMIN', payload: student.id })}>
+                                            <AddModeratorIcon sx={{ color:'#0f8874' }} />
+                                        </IconButton>
+                                    </Typography>
+                                </Card>
+                            :
+                                <Card key={i} sx={{ marginBottom: '10px', padding: '6px' }}>
+                                    <Typography>{student.name} <em>(admin)</em>
+                                        <IconButton onClick={() => dispatch({ type: 'REMOVE_ADMIN', payload: student.id })}>
+                                            <RemoveModeratorIcon sx={{ color:'#cf3123' }} />
+                                            </IconButton>   
+                                    </Typography>
+                                </Card>
                         );
                     })}
                 </Grid>
