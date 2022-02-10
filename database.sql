@@ -72,7 +72,8 @@ CREATE TABLE "skills" (
 CREATE TABLE "applications" (
     "id" SERIAL PRIMARY KEY,
     "company" TEXT,
-	"student_name" TEXT
+	"student_name" TEXT,
+    "new_notification" BOOLEAN DEFAULT true
 );
 
 

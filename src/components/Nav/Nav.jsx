@@ -43,14 +43,12 @@ function Nav() {
       <img src='gradient_bar.png' draggable='false' />
       <List id="nav-list">
         {/* Home link */}
-        {user.id &&
           <ListItem button onClick={() => history.push('/home')}>
               <ListItemIcon>
                 <HomeIcon sx={{ color: 'white' }} />
               </ListItemIcon>
               <ListItemText primary="Home"/>
           </ListItem>
-        }
         {/* Profile link */}
         {user.id &&
           <ListItem button onClick={() => history.push('/user')}>
