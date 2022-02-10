@@ -25,7 +25,8 @@ router.get('/admin', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         SELECT "user"."id", "name", "access_level" FROM "students"
         JOIN "user"
-        ON "students"."user_id" = "user"."id";
+        ON "students"."user_id" = "user"."id"
+        ORDER BY "id" ASC;
     `;
 
     pool.query(sqlText)
