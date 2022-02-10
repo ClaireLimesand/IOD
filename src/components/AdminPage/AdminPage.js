@@ -41,15 +41,15 @@ function AdminPage() {
                                 {application.new_notification ?
                                     <Typography className='new-notification notification-text'>
                                         - <span className='application-name'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
-                                        <IconButton>
-                                            <ClearIcon onClick={() => dispatch({ type: 'REMOVE_NOTIFICATION', payload: application.id })} />
+                                        <IconButton onClick={() => dispatch({ type: 'REMOVE_NOTIFICATION', payload: application.id })}>
+                                            <ClearIcon />
                                         </IconButton>
                                     </Typography>
                                 :
                                     <Typography className='notification-text'>
                                         - <span className='application-name'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
-                                        <IconButton>
-                                            <ClearIcon onClick={() => dispatch({ type: 'REMOVE_NOTIFICATION', payload: application.id })} />
+                                        <IconButton onClick={() => dispatch({ type: 'REMOVE_NOTIFICATION', payload: application.id })}>
+                                            <ClearIcon />
                                         </IconButton>
                                     </Typography>
                                 }
