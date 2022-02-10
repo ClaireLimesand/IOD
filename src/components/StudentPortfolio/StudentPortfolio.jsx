@@ -105,6 +105,7 @@ function StudentPortfolio() {
                 <input
                   className="skill-input"
                   placeholder="Internship ID"
+                  type="number"
                   value={internship_id}
                   onChange={(event) => setInternship_id(event.target.value)}
                   required

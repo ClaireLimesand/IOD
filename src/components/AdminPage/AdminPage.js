@@ -57,7 +57,7 @@ function AdminPage() {
                         );
                     })}
                 </Grid>
-                <Grid item sm={6} xs={12} className="admin-users-container" sx={{ marginLeft: 3 }}>
+                <Grid item sm={6} xs={12} className="admin-alerts-container" sx={{ marginLeft: 3 }}>
                     <center>
                         <h2>Manage Users</h2>
                     </center>
