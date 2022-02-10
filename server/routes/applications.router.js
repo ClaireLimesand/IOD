@@ -8,7 +8,8 @@ const {
 
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `
-        SELECT * FROM "applications";
+        SELECT * FROM "applications"
+        ORDER BY "id" ASC;
     `;
 
     pool.query(sqlQuery)
