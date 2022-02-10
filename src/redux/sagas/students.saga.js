@@ -17,6 +17,23 @@ function* fetchStudents() {
     };
 }
 
+function* fetchStudentProfile(action) {
+    const studentId= action.payload;
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/user/${studentId}`
+        })
+        yield put({
+            type: 'SET_PROFILE',
+            payload: response.data
+        })
+
+    } catch (err) {
+        console.error('GET profile by student id', err);
+    }
+}
+
 // Gets all students, but also with their access_level
 function* fetchStudentsAdmin() {
     try {
@@ -34,10 +51,13 @@ function* fetchStudentsAdmin() {
     };
 }
 
-
 function* studentsSaga() {
     yield takeEvery('FETCH_STUDENTS', fetchStudents);
+    yield takeEvery('GET_STUDENT', fetchStudentProfile);
     yield takeEvery('FETCH_STUDENTS_ADMIN', fetchStudentsAdmin);
-};
+}
+
+
+
 
 export default studentsSaga;

@@ -41,6 +41,7 @@ CREATE TABLE "students" (
 	"name" VARCHAR(255),
 	"picture" TEXT,
 	"banner" TEXT,
+	"cohort" TEXT,
 	"about" TEXT,
 	"linkedin" TEXT,
 	"resume" TEXT,

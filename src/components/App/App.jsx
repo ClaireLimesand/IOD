@@ -24,6 +24,7 @@ import EditSkill from '../EditSkill/EditSkill';
 import StudentsTable from '../StudentsPage/StudentsPage';
 import EditInternship from '../EditInternship/EditInternship';
 import AdminPage from '../AdminPage/AdminPage';
+import SelectedProfilePage from '../SelectedProfilePage/SelectedProfilePage';
 
 import './App.css';
 
@@ -90,6 +91,14 @@ function App() {
             path="/students"
           >
             <StudentsTable />
+        </ProtectedRoute>
+
+        {/*Specific student's profile page (non-user)*/}
+        <ProtectedRoute
+            exact
+            path="/user/:id"
+          >
+            <SelectedProfilePage />
         </ProtectedRoute>
 
           {/* Admin page */}
