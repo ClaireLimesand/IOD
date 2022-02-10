@@ -64,7 +64,7 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
         req.body.id
     ];
 
-    pool.query(sqlText)
+    pool.query(sqlText, sqlValues)
         .then((dbRes) => {
             res.sendStatus(201);
         })
