@@ -8,7 +8,7 @@ const {
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/', (req, res) => {
     const sqlText = `
         SELECT "announcements"."message", "announcements"."id", "message_types"."title", "message_types"."id" FROM "announcements"
         JOIN "message_types"

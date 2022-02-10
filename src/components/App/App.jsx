@@ -169,11 +169,7 @@ function App() {
             exact
             path="/home"
           >
-            {user.id ?
               <HomePage />
-            :
-              <LoginPage />
-            }
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}

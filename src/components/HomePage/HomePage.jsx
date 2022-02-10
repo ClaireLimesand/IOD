@@ -63,13 +63,13 @@ useEffect(() => {
 const getCategories = () => {
   dispatch({
       type: 'FETCH_CATEGORIES'
-  })
+  });
 }
 
 const getAnnouncements = () => {
   dispatch({
       type: 'FETCH_ANNOUNCEMENTS'
-  })
+  });
 }
 
 const handleSaveButton = () => {

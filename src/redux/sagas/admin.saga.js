@@ -61,12 +61,48 @@ function* seenNotification(action) {
     }
 }
 
+// Makes user an admin
+function* addAdmin(action) {
+    try {
+        yield axios({
+            method: 'PUT',
+            url: '/api/applications/add',
+            data: {id: action.payload}
+        })
+
+        yield put({
+            type: 'FETCH_STUDENTS_ADMIN'
+        })
+    }   catch (error) {
+        console.log(error)
+    }
+}
+
+// Removes admin from a user
+function* removeAdmin(action) {
+    try {
+        yield axios({
+            method: 'PUT',
+            url: '/api/applications/remove',
+            data: {id: action.payload}
+        })
+
+        yield put({
+            type: 'FETCH_STUDENTS_ADMIN'
+        })
+    }   catch (error) {
+        console.log(error)
+    }
+}
+
 
 function* adminSaga() {
     yield takeLatest('FETCH_APPLICATIONS', fetchApplications);
     yield takeLatest('SEND_APPLICATION', sendApplication);
     yield takeLatest('REMOVE_NOTIFICATION', removeNotification);
     yield takeLatest('SEEN_NOTIFICATION', seenNotification);
+    yield takeLatest('ADD_ADMIN', addAdmin);
+    yield takeLatest('REMOVE_ADMIN', removeAdmin);
 }
 
 export default adminSaga;

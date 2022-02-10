@@ -44,6 +44,8 @@ CREATE TABLE "students" (
 	"cohort" TEXT,
 	"about" TEXT,
 	"linkedin" TEXT,
+	"resume" TEXT,
+	"cohort" TEXT,
 	"user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -73,15 +75,29 @@ CREATE TABLE "skills" (
 CREATE TABLE "applications" (
     "id" SERIAL PRIMARY KEY,
     "company" TEXT,
-	"student_name" TEXT
+	"student_name" TEXT,
+    "new_notification" BOOLEAN DEFAULT true
 );
 
-
 -- test data
+
+-- this user has student level access 
+-- the password is "123"
+INSERT INTO "user" ("username", "password", "access_level")
+VALUES ('cactusfox', '123', '1');
+
+-- this user has admin level access 
+-- the password is "123"
+INSERT INTO "user" ("username", "password", "access_level")
+VALUES ('unicorn', '123', '3');
 
 INSERT INTO "internships" ("id", "company_name", "start_date", "end_date", "company_logo", "company_subtitle", "company_description") 
 VALUES ('1', '3M', '2022-06-24', '2022-08-24', '3m_logo.png', 'Design Research and Innovation', 'Paired with leading scientists and 
 resources, you’ll have the opportunity to learn new methods and gain experience on key equipment.');
+
+INSERT INTO "internships" ("id", "company_name", "start_date", "end_date", "company_logo", "company_subtitle", "company_description") 
+VALUES ('2', 'Spectrum', '2022-12-18', '2023-1-20', 'spectrum.png', 'Fast Connections, Great Entertainment', 'As an intern, you will learn about our industry 
+and gain exposure to a real life business setting. All in an atmosphere that will broaden your professional understanding, encourage your sense of accomplishment and fuel your career development.');
 
 INSERT INTO "message_types" ("title")
 VALUES
@@ -97,20 +113,26 @@ VALUES
 ('This is NOT a finished product, not all features are implemented', 3),
 ('We are recognizing the IOD team in their outstanding work and dedicationg to this project!', 4);
 
--- INSERT INTO "students" ("email", "pronouns", "name", "picture", "banner", "about", "linkedin", "user_id")
--- VALUES (
--- 	'smrdelb@gmail.com', 
--- 	'He/Him', 
--- 	'Bennett Smrdel', 
--- 	NULL, 
--- 	NULL, 
--- 	'not existant', 
--- 	'https://www.linkedin.com/in/bennett-smrdel-634893212/', 
--- 	1
--- );
+INSERT INTO "students" ("email", "pronouns", "name", "picture", "banner", "about", "linkedin", "user_id")
+VALUES (
+	'smrdelb@gmail.com', 
+	'He/Him', 
+	'Bennett Smrdel', 
+	NULL, 
+	NULL, 
+	'not existant', 
+	'https://www.linkedin.com/in/bennett-smrdel-634893212/', 
+	'2'
+);
 
--- INSERT INTO "projects" ("project_name", "description", "user_id", "internship_id")
--- VALUES
--- ('Failed Product', 'Identified failures and bugs in a project, then fixed them to make the project working.', 1, 2),
--- ('Secure Safety', 'Built the backend of a safety project and practiced best ways to secure routes and login information', 1, 1),
--- ('Think like an Industrial Designer', 'Designed and drew out a basic T.V. stand', 1, 2);
+INSERT INTO "projects" ("project_name", "description", "user_id", "internship_id")
+VALUES
+('Failed Product', 'Identified failures and bugs in a project, then fixed them to make the project working.', 2, 2),
+('Secure Safety', 'Built the backend of a safety project and practiced best ways to secure routes and login information', 2, 1),
+('Think like an Industrial Designer', 'Designed and drew out a basic T.V. stand', 2, 2);
+
+INSERT INTO "skills" ("skill", "user_id")
+VALUES
+('Javascript', 2),
+('Problem solving', 2),
+('Logical thinking', 2);
