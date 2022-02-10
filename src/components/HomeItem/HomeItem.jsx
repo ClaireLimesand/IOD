@@ -23,12 +23,12 @@ function HomeItem({messageItem}) {
         <div>
             <div className="home-messages">
                 <h3 className="home-title">{messageItem.title}
-                {user.access_level == 3 &&
-                    <IconButton  
-                        onClick={() => handleDeleteButton(messageItem.id)}>
-                            <ClearIcon />
-                    </IconButton>
-                }
+                    {user.access_level == 3 &&
+                        <IconButton  
+                            onClick={() => handleDeleteButton(messageItem.id)}>
+                                <ClearIcon />
+                        </IconButton>
+                    }
                 </h3>
                 <p className="home-message">{messageItem.message}</p>
             </div>

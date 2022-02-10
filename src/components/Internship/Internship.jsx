@@ -64,8 +64,9 @@ function Internship({internship}) {
                 {user.access_level == 3 &&
                     <IconButton  
                         onClick={() => {
-                        history.push(`/editinternship/${internship.id}`);
-                        }}>
+                            history.push(`/editinternship/${internship.id}`);
+                        }}
+                    >
                         <EditIcon />
                     </IconButton>
                 }

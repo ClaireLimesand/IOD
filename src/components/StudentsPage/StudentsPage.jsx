@@ -1,4 +1,5 @@
 import  React, {useEffect } from 'react';
+import '../StudentsPage/StudentsPage.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
@@ -49,7 +50,7 @@ function StudentsTable(student) {
         },
         tableHeaderCell: {
             fontWeight: 'bold',
-            backgroundColor: theme.palette.primary.dark,
+            backgroundColor: '#25262b',
             color: theme.palette.getContrastText(theme.palette.primary.dark)
         },
         
@@ -99,7 +100,9 @@ function StudentsTable(student) {
                                             <Typography>{student.email}</Typography>
                                         </TableCell>
                                         <TableCell>
-                                            <Button variant="contained" size="small" sx={{ float: 'right', marginRight: '40px' }} onClick={()=>{handleLoadProfileClick()}}>Load Profile</Button>
+                                            <button className='apply-btn' onClick={()=>{handleLoadProfileClick()}}>
+                                                Load Profile
+                                            </button>
                                         </TableCell>
                                     </TableRow>
                                 );
