@@ -11,6 +11,7 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import AddModeratorIcon from '@mui/icons-material/AddModerator';
 import RemoveModeratorIcon from '@mui/icons-material/RemoveModerator';
+import { Tooltip } from '@mui/material';
 
 function AdminPage() {
     const dispatch = useDispatch();
@@ -93,7 +94,9 @@ function AdminPage() {
                                 <Card key={i} sx={{ marginBottom: '10px', padding: '6px' }}>
                                     <Typography>{student.name} 
                                         <IconButton onClick={() => dispatch({ type: 'ADD_ADMIN', payload: student.id })}>
-                                            <AddModeratorIcon sx={{ color:'#0f8874' }} />
+                                            <Tooltip title="Promote to admin" arrow>
+                                                <AddModeratorIcon sx={{ color:'#0f8874' }} />
+                                            </Tooltip>
                                         </IconButton>
                                     </Typography>
                                 </Card>
@@ -101,7 +104,9 @@ function AdminPage() {
                                 <Card key={i} sx={{ marginBottom: '10px', padding: '6px' }}>
                                     <Typography>{student.name} <em>(admin)</em>
                                         <IconButton onClick={() => dispatch({ type: 'REMOVE_ADMIN', payload: student.id })}>
-                                            <RemoveModeratorIcon sx={{ color:'#cf3123' }} />
+                                            <Tooltip title="Remove admin" arrow>
+                                                <RemoveModeratorIcon sx={{ color:'#cf3123' }} />
+                                            </Tooltip>
                                             </IconButton>   
                                     </Typography>
                                 </Card>
