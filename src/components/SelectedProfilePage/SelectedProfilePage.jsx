@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import SelectedProfileItem from '../SelectedProfilePage/SelectedProfileItem';
 import { useEffect } from 'react';
-import Skills from '../Skills/Skills';
+import SelectedSkills from './SelectedSkills';
 import { useParams } from 'react-router';
 
 function SelectedProfilePage() {
@@ -32,7 +32,7 @@ return (
         {profile.map((data) => {
         return <SelectedProfileItem key={data.id} dataItem={data}/>
         })}
-        <Skills /> 
+        <SelectedSkills /> 
     
     </div>
 );

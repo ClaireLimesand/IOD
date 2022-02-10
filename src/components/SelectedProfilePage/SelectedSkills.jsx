@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import { useState } from 'react';
 
-import './Skills.css';
+import '../Skills/Skills.css';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -76,64 +76,15 @@ function Skills() {
 
     return (
         <div className="skills">
-            <h3 className="skills-text">Skills
-                {!editSkill &&
-                    <IconButton
-                        id="add-skill-icon" 
-                        onClick={handleOpen}
-                    >
-                        <AddIcon />
-                    </IconButton>
-                }
-            </h3>
+            <h3 className="skills-text">Skills</h3>
 
-            {!editSkill ?
-                store.skills.map((skillItem, i) => (
-                    <Typography className="skills-list" key={i}>{skillItem.skill}
-                    
-                        <IconButton
-                            id="edit-skill-icon" 
-                            onClick={() => {
-                                setEditSkill(!editSkill);
-                                setSelectedSkill(skillItem);
-                                setSkill(skillItem.skill);
-                            }}
-                        >
-                            <EditIcon />
-                        </IconButton>
-                        
-                        <IconButton
-                            id="delete-skill-icon" 
-                            onClick={() => {
-                                handleDeleteSkillButton(skillItem.id);
-                            }}
-                        >
-                            <ClearIcon />
-                        </IconButton>
-                    
+            {store.skills.map((skillItem, i) => {
+                return (
+                    <Typography className="skills-list" key={i}>
+                        {skillItem.skill}
                     </Typography>
-                ))
-            :
-                <form onSubmit={handleEditSkill}>
-                    <input 
-                        className="edit-about-input"
-                        value={skill}
-                        onChange={(e) => setSkill(e.target.value)}
-                    />
-
-                    <IconButton onClick={handleEditSkill}>
-                        <CheckIcon />
-                    </IconButton>
-
-                    <IconButton onClick={() => {
-                        setEditSkill(!editSkill);
-                        setSkill('');
-                    }}>
-                        <ArrowBackIcon />
-
-                    </IconButton>
-                </form>
-            }
+                );
+            })}
             
             <Modal
                 open={open}

@@ -16,6 +16,7 @@ import { Modal } from "@mui/material";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import { useHistory } from "react-router-dom";
+import SelectedSkillsPage from "./SelectedSkills";
 
 function SelectedProfileItem({ dataItem }) {
     const useStyles = makeStyles(theme => createStyles({
@@ -54,18 +55,18 @@ function SelectedProfileItem({ dataItem }) {
     };
 
     const handleSubmit = () => {
-    dispatch({
-        type: 'FETCH_RESUME'
-    });
+        dispatch({
+            type: 'FETCH_RESUME'
+        });
     };
 
     const handleLinkedClick = () => {
-    window.open(dataItem.linkedin);
+        window.open(dataItem.linkedin);
     };
 
     const handlePortfolio = () => {
         history.push("/portfolio");
-};
+    };
 
 return (
     <div>
