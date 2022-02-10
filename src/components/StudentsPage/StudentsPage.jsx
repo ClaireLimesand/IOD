@@ -79,51 +79,53 @@ function StudentsTable() {
         
     return (
         <div className='container'>
-            <TableContainer component={Paper} className={classes.tableContainer}>
-                <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell className={classes.tableHeaderCell}>Name</TableCell>
-                            <TableCell className={classes.tableHeaderCell}>Cohort</TableCell>
-                            <TableCell className={classes.tableHeaderCell}>Email</TableCell>
-                            <TableCell className={classes.tableHeaderCell}>Profile</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {students.map((student) => {
-                            return (
-                                <TableRow key={student.id}>
-                                    <TableCell>
-                                        <Typography>{student.name}</Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography>{student.cohort}</Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography>{student.email}</Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button variant="contained" size="small" sx={{ float: 'right', marginRight: '40px' }} onClick={()=>{handleLoadProfileClick()}}>Load Profile</Button>
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                    {/* <TableFooter>
-                        <TablePagination
-                            rowsPerPageOptions={[5, 10, 15]}
-                            component="div"
-                            count={students.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
-                    </TableFooter> */}
-                </Table>
-            </TableContainer>
-    </div>
-);
+            <center>
+                <TableContainer component={Paper} className={classes.tableContainer}>
+                    <Table className={classes.table} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell className={classes.tableHeaderCell}>Name</TableCell>
+                                <TableCell className={classes.tableHeaderCell}>Cohort</TableCell>
+                                <TableCell className={classes.tableHeaderCell}>Email</TableCell>
+                                <TableCell className={classes.tableHeaderCell}>Profile</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {students.map((student) => {
+                                return (
+                                    <TableRow key={student.id}>
+                                        <TableCell>
+                                            <Typography>{student.name}</Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography>{student.cohort}</Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography>{student.email}</Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Button variant="contained" size="small" sx={{ float: 'right', marginRight: '40px' }} onClick={()=>{handleLoadProfileClick()}}>Load Profile</Button>
+                                        </TableCell>
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                        {/* <TableFooter>
+                            <TablePagination
+                                rowsPerPageOptions={[5, 10, 15]}
+                                component="div"
+                                count={students.length}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                onPageChange={handleChangePage}
+                                onRowsPerPageChange={handleChangeRowsPerPage}
+                            />
+                        </TableFooter> */}
+                    </Table>
+                </TableContainer>
+            </center>
+        </div>
+    );
 }
 
 

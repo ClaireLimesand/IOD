@@ -58,7 +58,7 @@ router.post('/', rejectUnauthenticated, isAdmin, (req, res) => {
 
 router.delete('/:id', rejectUnauthenticated, isAdmin, (req, res) => {
     const sqlQuery = `
-    DELETE FROM "internships" 
+        DELETE FROM "internships" 
         WHERE "id"=$1;
     `;
 

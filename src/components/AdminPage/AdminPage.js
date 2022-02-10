@@ -1,13 +1,83 @@
 import React from 'react';
+import './AdminPage.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+
+import Grid from '@mui/material/Grid';
+import ClearIcon from '@mui/icons-material/Clear';
+import IconButton from '@mui/material/IconButton';
+import { Typography } from '@mui/material';
+import AddModeratorIcon from '@mui/icons-material/AddModerator';
+import RemoveModeratorIcon from '@mui/icons-material/RemoveModerator';
 
 function AdminPage() {
-  return (
-    <div className="container">
-        <center>
-          <h1>Admin Page</h1>
-        </center>
-    </div>
-  );
+    const dispatch = useDispatch();
+
+    const applications = useSelector((store) => store.applicationsReducer);
+    const students = useSelector((store) => store.students);
+
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_APPLICATIONS'
+        });
+        dispatch({
+            type: 'SEEN_NOTIFICATION'
+        });
+        dispatch({
+            type: 'FETCH_STUDENTS_ADMIN'
+        });
+    }, [])
+
+    return (
+      <div className="container admin-page">
+          <Grid container spacing={2}>
+                <Grid item sm={5} className="admin-alerts-container" sx={{ marginBottom: 3 }}>
+                    <center>
+                        <h2>Internship Applications</h2>
+                    </center>
+                    {applications.map((application) => {
+                        return (
+                            <div key={application.id}>
+                                {application.new_notification ?
+                                    <Typography className='new-notification notification-text'>
+                                        - <span className='application-name'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
+                                        <IconButton onClick={() => dispatch({ type: 'REMOVE_NOTIFICATION', payload: application.id })}>
+                                            <ClearIcon />
+                                        </IconButton>
+                                    </Typography>
+                                :
+                                    <Typography className='notification-text'>
+                                        - <span className='application-name'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
+                                        <IconButton onClick={() => dispatch({ type: 'REMOVE_NOTIFICATION', payload: application.id })}>
+                                            <ClearIcon />
+                                        </IconButton>
+                                    </Typography>
+                                }
+                            </div>
+                        );
+                    })}
+                </Grid>
+                <Grid item sm={6} xs={12} className="admin-alerts-container" sx={{ marginLeft: 3 }}>
+                    <center>
+                        <h2>Manage Users</h2>
+                    </center>
+                    {students.map((student, i) => {
+                        return (
+                            <div key={i}>
+                                <Typography>{student.name} 
+                                    {student.access_level < 3 ?
+                                        <IconButton onClick={() => dispatch({ type: 'ADD_ADMIN', payload: student.id })}><AddModeratorIcon /></IconButton>
+                                    :
+                                        <IconButton onClick={() => dispatch({ type: 'REMOVE_ADMIN', payload: student.id })}><RemoveModeratorIcon /></IconButton>   
+                                    }
+                                </Typography>
+                            </div>
+                        );
+                    })}
+                </Grid>
+          </Grid>
+      </div>
+    );
 }
 
 export default AdminPage;

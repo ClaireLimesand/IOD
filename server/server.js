@@ -18,6 +18,7 @@ const resumeRouter = require('./routes/resume.router');
 const announcementsRouter = require('./routes/announcements.router');
 const studentsRouter = require('./routes/students.router');
 const portfolioRouter = require('./routes/portfolio.router');
+const applicationsRouter = require('./routes/applications.router');
 const categoriesRouter = require('./routes/categories.router');
 
 // Body parser middleware
@@ -42,6 +43,7 @@ app.use('/api/resume', resumeRouter);
 app.use('/api/announcements', announcementsRouter);
 app.use('/api/students', studentsRouter);
 app.use('/api/portfolio', portfolioRouter);
+app.use('/api/applications', applicationsRouter);
 app.use('/api/categories', categoriesRouter);
 
 // Serve static files

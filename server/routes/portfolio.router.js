@@ -49,6 +49,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
       res.send(transformedProjectData);
     })
     .catch((dbErr) => {
+      console.log('Error: ', dbErr);
       res.sendStatus(500);
     });
 });
@@ -72,6 +73,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
       res.sendStatus(201);
     })
     .catch((dbErr) => {
+      console.log('Error: ', dbErr);
       res.sendStatus(500);
     });
 });
