@@ -11,6 +11,13 @@
     border-radius: 10px;
 }
 
+.admin-users-container {
+    box-shadow: 0 6px 3px -2px rgba(0, 0, 0, 0.301);
+    background-color: #efefef;
+    padding: 20px;
+    border-radius: 10px;
+}
+
 .notification-text {
     padding: 3px 0 3px 10px;
 }

@@ -12,6 +12,7 @@ function AdminPage() {
     const dispatch = useDispatch();
 
     const applications = useSelector((store) => store.applicationsReducer);
+    const students = useSelector((store) => store.students);
 
     useEffect(() => {
         dispatch({
@@ -20,12 +21,15 @@ function AdminPage() {
         dispatch({
             type: 'SEEN_NOTIFICATION'
         });
+        dispatch({
+            type: 'FETCH_STUDENTS'
+        });
     }, [])
 
     return (
       <div className="container admin-page">
           <Grid container spacing={2}>
-                <Grid item sm={5} className="admin-alerts-container">
+                <Grid item sm={5} className="admin-alerts-container" sx={{ marginBottom: 3 }}>
                     <center>
                         <h2>Internship Applications</h2>
                     </center>
@@ -49,6 +53,14 @@ function AdminPage() {
                                 }
                             </div>
                         );
+                    })}
+                </Grid>
+                <Grid item sm={6} xs={12} className="admin-users-container" sx={{ marginLeft: 3 }}>
+                    <center>
+                        <h2>Manage Users</h2>
+                    </center>
+                    {students.map((student) => {
+                        return <p>{student.name}</p>
                     })}
                 </Grid>
           </Grid>
