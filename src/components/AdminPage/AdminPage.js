@@ -2,6 +2,7 @@ import React from 'react';
 import './AdminPage.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 import Grid from '@mui/material/Grid';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -29,6 +30,30 @@ function AdminPage() {
         });
     }, [])
 
+    const handleDeleteNotification = (application) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#15B097',
+            cancelButtonColor: '#cf3123',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire (
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+                )
+                dispatch({ 
+                    type: 'REMOVE_NOTIFICATION', 
+                    payload: application.id 
+                });
+            }
+        })
+    }
+
     return (
       <div className="container admin-page">
           <Grid container spacing={2}>
@@ -42,14 +67,14 @@ function AdminPage() {
                                 {application.new_notification ?
                                     <Typography className='new-notification notification-text'>
                                         - <span className='application-name'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
-                                        <IconButton onClick={() => dispatch({ type: 'REMOVE_NOTIFICATION', payload: application.id })}>
+                                        <IconButton onClick={() => handleDeleteNotification(application)}>
                                             <ClearIcon />
                                         </IconButton>
                                     </Typography>
                                 :
                                     <Typography className='notification-text'>
                                         - <span className='application-name'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
-                                        <IconButton onClick={() => dispatch({ type: 'REMOVE_NOTIFICATION', payload: application.id })}>
+                                        <IconButton onClick={() => handleDeleteNotification(application)}>
                                             <ClearIcon />
                                         </IconButton>
                                     </Typography>
