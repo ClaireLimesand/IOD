@@ -66,9 +66,9 @@ function AdminPage() {
                             <div key={i}>
                                 <Typography>{student.name} 
                                     {student.access_level < 3 ?
-                                        <IconButton><AddModeratorIcon /></IconButton>
+                                        <IconButton onClick={() => dispatch({ type: 'ADD_ADMIN', payload: student.id })}><AddModeratorIcon /></IconButton>
                                     :
-                                        <IconButton><RemoveModeratorIcon /></IconButton>   
+                                        <IconButton onClick={() => dispatch({ type: 'REMOVE_ADMIN', payload: student.id })}><RemoveModeratorIcon /></IconButton>   
                                     }
                                 </Typography>
                             </div>

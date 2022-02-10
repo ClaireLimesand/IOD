@@ -74,5 +74,47 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// Add admin
+router.put('/add', rejectUnauthenticated, (req, res) => {
+    const sqlText = `
+        UPDATE "user"
+        SET "access_level" = 3
+        WHERE "id" = $1;
+    `;
+    const sqlValues = [
+        req.body.id
+    ];
+
+    pool.query(sqlText, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(201);
+        })
+        .catch((dbErr) => {
+            console.error('POST friends error', dbErr);
+            res.sendStatus(500);
+        })
+});
+
+// Remove admin
+router.put('/remove', rejectUnauthenticated, (req, res) => {
+    const sqlText = `
+        UPDATE "user"
+        SET "access_level" = 1
+        WHERE "id" = $1;
+    `;
+    const sqlValues = [
+        req.body.id
+    ];
+
+    pool.query(sqlText, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(201);
+        })
+        .catch((dbErr) => {
+            console.error('POST friends error', dbErr);
+            res.sendStatus(500);
+        })
+});
+
 
 module.exports = router;

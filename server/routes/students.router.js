@@ -23,7 +23,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.get('/admin', rejectUnauthenticated, (req, res) => {
     const sqlText = `
-        SELECT "name", "access_level" FROM "students"
+        SELECT "user"."id", "name", "access_level" FROM "students"
         JOIN "user"
         ON "students"."user_id" = "user"."id";
     `;
