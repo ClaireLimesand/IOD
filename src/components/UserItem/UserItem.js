@@ -299,7 +299,8 @@ function UserItem({ dataItem }) {
           <p className="about-data">{dataItem.about}</p>
         :
           <form onSubmit={handleEditAbout}>
-            <input 
+            <textarea
+              rows={6}
               className="edit-about-input"
               value={about}
               onChange={(e) => setAbout(e.target.value)}
