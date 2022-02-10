@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -26,10 +27,27 @@ function Internship({internship}) {
     }, [])
 
     const handleDeleteButton = (id) => {
-        dispatch({
-            type: 'DELETE_INTERNSHIP',
-            payload: id
-        });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#15B097',
+            cancelButtonColor: '#cf3123',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire (
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+                )
+                dispatch({
+                    type: 'DELETE_INTERNSHIP',
+                    payload: id
+                });
+            }
+        })
     }; 
 
     const handleApply = () => {
