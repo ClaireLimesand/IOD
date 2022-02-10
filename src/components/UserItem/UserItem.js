@@ -109,6 +109,14 @@ function UserItem({ dataItem }) {
     setEditTop(false);
   }
 
+  const handleEditTopClose = () => {
+    setEditTop(false);
+    setName(dataItem.name);
+    setEmail(dataItem.email);
+    setLinkedin(dataItem.linkedin);
+    setPronouns(dataItem.pronouns);
+  }
+
   return (
     <div>
       <div className="head">
@@ -173,7 +181,7 @@ function UserItem({ dataItem }) {
 
       <Modal
         open={editTop}
-        onClose={() => setEditTop(false)}
+        onClose={handleEditTopClose}
       >
         <center>
             <Box sx={style}>
@@ -186,7 +194,7 @@ function UserItem({ dataItem }) {
                       Name
                     </Typography>
                     <input 
-                        className='skill-input'
+                        className='top-edit-input'
                         value={name}
                         onChange={(event) => setName(event.target.value)}
                     />
@@ -195,7 +203,7 @@ function UserItem({ dataItem }) {
                       Email
                     </Typography>
                     <input 
-                        className='skill-input'
+                        className='top-edit-input'
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
                     />
@@ -204,7 +212,7 @@ function UserItem({ dataItem }) {
                       LinkedIn
                     </Typography>
                     <input 
-                        className='skill-input'
+                        className='top-edit-input'
                         value={linkedin}
                         onChange={(event) => setLinkedin(event.target.value)}
                     />
@@ -213,14 +221,14 @@ function UserItem({ dataItem }) {
                       Pronouns
                     </Typography>
                     <input 
-                        className='skill-input'
+                        className='top-edit-input'
                         value={pronouns}
                         onChange={(event) => setPronouns(event.target.value)}
                     />
                     <br />
                     <div className="modal-btn-container">
                       <button type='submit'>Save</button>
-                      <button id="cancel-btn" onClick={() => setEditTop(false)}>Cancel</button>
+                      <button id="cancel-btn" onClick={handleEditTopClose}>Cancel</button>
                     </div>
                 </form>
             </Box>

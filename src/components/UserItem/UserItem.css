@@ -250,3 +250,24 @@
     transform: scale(1.05, 1.05);
     cursor: pointer;
 }
+
+.top-edit-input {
+    font-size: 18px;
+    cursor: text;
+    padding-bottom: 4px;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 3px -2px rgba(0, 0, 0, 0.301);
+    transition: ease 0.3s;
+}
+
+.top-edit-input:hover {
+    transform: scale(1.08, 1.08);
+    background-color: #26e9c95d;
+}
+
+.top-edit-input:focus {
+    background-color: #19c9ac1e;
+}
