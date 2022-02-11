@@ -65,6 +65,15 @@ CREATE TABLE "projects" (
 	"internship_id" INT REFERENCES "internships" ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE "favorite-project" (
+	"id" SERIAL PRIMARY KEY,
+	"project_name" VARCHAR(100),
+	"description" VARCHAR(255),
+	"image" TEXT,
+	"user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE,
+	"internship_id" INT REFERENCES "internships" ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 CREATE TABLE "skills" (
 	"id" SERIAL PRIMARY KEY,
 	"skill" TEXT,
