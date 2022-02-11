@@ -41,7 +41,7 @@
 
 .email {
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 3px;
 }
 
 .linked {
@@ -120,7 +120,6 @@
     border: none;
     height: 20%;
     position: relative;
-    bottom: 7px;
     border-radius: 10px;
     background-color: #4F89B7;
     color: white;
@@ -218,7 +217,7 @@
     cursor: pointer;
     transition: ease 0.3s;
     position: relative;
-    top: 4.5px;
+    top: 10.5px;
 }
 
 .profile-link:hover {
