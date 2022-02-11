@@ -11,7 +11,7 @@ const cloudinaryUpload = require('../modules/cloudinary-config');
 
 router.put('/', rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {
       // after the image uploads, we have access to req.file:
-      console.log('neato! req.file:', req.file)
+      console.log('neato!', req.body.logo)
       const logoUrl = req.file.path;
 
       const sqlText =
@@ -25,14 +25,14 @@ router.put('/', rejectUnauthenticated, cloudinaryUpload.single('image'), async (
           req.user.id
       ];
   
-      pool.query(sqlText, sqlValues)
-       .then((dbres) => {
-         res.sendStatus(201);
-       })
-       .catch((dberror) => {
-         console.log('Oops you messed up DB error', dberror);
-         res.sendStatus(500)
-       })  
+      // pool.query(sqlText, sqlValues)
+      //  .then((dbres) => {
+      //    res.sendStatus(201);
+      //  })
+      //  .catch((dberror) => {
+      //    console.log('Oops you messed up DB error', dberror);
+      //    res.sendStatus(500)
+      //  })  
       // })
   });
 

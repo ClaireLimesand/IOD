@@ -114,16 +114,20 @@ function* uploadLogo(action) {
     const headers = {
         'content-type': 'multipart/form-data'
     }
-    
     const logoForm = new FormData();
-    logoForm.append('image', action.payload.file);
-
+    logoForm.append('image', action.payload.logo);
+    
+    const internshipImageData ={
+        logo: logoForm,
+        id: action.payload.internshipId
+    }
+    console.log('hey!', internshipImageData)
     try {
         yield axios({
             method: 'PUT',
             url: '/api/logo',
             headers: headers,
-            data: logoForm
+            data: internshipImageData
         });
         document.location.reload();
     } catch(err) {
