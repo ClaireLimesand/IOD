@@ -8,6 +8,7 @@ import "./PortfolioItem.css";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from "@mui/icons-material/Clear";
 import EditIcon from '@mui/icons-material/Edit';
+import StarIcon from '@mui/icons-material/Star';
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -77,6 +78,21 @@ function PortfolioItem({ projects }) {
     })
 }; 
 
+const handleFavorite = (project) => {
+  console.log(project);
+  dispatch({ 
+    type: 'STORE_FAVORITE_PROJECT',
+    payload: {
+          id: project.id,
+          name: project.project_name,
+          description: project.description,
+          image: project.image,
+          internship_id: project.internship_id,
+          user_id: project.user_id
+    }
+  })
+}
+
   return (
     <div>
       <div className="projects">
@@ -90,12 +106,21 @@ function PortfolioItem({ projects }) {
             <div className="projects-sub" key={project.id}>
               <div className="projects-header">
                 <h2 className="projects-name">{project.project_name}</h2>
+                
                 <IconButton
                   id="edit-skill-icon"
                   onClick={() => handleEdit(project.id)}
                 >
                   <EditIcon />
                 </IconButton>
+
+                <IconButton
+                  id="favorite-project-icon"
+                  onClick={() => handleFavorite(project)}
+                >
+                  <StarIcon />
+                </IconButton>
+
                 <IconButton
                   id="delete-skill-icon"
                   onClick={() => {
@@ -104,6 +129,7 @@ function PortfolioItem({ projects }) {
                 >
                   <ClearIcon />
                 </IconButton>
+
                 <Modal
                   open={open}
                   onClose={handleClose}

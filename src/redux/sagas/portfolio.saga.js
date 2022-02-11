@@ -75,12 +75,44 @@ function* updateProject(action) {
     }
 }
 
+function* storeFavoriteProject(action) {
+    try {
+        yield axios({
+            method: 'PUT',
+            url: `/api/favoriteProject`,
+            data: action.payload
+        })
+        yield put({ type: 'FETCH_FAVORITE_PROJECT' })
+    } catch(err) {
+        console.log('Error in storeFavoriteProject Saga', err);
+    }
+};
+
+function* fetchFavoriteProject() {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/favoriteProject'
+        })
+        console.log('The Favorite Project Data', response.data);
+        yield put({
+            type: 'SET_FAVORITE_PROJECT',
+            payload: response.data[0]
+        })
+    }catch(err) {
+        console.log('Error in fetchFavoriteProject', err);
+        
+    }
+}
+
 function* portfolioSaga() {
     yield takeLatest('FETCH_PORTFOLIO', fetchPortfolio);
     yield takeLatest('ADD_PROJECT', addProject);
     yield takeLatest('DELETE_PROJECT', deleteProject);
     yield takeLatest('FETCH_EDITED_PROJECT', fetchOneProject);
     yield takeLatest('EDIT_PROJECT', updateProject);
+    yield takeLatest('STORE_FAVORITE_PROJECT', storeFavoriteProject);
+    yield takeLatest('FETCH_FAVORITE_PROJECT', fetchFavoriteProject);
 };
 
 export default portfolioSaga;

@@ -12,6 +12,8 @@ router.get("/", rejectUnauthenticated, (req, res) => {
         "projects"."project_name",
         "projects"."description",
         "projects"."internship_id",
+        "projects"."image",
+        "projects"."user_id",
         "internships"."company_name",
         "internships"."company_subtitle",
         "internships"."company_logo"
