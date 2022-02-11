@@ -42,11 +42,6 @@ function AdminPage() {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire (
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-                )
                 dispatch({ 
                     type: 'REMOVE_NOTIFICATION', 
                     payload: application.id 

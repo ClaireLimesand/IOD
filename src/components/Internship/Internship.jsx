@@ -37,11 +37,22 @@ function Internship({internship}) {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire (
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-                )
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                  
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Deleted successfully'
+                })
                 dispatch({
                     type: 'DELETE_INTERNSHIP',
                     payload: id
