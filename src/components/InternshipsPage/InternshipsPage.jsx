@@ -75,6 +75,17 @@ function InternshipsPage() {
         });
     }, [])
 
+    const handleEditLogo = (file) => {
+        console.log(file);
+        setTimeout(() => {
+            dispatch({
+                type: 'UPLOAD_LOGO',
+                payload: {file: file}
+            });
+        }, 1000)
+    }
+    
+
     const handleSaveButton = () => {
         console.log(startDate);
         console.log(endDate);
@@ -161,7 +172,7 @@ function InternshipsPage() {
                                 onSave={(files) => {
                                 console.log('Files:', files[0]);
                                 setLogoOpen(false);
-                                // handleEditPicture(files[0]);
+                                handleEditLogo(files[0]);
                                 }}
                                 showPreviews={true}
                                 showFileNamesInPreview={true}
