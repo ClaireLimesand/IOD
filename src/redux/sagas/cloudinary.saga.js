@@ -76,6 +76,19 @@ function* fetchResume(action) {
     }
 }
 
+function* fetchSpecificResume(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/resume/${action.payload}`,
+        });
+        console.log(response.data.resume);
+        window.open(response.data.resume);
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
+
 // Gets students info to see if user already exists
 function* retrieveUser(action) {
     try {
@@ -96,7 +109,6 @@ function* retrieveUser(action) {
     }
 }
 
-
 // Checks if the user has a profile
 // POST a new row to the students table if they don't exist
 function* checkUser(action) {
@@ -110,13 +122,15 @@ function* checkUser(action) {
     }
 }
 
+
 function* cloudinarySaga() {
-  yield takeLatest('UPLOAD_PICTURE', uploadPicture);
-  yield takeLatest('UPLOAD_BANNER', uploadBanner);
-  yield takeLatest('UPLOAD_RESUME', uploadResume);
-  yield takeLatest('FETCH_RESUME', fetchResume);
-  yield takeLatest('CHECK_USER_EXISTS', retrieveUser);
-  yield takeLatest('NEW_USER', checkUser);
+    yield takeLatest('UPLOAD_PICTURE', uploadPicture);
+    yield takeLatest('UPLOAD_BANNER', uploadBanner);
+    yield takeLatest('UPLOAD_RESUME', uploadResume);
+    yield takeLatest('FETCH_RESUME', fetchResume);
+    yield takeLatest('FETCH_SPECIFIC_RESUME',fetchSpecificResume);
+    yield takeLatest('CHECK_USER_EXISTS', retrieveUser);
+    yield takeLatest('NEW_USER', checkUser);
 }
 
 export default cloudinarySaga;

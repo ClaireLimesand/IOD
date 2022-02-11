@@ -17,6 +17,7 @@ import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import SelectedSkillsPage from "./SelectedSkills";
+import { useParams } from "react-router-dom";
 
 function SelectedProfileItem({ dataItem }) {
     const useStyles = makeStyles(theme => createStyles({
@@ -28,6 +29,7 @@ function SelectedProfileItem({ dataItem }) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory(); 
+    const params = useParams();
 
     const [pictureOpen, setPictureOpen] = useState(false);
     const [bannerOpen, setBannerOpen] = useState(false);
@@ -55,8 +57,10 @@ function SelectedProfileItem({ dataItem }) {
     };
 
     const handleSubmit = () => {
+        console.log(params.id);
         dispatch({
-            type: 'FETCH_RESUME'
+            type: 'FETCH_SPECIFIC_RESUME',
+            payload: params.id
         });
     };
 
