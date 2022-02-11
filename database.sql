@@ -10,7 +10,7 @@ CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (120) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
-    "access_level" TEXT
+    "access_level" TEXT DEFAULT '1'
 );
 
 CREATE TABLE "internships" (
@@ -45,7 +45,6 @@ CREATE TABLE "students" (
 	"about" TEXT,
 	"linkedin" TEXT,
 	"resume" TEXT,
-	"cohort" TEXT,
 	"user_id" INT REFERENCES "user" ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -84,12 +83,14 @@ CREATE TABLE "applications" (
 -- this user has student level access 
 -- the password is "123"
 INSERT INTO "user" ("username", "password", "access_level")
-VALUES ('cactusfox', '123', '1');
+VALUES ('Steve Steve', '123', '1');
 
--- this user has admin level access 
+-- these users have admin level access 
 -- the password is "123"
 INSERT INTO "user" ("username", "password", "access_level")
-VALUES ('unicorn', '123', '3');
+VALUES 
+('John Smith', '123', '3'),
+('Jane Doe', '123', '3');
 
 INSERT INTO "internships" ("company_name", "start_date", "end_date", "company_logo", "company_subtitle", "company_description") 
 VALUES ('3M', '2022-06-24', '2022-08-24', '3m_logo.png', 'Design Research and Innovation', 'Paired with leading scientists and 
@@ -114,15 +115,36 @@ VALUES
 ('We are recognizing the IOD team in their outstanding work and dedicationg to this project!', 4);
 
 INSERT INTO "students" ("email", "pronouns", "name", "picture", "banner", "about", "linkedin", "user_id")
-VALUES (
-	'smrdelb@gmail.com', 
+VALUES 
+(
+	'SteveSteve@gmail.com', 
 	'He/Him', 
-	'Bennett Smrdel', 
+	'Steve Steve', 
 	NULL, 
 	NULL, 
-	'not existant', 
-	'https://www.linkedin.com/in/bennett-smrdel-634893212/', 
+	'I am a filler data enthusiast', 
+	NULL, 
+	'1'
+),
+(
+	'JohnSmith@gmail.com', 
+	'He/Him', 
+	'John Smith', 
+	NULL, 
+	NULL, 
+	'I am a filler data enthusiast', 
+	NULL, 
 	'2'
+),
+(
+	'JaneDoe@gmail.com', 
+	'He/Him', 
+	'Jane Doe', 
+	NULL, 
+	NULL, 
+	'I am a filler data enthusiast', 
+	NULL, 
+	'3'
 );
 
 INSERT INTO "projects" ("project_name", "description", "user_id", "internship_id")
