@@ -6,36 +6,26 @@ import SelectedSkills from './SelectedSkills';
 import { useParams } from 'react-router';
 
 function SelectedProfilePage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
-const profile = useSelector((store) => store.profile);
-const params = useParams();
-const dispatch = useDispatch();
+    // this component doesn't do much to start, just renders some user reducer info to the DOM
+    const profile = useSelector((store) => store.profile);
+    const params = useParams();
+    const dispatch = useDispatch();
 
-useEffect(() => {
-    handleRefresh()
-}, [])
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_SELECTED_PROFILE',
+            payload: params.id
+        });
+    }, [])
 
-const handleRefresh = () =>{
-    if (profile.length === 0) {
-        dispatch ({
-            type: 'FETCH_PROFILE',
-            payload: params.id
-        }),
-        dispatch ({
-            type: 'CHECK_USER_EXISTS',
-            payload: params.id
-        })
-    }
-}
-return (
-    <div className="container">
-        {profile.map((data) => {
-        return <SelectedProfileItem key={data.id} dataItem={data}/>
-        })}
-        <SelectedSkills /> 
-    
-    </div>
-);
+    return (
+        <div className="container">
+            {profile.map((data) => {
+                return <SelectedProfileItem key={data.id} dataItem={data}/>
+            })}
+            <SelectedSkills /> 
+        </div>
+    );
 }
 
 // this allows us to use <App /> in index.js

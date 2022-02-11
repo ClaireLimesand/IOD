@@ -51,10 +51,29 @@ function* fetchStudentsAdmin() {
     };
 }
 
+// Fetches specific student
+function* fetchSelectedProfile(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/students/${action.payload}`
+        });
+        console.log(response.data);
+
+        yield put({
+            type: 'SET_PROFILE',
+            payload: response.data
+        });
+    } catch(err) {
+        console.log('Error in fetchStudents Saga', err);
+    };
+}
+
 function* studentsSaga() {
     yield takeEvery('FETCH_STUDENTS', fetchStudents);
     yield takeEvery('GET_STUDENT', fetchStudentProfile);
     yield takeEvery('FETCH_STUDENTS_ADMIN', fetchStudentsAdmin);
+    yield takeEvery('FETCH_SELECTED_PROFILE', fetchSelectedProfile);
 }
 
 
