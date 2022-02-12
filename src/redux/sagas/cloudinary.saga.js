@@ -114,35 +114,34 @@ function* uploadLogo(action) {
     const headers = {
         'content-type': 'multipart/form-data'
     }
+    console.log('listen up', action.payload.logo)
     const logoForm = new FormData();
     logoForm.append('image', action.payload.logo);
-    
-    const internshipImageData ={
-        logo: logoForm,
-        id: action.payload.internshipId
-    }
-    console.log('hey!', internshipImageData)
+    logoForm.append('id', action.payload.internshipId);
+
     try {
         yield axios({
             method: 'PUT',
             url: '/api/logo',
             headers: headers,
-            data: internshipImageData
+            data: logoForm
         });
-        document.location.reload();
+        yield put ({
+            type: 'FETCH_INTERNSHIPS',
+        });
     } catch(err) {
-        console.error('GET LOGO error: ', err);
+        console.error('PUT error: ', err);
     }
 }
 
 function* cloudinarySaga() {
-  yield takeLatest('UPLOAD_PICTURE', uploadPicture);
-  yield takeLatest('UPLOAD_BANNER', uploadBanner);
-  yield takeLatest('UPLOAD_RESUME', uploadResume);
-  yield takeLatest('FETCH_RESUME', fetchResume);
-  yield takeLatest('CHECK_USER_EXISTS', retrieveUser);
-  yield takeLatest('NEW_USER', checkUser);
-  yield takeLatest('UPLOAD_LOGO', uploadLogo)
+    yield takeLatest('UPLOAD_PICTURE', uploadPicture);
+    yield takeLatest('UPLOAD_BANNER', uploadBanner);
+    yield takeLatest('UPLOAD_RESUME', uploadResume);
+    yield takeLatest('FETCH_RESUME', fetchResume);
+    yield takeLatest('CHECK_USER_EXISTS', retrieveUser);
+    yield takeLatest('NEW_USER', checkUser);
+    yield takeLatest('UPLOAD_LOGO', uploadLogo)
 }
 
 export default cloudinarySaga;

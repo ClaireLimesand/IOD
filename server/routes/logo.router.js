@@ -6,12 +6,12 @@ const pool = require('../modules/pool');
 const router = express.Router();
 require('dotenv').config();
 // Cloudinary
-// const cloudinary = require("cloudinary").v2;
+const cloudinary = require("cloudinary").v2;
 const cloudinaryUpload = require('../modules/cloudinary-config');
 
 router.put('/', rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {
       // after the image uploads, we have access to req.file:
-      console.log('neato!', req.body.logo)
+      console.log('neato!', req.file)
       const logoUrl = req.file.path;
 
       const sqlText =
@@ -22,18 +22,17 @@ router.put('/', rejectUnauthenticated, cloudinaryUpload.single('image'), async (
       `
       const sqlValues = [
           logoUrl,
-          req.user.id
+          req.body.id
       ];
   
-      // pool.query(sqlText, sqlValues)
-      //  .then((dbres) => {
-      //    res.sendStatus(201);
-      //  })
-      //  .catch((dberror) => {
-      //    console.log('Oops you messed up DB error', dberror);
-      //    res.sendStatus(500)
-      //  })  
-      // })
+      pool.query(sqlText, sqlValues)
+        .then((dbres) => {
+          res.sendStatus(201);
+        })
+        .catch((dberror) => {
+          console.log('Oops you messed up DB error', dberror);
+          res.sendStatus(500)
+        })  
   });
 
 module.exports = router;

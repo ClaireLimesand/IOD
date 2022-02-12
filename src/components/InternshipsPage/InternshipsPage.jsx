@@ -9,11 +9,9 @@ import './InternshipPage.css';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { DropzoneDialog } from 'material-ui-dropzone';
 
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { makeStyles } from '@material-ui/core/styles';
 
 import TextField from '@mui/material/TextField';
@@ -55,7 +53,6 @@ function InternshipsPage() {
     const startDate= dateRange[0];
     const endDate = dateRange[1];
 
-    const [logoOpen, setLogoOpen] = useState(false);
     const [open, setOpen] = React.useState(false);
     const [editOpen, editSetOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -153,35 +150,6 @@ function InternshipsPage() {
                                 className="internship-input"
                                 value={subtitle}
                                 onChange={(event) => setSubtitle(event.target.value)}
-                            />
-
-                            <label>Company Logo
-                                <IconButton>
-                                <AddPhotoAlternateIcon
-                                onClick={() => setLogoOpen(true)}/>
-                                </IconButton>
-                            </label>
-                            
-                            <DropzoneDialog
-                                acceptedFiles={['image/*']}
-                                cancelButtonText={"cancel"}
-                                submitButtonText={"submit"}
-                                maxFileSize={5000000}
-                                open={logoOpen}
-                                onClose={() => setLogoOpen(false)}
-                                onSave={(files) => {
-                                console.log('Files:', files[0]);
-                                setLogoOpen(false);
-                                handleEditLogo(files[0]);
-                                }}
-                                showPreviews={true}
-                                showFileNamesInPreview={true}
-                            />
-
-                            <input 
-                                className="internship-input"
-                                value={logo}
-                                onChange={(event) => setLogo(event.target.value)}
                             />
 
                             <label>Internship Description</label>
