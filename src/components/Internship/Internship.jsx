@@ -2,7 +2,9 @@ import React from 'react';
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { useState } from 'react';
 import Swal from 'sweetalert2';
+
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -11,14 +13,21 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+
+import { DropzoneDialog } from 'material-ui-dropzone';
 
 function Internship({internship}) {
     
     const history = useHistory();
     const dispatch = useDispatch();
     
+    const [logo, setLogo] = useState('');
+    const [logoOpen, setLogoOpen] = useState(false);
+
     const user = useSelector((store) => store.user);
     const profile = useSelector((store) => store.profile);
+    
 
     useEffect(() => {
         dispatch({
@@ -68,6 +77,19 @@ function Internship({internship}) {
         });
     }
 
+    const handleEditLogo = (file) => {
+        console.log('file', file);
+        const internshipWithLogo = {
+            logo: file,
+            internshipId: internship.id
+        }
+        console.log(internshipWithLogo)
+        dispatch({
+            type: 'UPLOAD_LOGO',
+            payload: internshipWithLogo
+        });
+    }
+
     return (
         <Card sx={{ maxWidth: 345, minWidth: 340, backgroundColor: '#E8E9EE' }}>
             <center>
@@ -105,6 +127,30 @@ function Internship({internship}) {
                         <ClearIcon />
                     </IconButton>
                 }
+
+                {user.access_level == 3 &&
+                <IconButton>
+                    <AddPhotoAlternateIcon
+                    onClick={() => setLogoOpen(true)}/>
+                </IconButton>
+                }
+
+                <DropzoneDialog
+                    acceptedFiles={['image/*']}
+                    cancelButtonText={"cancel"}
+                    submitButtonText={"submit"}
+                    maxFileSize={5000000}
+                    open={logoOpen}
+                    onClose={() => setLogoOpen(false)}
+                    onSave={(files) => {
+                    console.log('Files:', files[0]);
+                    setLogoOpen(false);
+                    handleEditLogo(files[0]);
+                    }}
+                    showPreviews={true}
+                    showFileNamesInPreview={true}
+                />
+            
             </CardActions>
         </Card>
 

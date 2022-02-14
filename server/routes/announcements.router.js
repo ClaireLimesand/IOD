@@ -12,7 +12,8 @@ router.get('/', (req, res) => {
     const sqlText = `
         SELECT "announcements"."id", "message", "message_id", "title" FROM "announcements"
         JOIN "message_types"
-        ON "announcements"."message_id" = "message_types"."id";
+        ON "announcements"."message_id" = "message_types"."id"
+        ORDER BY "announcements"."id" DESC;
     `;
     pool.query(sqlText)
         .then((dbRes) => {

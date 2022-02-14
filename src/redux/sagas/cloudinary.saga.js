@@ -123,14 +123,40 @@ function* checkUser(action) {
 }
 
 
+function* uploadLogo(action) {
+    const headers = {
+        'content-type': 'multipart/form-data'
+    }
+    console.log('listen up', action.payload.logo)
+    const logoForm = new FormData();
+    logoForm.append('image', action.payload.logo);
+    logoForm.append('id', action.payload.internshipId);
+
+    try {
+        yield axios({
+            method: 'PUT',
+            url: '/api/logo',
+            headers: headers,
+            data: logoForm
+        });
+        yield put ({
+            type: 'FETCH_INTERNSHIPS',
+        });
+    } catch(err) {
+        console.error('PUT error: ', err);
+    }
+}
+
+
 function* cloudinarySaga() {
     yield takeLatest('UPLOAD_PICTURE', uploadPicture);
     yield takeLatest('UPLOAD_BANNER', uploadBanner);
     yield takeLatest('UPLOAD_RESUME', uploadResume);
     yield takeLatest('FETCH_RESUME', fetchResume);
-    yield takeLatest('FETCH_SPECIFIC_RESUME',fetchSpecificResume);
     yield takeLatest('CHECK_USER_EXISTS', retrieveUser);
     yield takeLatest('NEW_USER', checkUser);
+    yield takeLatest('UPLOAD_LOGO', uploadLogo)
+    yield takeLatest('FETCH_SPECIFIC_RESUME',fetchSpecificResume);
 }
 
 export default cloudinarySaga;

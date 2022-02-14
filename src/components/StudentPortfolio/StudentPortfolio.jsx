@@ -79,15 +79,16 @@ function StudentPortfolio() {
                   draggable={false}
                 />
                 <input
-                  className="skill-input"
+                  className="project-input"
                   placeholder="Title"
                   value={title}
                   onChange={(event) => setTitle(event.target.value)}
                   required
                 />
 
-                <input
-                  className="skill-input"
+                <textarea
+                  rows="4"
+                  className="project-description-input"
                   placeholder="Description"
                   value={description}
                   onChange={(event) => setDescription(event.target.value)}
@@ -95,7 +96,7 @@ function StudentPortfolio() {
                 />
 
                 <input
-                  className="skill-input"
+                  className="project-input"
                   placeholder="Image URL"
                   value={image}
                   onChange={(event) => setImage(event.target.value)}
@@ -103,7 +104,7 @@ function StudentPortfolio() {
                 />
 
                 <input
-                  className="skill-input"
+                  className="project-input"
                   placeholder="Internship ID"
                   type="number"
                   value={internship_id}

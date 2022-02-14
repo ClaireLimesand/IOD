@@ -23,6 +23,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             "internships"."company_logo",
             "internships"."company_description"
         FROM "internships" 
+        ORDER BY "id" DESC;
     `;
 
     pool.query(sqlText)
