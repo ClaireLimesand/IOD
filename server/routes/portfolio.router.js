@@ -55,6 +55,56 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
+router.get("/specific/:id", rejectUnauthenticated, (req, res) => {
+  const sqlText = `
+      SELECT
+        "projects"."id",
+        "projects"."project_name",
+        "projects"."description",
+        "projects"."internship_id",
+        "projects"."image",
+        "projects"."user_id",
+        "internships"."company_name",
+        "internships"."company_subtitle",
+        "internships"."company_logo"
+      FROM "projects"
+        JOIN "internships"
+          ON "projects"."internship_id" = "internships"."id"
+      WHERE "projects"."user_id" = $1;
+    `;
+  const sqlValues = [req.params.id];
+  pool
+    .query(sqlText, sqlValues)
+    .then((dbRes) => {
+      console.log(
+        `All the projects for user_id ${req.user.id} ==>`,
+        dbRes.rows
+      );
+
+      // Transform dbRes.rows array to be an object where each
+      // key corresponds to a given internship, and each key's value is an
+      const splitProjects = (projects) => {
+        let grouped = {};
+        for (let project of projects) {
+          if (!grouped[project.internship_id]) {
+            grouped[project.internship_id] = [];
+          }
+          grouped[project.internship_id].push(project);
+        }
+        return grouped;
+      };
+      // array of project objects
+      const transformedProjectData = splitProjects(dbRes.rows);
+      console.log("This split array", splitProjects(dbRes.rows));
+
+      res.send(transformedProjectData);
+    })
+    .catch((dbErr) => {
+      console.log("Error: ", dbErr);
+      res.sendStatus(500);
+    });
+});
+
 router.get("/:id", rejectUnauthenticated, (req, res) => {
   const sqlText = `
     SELECT * FROM "projects"
@@ -67,6 +117,7 @@ router.get("/:id", rejectUnauthenticated, (req, res) => {
       res.send(dbRes.rows);
     })
     .catch((dbErr) => {
+      console.log("Error: ", dbErr);
       res.sendStatus(500);
     });
 });
@@ -134,6 +185,7 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
       res.sendStatus(201);
     })
     .catch((dbErr) => {
+      console.log("Error: ", dbErr);
       res.sendStatus(500);
     });
 });

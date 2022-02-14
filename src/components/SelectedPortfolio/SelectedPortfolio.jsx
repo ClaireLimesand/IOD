@@ -1,25 +1,33 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import SelectedPortfolioItem from "../SelectedPortfolioItem/SelectedPortfolioItem";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
-function StudentPortfolio() {
-  const dispatch = useDispatch();
-  const portfolio = useSelector((store) => store.portfolio);
+function SelectedStudentPortfolio() {
+    const portfolio = useSelector((store) => store.portfolio);
+    const dispatch = useDispatch();
 
-  return (
-    <div className="container">
-      <h1>Names's Portfolio</h1>
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_SELECTED_PORTFOLIO'
+        });
+    }, [])
 
-      {Object.keys(portfolio).map((internship_id) => {
-        return (
-          <PortfolioItem
-            key={internship_id}
-            projects={portfolio[internship_id]}
-          />
-        );
-      })}
-    </div>
-  );
+    return (
+        <div className="container">
+            <h1>Portfolio</h1>
+
+            {Object.keys(portfolio).map((internship_id) => {
+                return (
+                    <SelectedPortfolioItem
+                        key={internship_id}
+                        projects={portfolio[internship_id]}
+                    />
+                );
+            })}
+        </div>
+    );
 }
 
-export default StudentPortfolio;
+export default SelectedStudentPortfolio;

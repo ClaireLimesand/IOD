@@ -153,6 +153,23 @@ function* detectStudentProject(action) {
     }
 }
 
+function* fetchSelectedPortfolio(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/portfolio/specific/${action.payload}`
+        });
+        console.log(response.data);
+
+        yield put({
+            type: 'SET_PORTFOLIO',
+            payload: response.data
+        });
+    }catch(err) {
+        console.log('Error in fetchFavoriteProject', err);  
+    }
+}
+
 function* portfolioSaga() {
     yield takeLatest('FETCH_PORTFOLIO', fetchPortfolio);
     yield takeLatest('ADD_PROJECT', addProject);
@@ -162,7 +179,8 @@ function* portfolioSaga() {
     yield takeLatest('STORE_FAVORITE_PROJECT', storeFavoriteProject);
     yield takeLatest('FETCH_FAVORITE_PROJECT', fetchFavoriteProject);
     yield takeLatest('DETECT_FAVORITE_PROJECT', detectFavoriteProject);
-    yield takeLatest('DETECT_STUDENT_FAVORITE_PROJECT', detectStudentProject)
+    yield takeLatest('DETECT_STUDENT_FAVORITE_PROJECT', detectStudentProject);
+    yield takeLatest('FETCH_SELECTED_PORTFOLIO', fetchSelectedPortfolio);
 };
 
 export default portfolioSaga;
