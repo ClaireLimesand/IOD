@@ -4,6 +4,7 @@ import SelectedProfileItem from '../SelectedProfilePage/SelectedProfileItem';
 import { useEffect } from 'react';
 import SelectedSkills from './SelectedSkills';
 import { useParams } from 'react-router';
+import SelectedFavoriteProject from '../SelectedFavoriteProject/SelectedFavoriteProject';
 
 function SelectedProfilePage() {
     // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -23,7 +24,10 @@ function SelectedProfilePage() {
             {profile.map((data) => {
                 return <SelectedProfileItem key={data.id} dataItem={data}/>
             })}
-            <SelectedSkills /> 
+            <div className="user-data">
+                <SelectedSkills /> 
+                <SelectedFavoriteProject />
+            </div>
         </div>
     );
 }
