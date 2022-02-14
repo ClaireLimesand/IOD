@@ -22,6 +22,26 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// GET for selected user's specific skills
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+    const sqlQuery = `
+        SELECT * FROM "skills"
+        WHERE "user_id" = $1
+        ORDER BY "id" ASC;
+    `;
+    const sqlValues = [
+        req.params.id
+    ];
+
+    pool.query(sqlQuery, sqlValues)
+    .then((dbRes) => {
+        res.send(dbRes.rows);
+    })
+    .catch((dbErr) => {
+        res.sendStatus(500);
+    })
+});
+
 // POST for a user to add a skill
 router.post('/', rejectUnauthenticated, (req, res) => {
     const newSkill = req.body;
