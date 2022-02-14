@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import {useDispatch, useSelector} from 'react-redux';
 import useReduxStore from '../../hooks/useReduxStore';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 import './Skills.css';
 
@@ -62,9 +63,37 @@ function Skills() {
     }; 
 
     const handleDeleteSkillButton = (id) => {
-        dispatch({
-            type: 'DELETE_SKILL',
-            payload: id
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#15B097',
+            cancelButtonColor: '#cf3123',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                  
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Deleted successfully'
+                })
+                dispatch({
+                    type: 'DELETE_SKILL',
+                    payload: id
+                });
+            }
         })
     };  
 

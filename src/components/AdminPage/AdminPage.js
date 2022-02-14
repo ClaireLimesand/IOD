@@ -2,6 +2,7 @@ import React from 'react';
 import './AdminPage.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 import Grid from '@mui/material/Grid';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -10,6 +11,7 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import AddModeratorIcon from '@mui/icons-material/AddModerator';
 import RemoveModeratorIcon from '@mui/icons-material/RemoveModerator';
+import { Tooltip } from '@mui/material';
 
 function AdminPage() {
     const dispatch = useDispatch();
@@ -29,6 +31,25 @@ function AdminPage() {
         });
     }, [])
 
+    const handleDeleteNotification = (application) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#15B097',
+            cancelButtonColor: '#cf3123',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch({ 
+                    type: 'REMOVE_NOTIFICATION', 
+                    payload: application.id 
+                });
+            }
+        })
+    }
+
     return (
       <div className="container admin-page">
           <Grid container spacing={2}>
@@ -42,14 +63,14 @@ function AdminPage() {
                                 {application.new_notification ?
                                     <Typography className='new-notification notification-text'>
                                         - <span className='application-name'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
-                                        <IconButton onClick={() => dispatch({ type: 'REMOVE_NOTIFICATION', payload: application.id })}>
+                                        <IconButton onClick={() => handleDeleteNotification(application)}>
                                             <ClearIcon />
                                         </IconButton>
                                     </Typography>
                                 :
                                     <Typography className='notification-text'>
                                         - <span className='application-name'>{application.student_name}</span> has applied at <span className='application-company'>{application.company}</span>
-                                        <IconButton onClick={() => dispatch({ type: 'REMOVE_NOTIFICATION', payload: application.id })}>
+                                        <IconButton onClick={() => handleDeleteNotification(application)}>
                                             <ClearIcon />
                                         </IconButton>
                                     </Typography>
@@ -68,7 +89,9 @@ function AdminPage() {
                                 <Card key={i} sx={{ marginBottom: '10px', padding: '6px' }}>
                                     <Typography>{student.name} 
                                         <IconButton onClick={() => dispatch({ type: 'ADD_ADMIN', payload: student.id })}>
-                                            <AddModeratorIcon sx={{ color:'#0f8874' }} />
+                                            <Tooltip title="Promote to admin" arrow>
+                                                <AddModeratorIcon sx={{ color:'#0f8874' }} />
+                                            </Tooltip>
                                         </IconButton>
                                     </Typography>
                                 </Card>
@@ -76,7 +99,9 @@ function AdminPage() {
                                 <Card key={i} sx={{ marginBottom: '10px', padding: '6px' }}>
                                     <Typography>{student.name} <em>(admin)</em>
                                         <IconButton onClick={() => dispatch({ type: 'REMOVE_ADMIN', payload: student.id })}>
-                                            <RemoveModeratorIcon sx={{ color:'#cf3123' }} />
+                                            <Tooltip title="Remove admin" arrow>
+                                                <RemoveModeratorIcon sx={{ color:'#cf3123' }} />
+                                            </Tooltip>
                                             </IconButton>   
                                     </Typography>
                                 </Card>

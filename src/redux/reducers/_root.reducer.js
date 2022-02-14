@@ -11,6 +11,8 @@ import portfolio from './portfolio.reducer';
 import editInternship from './edit.internship.reducer';
 import applicationsReducer from './applications.reducer';
 import categories from './categories.reducer';
+import projectToEdit from './edit.project.reducer';
+import favoriteProject from './favProject.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -30,7 +32,9 @@ const rootReducer = combineReducers({
   portfolio,
   editInternship,
   applicationsReducer,
-  categories
+  categories,
+  projectToEdit,
+  favoriteProject,
 });
 
 export default rootReducer;

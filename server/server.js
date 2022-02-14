@@ -21,6 +21,8 @@ const portfolioRouter = require('./routes/portfolio.router');
 const applicationsRouter = require('./routes/applications.router');
 const categoriesRouter = require('./routes/categories.router');
 const logoRouter = require('./routes/logo.router');
+const favoriteProjectRouter = require('./routes/favorite.project.router');
+
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -47,6 +49,7 @@ app.use('/api/portfolio', portfolioRouter);
 app.use('/api/applications', applicationsRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/logo', logoRouter);
+app.use('/api/favoriteProject', favoriteProjectRouter);
 
 // Serve static files
 app.use(express.static('build'));

@@ -33,10 +33,9 @@ function StudentsTable(student) {
         });
     }, [])
 
-    const handleLoadProfileClick = () => {
-        dispatch({ type: 'GET_STUDENT', payload: student.id});
+    const handleLoadProfileClick = (student) => {
         history.push(`/user/${student.id}`);
-        };
+    };
     
 
     const useStyles = makeStyles((theme) => ({
@@ -100,7 +99,7 @@ function StudentsTable(student) {
                                             <Typography>{student.email}</Typography>
                                         </TableCell>
                                         <TableCell>
-                                            <button className='apply-btn' onClick={()=>{handleLoadProfileClick()}}>
+                                            <button className='apply-btn' onClick={()=>{handleLoadProfileClick(student)}}>
                                                 Load Profile
                                             </button>
                                         </TableCell>

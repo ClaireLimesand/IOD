@@ -40,6 +40,26 @@ router.get('/admin', rejectUnauthenticated, (req, res) => {
         })
 });
 
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+    const sqlText = `
+        SELECT * FROM "students"
+        WHERE id = $1;
+    `;
+    const sqlValues = [
+        req.params.id
+    ];
+
+    pool.query(sqlText, sqlValues)
+        .then((dbRes) => {
+            console.log('Data', dbRes.rows);
+            res.send(dbRes.rows);
+        })
+        .catch((dbErr) => {
+            console.log('dbErr', dbErr)
+            res.sendStatus(500);
+        })
+});
+
 
 
 module.exports = router;
