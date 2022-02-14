@@ -111,7 +111,7 @@ function* detectFavoriteProject(action) {
             method: 'GET',
             url: '/api/favoriteProject'
         });
-        console.log('DETECT The Favorite Project Data', response.data);
+
         let exists = false;
 
         for (let favorite of response.data) {
@@ -136,6 +136,23 @@ function* detectFavoriteProject(action) {
     }
 }
 
+function* detectStudentProject(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/favoriteProject/${action.payload}`
+        });
+        console.log('DETECT The Favorite Project Data', response.data);
+
+        yield put({
+            type: 'SET_FAVORITE_PROJECT',
+            payload: response.data[0]
+        });
+    }catch(err) {
+        console.log('Error in fetchFavoriteProject', err);  
+    }
+}
+
 function* portfolioSaga() {
     yield takeLatest('FETCH_PORTFOLIO', fetchPortfolio);
     yield takeLatest('ADD_PROJECT', addProject);
@@ -145,6 +162,7 @@ function* portfolioSaga() {
     yield takeLatest('STORE_FAVORITE_PROJECT', storeFavoriteProject);
     yield takeLatest('FETCH_FAVORITE_PROJECT', fetchFavoriteProject);
     yield takeLatest('DETECT_FAVORITE_PROJECT', detectFavoriteProject);
+    yield takeLatest('DETECT_STUDENT_FAVORITE_PROJECT', detectStudentProject)
 };
 
 export default portfolioSaga;

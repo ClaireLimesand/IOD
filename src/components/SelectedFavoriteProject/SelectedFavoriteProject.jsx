@@ -8,7 +8,7 @@ function SelectedFavoriteProject() {
     const favoriteProject = useSelector((store) => store.favoriteProject);
 
     return (
-        favoriteProject.image != null ?
+        favoriteProject.image != null &&
             <div className="favProjects">
             <h2 className="fav-name">{favoriteProject.project_name}</h2>
             <div className="fav-info">
@@ -16,8 +16,6 @@ function SelectedFavoriteProject() {
                 <p>{favoriteProject.description}</p>
             </div>
             </div>
-        :
-            <div className="favProjects"></div>
     );
 }
 

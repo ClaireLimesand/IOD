@@ -21,7 +21,26 @@ router.get("/", rejectUnauthenticated, (req, res) => {
         console.log(dbErr);
         res.sendStatus(500);
       });
+});
+
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+  const sqlText = `
+    SELECT * FROM "favorite-project"
+    WHERE "user_id" = $1;
+  `;
+  const sqlValues = [
+    req.params.id
+  ];
+
+  pool.query(sqlText, sqlValues)
+  .then((dbRes) => {
+    res.send(dbRes.rows);
+  })
+  .catch((dbErr) => {
+    console.log(dbErr);
+    res.sendStatus(500);
   });
+});
 
 router.put("/", rejectUnauthenticated, (req, res) => {
   console.log('req.body for favorite project', req.body);

@@ -17,6 +17,10 @@ function SelectedProfilePage() {
             type: 'FETCH_SELECTED_PROFILE',
             payload: params.id
         });
+        dispatch({
+            type: 'DETECT_STUDENT_FAVORITE_PROJECT',
+            payload: params.id
+        });
     }, [])
 
     return (
