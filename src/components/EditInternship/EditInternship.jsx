@@ -50,13 +50,6 @@ function EditInternship() {
         })
     }
 
-    const handleLogoChange = (e) => {
-        dispatch({
-            type: 'EDIT_INTERNSHIP_LOGO',
-            payload: e.target.value
-        })
-    }
-
     const handleDateChange = (newValues) => {
         let startDate = newValues[0];
         let endDate = newValues[1];
@@ -78,7 +71,6 @@ function EditInternship() {
         const description = editInternshipReducer.description;
         const startDate = editInternshipReducer.start_date;
         const endDate = editInternshipReducer.end_date;
-        const logo = editInternshipReducer.logo;
 
         const editedInternship = {
             id,
@@ -87,7 +79,6 @@ function EditInternship() {
             description,
             startDate,
             endDate,
-            logo
         }
 
         dispatch({
@@ -123,12 +114,6 @@ function EditInternship() {
                         value={editInternshipReducer.subtitle|| ""}
                         onChange={handleSubtitleChange}
                     />         
-                
-                    <input 
-                        className="internship-edit-input"
-                        value={editInternshipReducer.logo|| ""}
-                        onChange={handleLogoChange}
-                    />    
 
                     <textarea 
                         rows="8"

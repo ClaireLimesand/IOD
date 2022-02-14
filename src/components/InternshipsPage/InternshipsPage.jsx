@@ -72,6 +72,17 @@ function InternshipsPage() {
         });
     }, [])
 
+    const handleEditLogo = (file) => {
+        console.log(file);
+        setTimeout(() => {
+            dispatch({
+                type: 'UPLOAD_LOGO',
+                payload: {file: file}
+            });
+        }, 1000)
+    }
+    
+
     const handleSaveButton = () => {
         console.log(startDate);
         console.log(endDate);
@@ -139,13 +150,6 @@ function InternshipsPage() {
                                 className="internship-input"
                                 value={subtitle}
                                 onChange={(event) => setSubtitle(event.target.value)}
-                            />
-
-                            <label>Logo Picture</label>
-                            <input 
-                                className="internship-input"
-                                value={logo}
-                                onChange={(event) => setLogo(event.target.value)}
                             />
 
                             <label>Internship Description</label>
