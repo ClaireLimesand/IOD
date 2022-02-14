@@ -22,7 +22,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             TO_CHAR("end_date",'MM-DD-YYYY') AS "end_date", 
             "internships"."company_logo",
             "internships"."company_description"
-        FROM "internships" 
+        FROM "internships"
+        ORDER BY "id" ASC; 
     `;
 
     pool.query(sqlText)
