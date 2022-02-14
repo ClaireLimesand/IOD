@@ -105,6 +105,71 @@ function* fetchFavoriteProject() {
     }
 }
 
+function* detectFavoriteProject(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/favoriteProject'
+        });
+
+        let exists = false;
+
+        for (let favorite of response.data) {
+            if (favorite.user_id === action.payload) {
+                exists = true;
+            }
+        }
+
+        if (exists === false) {
+            exists = true;
+            yield axios({
+                method: 'POST',
+                url: '/api/favoriteProject'
+            });
+        }
+
+        yield put({
+            type: 'FETCH_FAVORITE_PROJECT'
+        });
+    }catch(err) {
+        console.log('Error in fetchFavoriteProject', err);  
+    }
+}
+
+function* detectStudentProject(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/favoriteProject/${action.payload}`
+        });
+        console.log('DETECT The Favorite Project Data', response.data);
+
+        yield put({
+            type: 'SET_FAVORITE_PROJECT',
+            payload: response.data[0]
+        });
+    }catch(err) {
+        console.log('Error in fetchFavoriteProject', err);  
+    }
+}
+
+function* fetchSelectedPortfolio(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/portfolio/specific/${action.payload}`
+        });
+        console.log(response.data);
+
+        yield put({
+            type: 'SET_PORTFOLIO',
+            payload: response.data
+        });
+    }catch(err) {
+        console.log('Error in fetchFavoriteProject', err);  
+    }
+}
+
 function* portfolioSaga() {
     yield takeLatest('FETCH_PORTFOLIO', fetchPortfolio);
     yield takeLatest('ADD_PROJECT', addProject);
@@ -113,6 +178,9 @@ function* portfolioSaga() {
     yield takeLatest('EDIT_PROJECT', updateProject);
     yield takeLatest('STORE_FAVORITE_PROJECT', storeFavoriteProject);
     yield takeLatest('FETCH_FAVORITE_PROJECT', fetchFavoriteProject);
+    yield takeLatest('DETECT_FAVORITE_PROJECT', detectFavoriteProject);
+    yield takeLatest('DETECT_STUDENT_FAVORITE_PROJECT', detectStudentProject);
+    yield takeLatest('FETCH_SELECTED_PORTFOLIO', fetchSelectedPortfolio);
 };
 
 export default portfolioSaga;

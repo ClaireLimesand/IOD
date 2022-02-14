@@ -24,6 +24,7 @@ import {
 function StudentsTable(student) {
     const history = useHistory();
     const students = useSelector((store) => store.students);
+    const user = useSelector(store => store.user);
     // const params= useParams();
     const dispatch = useDispatch();
 
@@ -88,6 +89,7 @@ function StudentsTable(student) {
                         <TableBody>
                             {students.map((student) => {
                                 return (
+                                    student.access_level < 3 &&
                                     <TableRow key={student.id}>
                                         <TableCell>
                                             <Typography>{student.name}</Typography>
