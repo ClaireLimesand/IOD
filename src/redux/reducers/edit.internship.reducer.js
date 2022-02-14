@@ -4,7 +4,6 @@ const editInternship = ( state = {}, action) => {
             id: action.payload.id,
             name: action.payload.company_name,
             subtitle: action.payload.company_subtitle,
-            logo: action.payload.company_logo,
             description: action.payload.company_description,
             start_date: action.payload.start_date,
             end_date: action.payload.end_date,
@@ -13,8 +12,6 @@ const editInternship = ( state = {}, action) => {
         return { ...state, name: action.payload }
     } else if (action.type === 'EDIT_INTERNSHIP_SUBTITLE') {
         return { ...state, subtitle: action.payload }
-    } else if (action.type === 'EDIT_INTERNSHIP_LOGO') {
-        return { ...state, logo: action.payload }
     } else if (action.type === 'EDIT_INTERNSHIP_DESCRIPTION') {
         return { ...state, description: action.payload }
     } else if (action.type === 'EDIT_INTERNSHIP_START_DATE') {
