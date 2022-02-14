@@ -7,7 +7,9 @@ const router = express.Router();
 
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
-        SELECT * FROM "students";
+        SELECT "email", "pronouns", "name", "picture", "banner", "cohort", "about", "linkedin", "resume", "user_id", "access_level" FROM "students"
+        JOIN "user"
+        ON "students"."user_id" = "user"."id";
     `;
 
     pool.query(sqlText)

@@ -13,6 +13,23 @@ function* fetchSkills() {
     }
 }
 
+function* fetchStudentsSkills(action) {
+    try {
+        console.log(action.payload);
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/skills/${action.payload}`
+        });
+
+        yield put({ 
+            type: 'SET_SKILLS', 
+            payload: response.data 
+        });
+    } catch (error) {
+        console.log('fetchSkills error', error);
+    }
+}
+
 function* addSkill(action) {
     try {
         const response = yield axios({
@@ -74,6 +91,7 @@ function* fetchSingleSkill(action) {
 
 function* skillsSaga() {
     yield takeEvery('FETCH_SKILLS', fetchSkills);
+    yield takeEvery('FETCH_STUDENTS_SKILLS', fetchStudentsSkills);
     yield takeEvery('ADD_SKILL', addSkill);
     yield takeEvery('DELETE_SKILL', deleteSkill);
     yield takeEvery('EDIT_SKILL', editSkill);

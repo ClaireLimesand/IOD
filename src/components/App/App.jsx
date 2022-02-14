@@ -25,6 +25,7 @@ import StudentsTable from '../StudentsPage/StudentsPage';
 import EditInternship from '../EditInternship/EditInternship';
 import AdminPage from '../AdminPage/AdminPage';
 import SelectedProfilePage from '../SelectedProfilePage/SelectedProfilePage';
+import SelectedPortfolio from '../SelectedPortfolio/SelectedPortfolio';
 
 import './App.css';
 
@@ -100,6 +101,14 @@ function App() {
             path="/user/:id"
           >
             <SelectedProfilePage />
+        </ProtectedRoute>
+
+        {/*Specific student's portfolio (non-user)*/}
+        <ProtectedRoute
+            exact
+            path="/portfolio/:id"
+          >
+            <SelectedPortfolio />
         </ProtectedRoute>
 
           {/* Admin page */}

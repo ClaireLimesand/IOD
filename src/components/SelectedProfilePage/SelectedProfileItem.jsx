@@ -57,7 +57,6 @@ function SelectedProfileItem({ dataItem }) {
     };
 
     const handleSubmit = () => {
-        console.log(params.id);
         dispatch({
             type: 'FETCH_SPECIFIC_RESUME',
             payload: params.id
@@ -69,7 +68,7 @@ function SelectedProfileItem({ dataItem }) {
     };
 
     const handlePortfolio = () => {
-        history.push("/portfolio");
+        history.push(`/portfolio/${params.id}`);
     };
 
 return (
