@@ -9,6 +9,7 @@ import './UserPage.css';
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const profile = useSelector((store) => store.profile);
+  const user = useSelector(store => store.user);
 
   const dispatch = useDispatch();
 
@@ -19,6 +20,10 @@ function UserPage() {
     dispatch({
       type: "CHECK_USER_EXISTS",
     });
+    dispatch({
+      type: 'DETECT_FAVORITE_PROJECT',
+      payload: user.id
+    });
   }, []);
 
   return (
@@ -26,11 +31,6 @@ function UserPage() {
       {profile.map((data) => {
         return <UserItem key={data.id} dataItem={data} />;
       })}
-      {/* {setTimeout(() => {
-          profile.map((data) => {
-            return <UserItem key={data.id} dataItem={data}/>
-          })
-        }, 1000)} */}
       <div className="user-data">
         <Skills />
         <FavoriteProject />
