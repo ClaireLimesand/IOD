@@ -128,10 +128,12 @@ function Internship({internship}) {
                     </IconButton>
                 }
 
+                {user.access_level == 3 &&
                 <IconButton>
                     <AddPhotoAlternateIcon
                     onClick={() => setLogoOpen(true)}/>
                 </IconButton>
+                }
 
                 <DropzoneDialog
                     acceptedFiles={['image/*']}
