@@ -26,7 +26,7 @@ function SelectedProfilePage() {
     return (
         <div className="container">
             {profile.map((data) => {
-                return <SelectedProfileItem key={data.id} dataItem={data}/>
+                return <SelectedProfileItem key={data.id} dataItem={data}/>;
             })}
             <div className="user-data">
                 <SelectedSkills /> 

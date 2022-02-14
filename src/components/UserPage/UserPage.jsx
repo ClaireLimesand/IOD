@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import Skills from "../Skills/Skills";
 import FavoriteProject from "../FavoriteProject/FavoriteProject";
 import './UserPage.css';
+import AdminProfile from "../AdminProfile/AdminProfile";
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -29,12 +30,20 @@ function UserPage() {
   return (
     <div className="container">
       {profile.map((data) => {
-        return <UserItem key={data.id} dataItem={data} />;
+        return (
+          data.access_level < 3 ?
+            <UserItem key={data.id} dataItem={data} />
+          :
+            <AdminProfile key={data.id} dataItem={data} />
+        );
       })}
-      <div className="user-data">
-        <Skills />
-        <FavoriteProject />
-      </div>
+
+      {user.access_level < 3 &&
+        <div className="user-data">
+          <Skills />
+          <FavoriteProject />
+        </div>
+      }
     </div>
   );
 }
