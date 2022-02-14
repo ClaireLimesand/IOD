@@ -25,6 +25,8 @@ function Internship({internship}) {
     const [logo, setLogo] = useState('');
     const [logoOpen, setLogoOpen] = useState(false);
 
+    const [applied, setApplied] = useState(false);
+
     const user = useSelector((store) => store.user);
     const profile = useSelector((store) => store.profile);
     
@@ -71,6 +73,7 @@ function Internship({internship}) {
     }; 
 
     const handleApply = () => {
+        setApplied(true);
         dispatch({
             type: 'SEND_APPLICATION',
             payload: {company: internship.company_name, name: profile[0].name}
@@ -111,7 +114,12 @@ function Internship({internship}) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <button className='apply-btn' onClick={handleApply}>Apply</button>
+                {applied ?
+                    <button className='applied-btn' disabled="true">Applied</button>
+                :
+                    <button className='apply-btn' onClick={handleApply}>Apply</button>
+                }
+
                 {user.access_level == 3 &&
                     <IconButton  
                         onClick={() => {
