@@ -35,6 +35,7 @@ function StudentsTable(student) {
     }, [])
 
     const handleLoadProfileClick = (student) => {
+        console.log(student);
         history.push(`/user/${student.id}`);
     };
     
