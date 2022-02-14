@@ -2,6 +2,9 @@ const express = require('express');
 const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+const {
+  isAdmin,
+} = require('../modules/admin-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 require('dotenv').config();
@@ -9,7 +12,7 @@ require('dotenv').config();
 const cloudinary = require("cloudinary").v2;
 const cloudinaryUpload = require('../modules/cloudinary-config');
 
-router.put('/', rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {
+router.put('/', rejectUnauthenticated, isAdmin, cloudinaryUpload.single('image'), async (req, res) => {
       // after the image uploads, we have access to req.file:
       console.log('neato!', req.file)
       const logoUrl = req.file.path;
