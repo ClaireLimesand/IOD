@@ -147,6 +147,40 @@ function* uploadLogo(action) {
     }
 }
 
+function* uploadProject(action) {
+    const headers = {
+        'content-type': 'multipart/form-data'
+      }
+    
+    const projectForm = new FormData();
+    projectForm.append('image', action.payload.file);
+
+    try {
+        yield axios({
+            method: 'POST',
+            url: '/api/portfolio',
+            data: action.payload.data
+        });
+
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/project',
+        });
+        console.log(response.data.id);
+
+        yield axios({
+            method: 'PUT',
+            url: `/api/project/${response.data.id}`,
+            headers: headers,
+            data: projectForm
+        });
+        document.location.reload();
+    } catch(err) {
+        console.error('GET error: ', err);
+    }
+}
+
+
 
 function* cloudinarySaga() {
     yield takeLatest('UPLOAD_PICTURE', uploadPicture);
@@ -157,6 +191,7 @@ function* cloudinarySaga() {
     yield takeLatest('NEW_USER', checkUser);
     yield takeLatest('UPLOAD_LOGO', uploadLogo)
     yield takeLatest('FETCH_SPECIFIC_RESUME',fetchSpecificResume);
+    yield takeLatest('UPLOAD_PROJECT',uploadProject);
 }
 
 export default cloudinarySaga;

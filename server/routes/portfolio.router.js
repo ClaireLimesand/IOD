@@ -4,6 +4,8 @@ const {
 } = require("../modules/authentication-middleware");
 const pool = require("../modules/pool");
 const router = express.Router();
+require('dotenv').config();
+const cloudinaryUpload = require('../modules/cloudinary-config');
 
 router.get("/", rejectUnauthenticated, (req, res) => {
   const sqlText = `
@@ -55,7 +57,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
-router.get("/specific/:id", rejectUnauthenticated, (req, res) => {
+router.get('/specific/:id', rejectUnauthenticated, (req, res) => {
   const sqlText = `
       SELECT
         "projects"."id",
@@ -72,12 +74,15 @@ router.get("/specific/:id", rejectUnauthenticated, (req, res) => {
           ON "projects"."internship_id" = "internships"."id"
       WHERE "projects"."user_id" = $1;
     `;
-  const sqlValues = [req.params.id];
+  const sqlValues = [
+    req.params.id
+  ];
+
   pool
     .query(sqlText, sqlValues)
     .then((dbRes) => {
       console.log(
-        `All the projects for user_id ${req.user.id} ==>`,
+        `All the projects for user_id ${req.params.id} ==>`,
         dbRes.rows
       );
 
@@ -169,13 +174,13 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
     SET
       "project_name" = $1,
       "description" = $2,
-      "image" = $3
+      "internship_id" = $3
     WHERE "id" = $4;
   `;
   const sqlValues = [
     req.body.name,
     req.body.description,
-    req.body.image,
+    req.body.internship_id,
     req.params.id,
   ];
 
@@ -189,5 +194,32 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     });
 });
+
+router.put("/image/:id", rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {
+  // after the image uploads, we have access to req.file:
+  console.log('nifty! req.file:', req.file);
+  const pictureUrl = req.file.path;
+
+  const sqlText = `
+    UPDATE "projects"
+    SET "image" = $1
+    WHERE "id" = $2;
+  `;
+  const sqlValues = [
+    pictureUrl,
+    req.params.id,
+  ];
+
+  pool
+    .query(sqlText, sqlValues)
+    .then((dbRes) => {
+      res.sendStatus(201);
+    })
+    .catch((dbErr) => {
+      console.log("Error: ", dbErr);
+      res.sendStatus(500);
+    });
+});
+
 
 module.exports = router;

@@ -3,14 +3,17 @@ import { useSelector } from "react-redux";
 import SelectedPortfolioItem from "../SelectedPortfolioItem/SelectedPortfolioItem";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 function SelectedStudentPortfolio() {
     const portfolio = useSelector((store) => store.portfolio);
     const dispatch = useDispatch();
+    const params = useParams();
 
     useEffect(() => {
         dispatch({
-            type: 'FETCH_SELECTED_PORTFOLIO'
+            type: 'FETCH_SELECTED_PORTFOLIO',
+            payload: params.id
         });
     }, [])
 

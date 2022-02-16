@@ -1,8 +1,9 @@
-import  React, {useEffect } from 'react';
+import  React, { useEffect } from 'react';
 import '../StudentsPage/StudentsPage.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
+import { useState } from 'react';
 import { 
     Table,
     TableBody,
@@ -17,8 +18,11 @@ import {
     TableFooter,
     Button
 } from '@material-ui/core';
-
-
+import { IconButton } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
+import CheckIcon from '@mui/icons-material/Check';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Tooltip } from '@mui/material';
 
 
 function StudentsTable(student) {
@@ -27,6 +31,9 @@ function StudentsTable(student) {
     const user = useSelector(store => store.user);
     // const params= useParams();
     const dispatch = useDispatch();
+
+    const [cohort, setCohort] = useState('');
+    const [editCohort, setEditCohort] = useState(false);
 
     useEffect(() => {
         dispatch({
@@ -62,9 +69,12 @@ function StudentsTable(student) {
     }));
 
     const classes = useStyles();
+
+    // --- This code would be used for multiple pages on the table ---
+    /*
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+ 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -73,6 +83,16 @@ function StudentsTable(student) {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+    */
+
+    const handleCohort = () => {
+        dispatch({
+            type: 'CHANGE_COHORT',
+            payload: cohort
+        })
+        setCohort('');
+        setEditCohort(false);
+    }
         
     return (
         <div className='container'>
@@ -96,7 +116,63 @@ function StudentsTable(student) {
                                             <Typography>{student.name}</Typography>
                                         </TableCell>
                                         <TableCell>
-                                            <Typography>{student.cohort}</Typography>
+                                            {student.cohort ?
+                                                student.user_id === user.id ?
+                                                    !editCohort ?
+                                                        <Tooltip title="Click to edit" arrow>
+                                                            <Typography className='specific-cohort' onClick={() => setEditCohort(true)}>
+                                                                {student.cohort}
+                                                            </Typography>
+                                                        </Tooltip>
+                                                    :
+                                                        student.user_id === user.id &&
+                                                        <>
+                                                            <input 
+                                                                className='skill-input'
+                                                                value={cohort}
+                                                                onChange={(e) => setCohort(e.target.value)}
+                                                            />
+                                                            <IconButton>
+                                                                <CheckIcon onClick={handleCohort} />
+                                                            </IconButton>
+                                                            <IconButton>
+                                                                <ArrowBackIcon onClick={() => {
+                                                                        setEditCohort(false);
+                                                                        setCohort('');
+                                                                    }} 
+                                                                />
+                                                            </IconButton>
+                                                        </>
+                                                :
+                                                    <Typography>{student.cohort}</Typography>
+                                            :
+                                                !editCohort ?
+                                                    student.user_id === user.id &&
+                                                        <button className='apply-btn' onClick={() => setEditCohort(true)}>
+                                                            <IconButton sx={{ height: '25px', width: '20px' }}>
+                                                                <AddIcon sx={{ color: 'white' }} />
+                                                            </IconButton>
+                                                        </button>
+                                                :
+                                                    student.user_id === user.id &&
+                                                        <>
+                                                            <input 
+                                                                className='skill-input'
+                                                                value={cohort}
+                                                                onChange={(e) => setCohort(e.target.value)}
+                                                            />
+                                                            <IconButton>
+                                                                <CheckIcon onClick={handleCohort} />
+                                                            </IconButton>
+                                                            <IconButton>
+                                                                <ArrowBackIcon onClick={() => {
+                                                                        setEditCohort(false);
+                                                                        setCohort('');
+                                                                    }} 
+                                                                />
+                                                            </IconButton>
+                                                        </>
+                                            }
                                         </TableCell>
                                         <TableCell>
                                             <Typography>{student.email}</Typography>

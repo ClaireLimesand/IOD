@@ -22,7 +22,7 @@ const applicationsRouter = require('./routes/applications.router');
 const categoriesRouter = require('./routes/categories.router');
 const logoRouter = require('./routes/logo.router');
 const favoriteProjectRouter = require('./routes/favorite.project.router');
-
+const projectRouter = require('./routes/project.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -50,6 +50,7 @@ app.use('/api/applications', applicationsRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/logo', logoRouter);
 app.use('/api/favoriteProject', favoriteProjectRouter);
+app.use('/api/project', projectRouter);
 
 // Serve static files
 app.use(express.static('build'));

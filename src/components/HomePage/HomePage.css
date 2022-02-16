@@ -26,3 +26,7 @@
 .category-dropdown:focus {
     background-color: #19c9ac1e;
 }
+
+#home-category-dropdown {
+    width: 60%;
+}
