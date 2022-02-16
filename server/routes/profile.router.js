@@ -48,7 +48,7 @@ router.put('/about', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         UPDATE "students"
         SET "about" = $1
-        WHERE id = $2;
+        WHERE "user_id" = $2;
     `;
     const sqlValues = [
         req.body.text,

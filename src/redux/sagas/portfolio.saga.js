@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { actionChannel, put, takeLatest } from 'redux-saga/effects';
 
+function truncate(str, n){
+    return (str.length > n) ? str.substr(0, n-1) + '...' : str;
+};
+
 function* fetchPortfolio() {
     try {
         const response = yield axios({
@@ -93,11 +97,15 @@ function* fetchFavoriteProject() {
         const response = yield axios({
             method: 'GET',
             url: '/api/favoriteProject'
-        })
-        console.log('The Favorite Project Data', response.data);
+        });
+
         yield put({
             type: 'SET_FAVORITE_PROJECT',
-            payload: response.data[0]
+            payload: {
+                project_name: response.data[0].project_name, 
+                image: response.data[0].image,
+                description: truncate(response.data[0].description, 400)
+            }
         })
     }catch(err) {
         console.log('Error in fetchFavoriteProject', err);
@@ -142,11 +150,14 @@ function* detectStudentProject(action) {
             method: 'GET',
             url: `/api/favoriteProject/${action.payload}`
         });
-        console.log('DETECT The Favorite Project Data', response.data);
 
         yield put({
             type: 'SET_FAVORITE_PROJECT',
-            payload: response.data[0]
+            payload: {
+                project_name: response.data[0].project_name, 
+                image: response.data[0].image,
+                description: truncate(response.data[0].description, 400)
+            }
         });
     }catch(err) {
         console.log('Error in fetchFavoriteProject', err);  
