@@ -1,4 +1,4 @@
-import  React, {useEffect } from 'react';
+import  React, { useEffect } from 'react';
 import '../StudentsPage/StudentsPage.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from "react-router-dom";
@@ -17,6 +17,8 @@ import {
     TableFooter,
     Button
 } from '@material-ui/core';
+import { IconButton } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 
 
 
@@ -62,9 +64,12 @@ function StudentsTable(student) {
     }));
 
     const classes = useStyles();
+
+    // --- This code would be used for multiple pages on the table ---
+    /*
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+ 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -73,6 +78,14 @@ function StudentsTable(student) {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+    */
+
+    const handleCohort = () => {
+        dispatch({
+            type: 'CHANGE_COHORT',
+            payload: cohort
+        })
+    }
         
     return (
         <div className='container'>
@@ -96,7 +109,16 @@ function StudentsTable(student) {
                                             <Typography>{student.name}</Typography>
                                         </TableCell>
                                         <TableCell>
-                                            <Typography>{student.cohort}</Typography>
+                                            {student.cohort ?
+                                                <Typography>{student.cohort}</Typography>
+                                            :
+                                                student.user_id === user.id &&
+                                                <button className='apply-btn' onClick={handleCohort}>
+                                                    <IconButton sx={{ height: '25px', width: '20px' }}>
+                                                        <AddIcon sx={{ color: 'white' }} />
+                                                    </IconButton>
+                                                </button>
+                                            }
                                         </TableCell>
                                         <TableCell>
                                             <Typography>{student.email}</Typography>
