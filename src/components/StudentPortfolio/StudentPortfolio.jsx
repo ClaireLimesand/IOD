@@ -88,7 +88,7 @@ function StudentPortfolio() {
 
                 <textarea
                   rows="4"
-                  className="project-description-input"
+                  className="project-input project-description-input"
                   placeholder="Description"
                   value={description}
                   onChange={(event) => setDescription(event.target.value)}

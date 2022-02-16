@@ -72,7 +72,9 @@ function* updateProject(action) {
             url: `/api/portfolio/${action.payload.id}`,
             data: action.payload
         })
-        yield put({ type: 'FETCH_PORTFOLIO '})
+        yield put({ 
+            type: 'FETCH_PORTFOLIO'
+        })
     } catch(err) {
         console.log('Error in updateProject Saga', err);
         

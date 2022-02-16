@@ -55,7 +55,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
-router.get("/specific/:id", rejectUnauthenticated, (req, res) => {
+router.get('/specific/:id', rejectUnauthenticated, (req, res) => {
   const sqlText = `
       SELECT
         "projects"."id",
@@ -72,12 +72,15 @@ router.get("/specific/:id", rejectUnauthenticated, (req, res) => {
           ON "projects"."internship_id" = "internships"."id"
       WHERE "projects"."user_id" = $1;
     `;
-  const sqlValues = [req.params.id];
+  const sqlValues = [
+    req.params.id
+  ];
+
   pool
     .query(sqlText, sqlValues)
     .then((dbRes) => {
       console.log(
-        `All the projects for user_id ${req.user.id} ==>`,
+        `All the projects for user_id ${req.params.id} ==>`,
         dbRes.rows
       );
 

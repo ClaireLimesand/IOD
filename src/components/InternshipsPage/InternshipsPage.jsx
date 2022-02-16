@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 import Internship from '../Internship/Internship';
-import './InternshipPage.css';
+import '../InternshipsPage/InternshipPage.css';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -146,7 +146,7 @@ function InternshipsPage() {
                             />
 
                             <label>Internship Subtitle</label>
-                            <input 
+                            <input
                                 className="internship-input"
                                 value={subtitle}
                                 onChange={(event) => setSubtitle(event.target.value)}
