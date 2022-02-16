@@ -67,10 +67,6 @@ function StudentPortfolio() {
       internship_id: internship_id
     };
     console.log(image);
-    // dispatch({
-    //   type: "ADD_PROJECT",
-    //   payload: newProject,
-    // });
     dispatch({
       type: 'UPLOAD_PROJECT',
       payload: {file: image, data: newProject}

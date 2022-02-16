@@ -13,6 +13,12 @@ import StarIcon from '@mui/icons-material/Star';
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { DropzoneDialog } from 'material-ui-dropzone';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 const style = {
   position: "absolute",
@@ -28,12 +34,14 @@ function PortfolioItem({ projects }) {
   const dispatch = useDispatch();
 
   const projectToEdit = useSelector(store => store.projectToEdit);
+  const internships = useSelector((store) => store.internshipReducer);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [internship_id, setInternship_id] = useState("");
   const [open, setOpen] = React.useState(false);
+  const [pictureOpen, setPictureOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -87,9 +95,10 @@ function PortfolioItem({ projects }) {
     dispatch({ type: 'CHANGE_DESCRIPTION', payload: e.target.value})
   };
 
-  const handleImageChange = (e) => {
-    dispatch({ type: 'CHANGE_IMAGE', payload: e.target.value})
-  };
+  const handleEditPicture = (file) => {
+    console.log(file);
+    setImage(file);
+  }
 
   const handleEditProjectButton = (event) => {
     event.preventDefault();
@@ -100,8 +109,8 @@ function PortfolioItem({ projects }) {
           id: projectToEdit.id,
           name: projectToEdit.title,
           description: projectToEdit.description,
-          image: projectToEdit.image,
-          internship_id: projectToEdit.internship_id,
+          file: image,
+          internship_id: internship_id,
           user_id: projectToEdit.user_id
         }
     })
@@ -191,21 +200,50 @@ const handleFavorite = (project) => {
                           required
                         />
 
-                        <input
-                          className="skill-input"
+                        <textarea
+                          rows="4"
+                          className="project-input project-description-input"
                           placeholder="Description"
                           value={projectToEdit.description}
-                          onChange={handleDescriptionChange}
+                          onChange={(e) => handleDescriptionChange(e)}
                           required
                         />
 
-                        <input
-                          className="skill-input"
-                          placeholder="Image URL"
-                          value={projectToEdit.image}
-                          onChange={handleImageChange}
-                          required
+                        <IconButton onClick={() => setPictureOpen(true)} id='image-select-btn'>
+                          <AddPhotoAlternateIcon />
+                        </IconButton>
+                        <br />
+
+                        {/* project picture import dialogue */}
+                        <DropzoneDialog
+                          acceptedFiles={['image/*']}
+                          cancelButtonText={"cancel"}
+                          submitButtonText={"submit"}
+                          maxFileSize={5000000}
+                          open={pictureOpen}
+                          onClose={() => setPictureOpen(false)}
+                          onSave={(files) => {
+                            console.log('Files:', files[0]);
+                            setPictureOpen(false);
+                            handleEditPicture(files[0]);
+                          }}
+                          showPreviews={true}
+                          showFileNamesInPreview={true}
                         />
+
+                        <FormControl id='internship-id-dropdown' variant="standard">
+                          <InputLabel>Internship</InputLabel>
+                          <Select
+                            value={internship_id}
+                            label="Internship"
+                            onChange={(e) => setInternship_id(e.target.value)}
+                            required
+                          >
+                            {internships.map((internship) => {
+                              return <MenuItem key={internship_id} value={internship.id}>{internship.company_name}</MenuItem>;
+                            })}
+                          </Select>
+                        </FormControl>
 
                         <br />
                         <button type="submit">Update</button>

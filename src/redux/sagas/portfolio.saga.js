@@ -66,12 +66,28 @@ function* deleteProject(action) {
 }
 
 function* updateProject(action) {
+    const headers = {
+        'content-type': 'multipart/form-data'
+      }
+    
+    const pictureForm = new FormData();
+    pictureForm.append('image', action.payload.file);
+    
     try {
         yield axios({
             method: 'PUT',
             url: `/api/portfolio/${action.payload.id}`,
             data: action.payload
-        })
+        });
+
+        yield axios({
+            method: 'PUT',
+            url: `/api/portfolio/image/${action.payload.id}`,
+            headers: headers,
+            data: pictureForm
+        });
+        document.location.reload();
+
         yield put({ 
             type: 'FETCH_PORTFOLIO'
         })

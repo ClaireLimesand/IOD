@@ -4,6 +4,8 @@ const {
 } = require("../modules/authentication-middleware");
 const pool = require("../modules/pool");
 const router = express.Router();
+require('dotenv').config();
+const cloudinaryUpload = require('../modules/cloudinary-config');
 
 router.get("/", rejectUnauthenticated, (req, res) => {
   const sqlText = `
@@ -171,14 +173,12 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
     UPDATE "projects"
     SET
       "project_name" = $1,
-      "description" = $2,
-      "image" = $3
-    WHERE "id" = $4;
+      "description" = $2
+    WHERE "id" = $3;
   `;
   const sqlValues = [
     req.body.name,
     req.body.description,
-    req.body.image,
     req.params.id,
   ];
 
@@ -192,5 +192,32 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     });
 });
+
+router.put("/image/:id", rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {
+  // after the image uploads, we have access to req.file:
+  console.log('nifty! req.file:', req.file);
+  const pictureUrl = req.file.path;
+
+  const sqlText = `
+    UPDATE "projects"
+    SET "image" = $1
+    WHERE "id" = $2;
+  `;
+  const sqlValues = [
+    pictureUrl,
+    req.params.id,
+  ];
+
+  pool
+    .query(sqlText, sqlValues)
+    .then((dbRes) => {
+      res.sendStatus(201);
+    })
+    .catch((dbErr) => {
+      console.log("Error: ", dbErr);
+      res.sendStatus(500);
+    });
+});
+
 
 module.exports = router;
