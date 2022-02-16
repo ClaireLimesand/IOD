@@ -1,0 +1,8 @@
+.specific-cohort {
+    transition: ease 0.3s;
+}
+
+.specific-cohort:hover {
+    color: rgb(25, 189, 161);
+    transform: scale(1.05,1.05);
+}

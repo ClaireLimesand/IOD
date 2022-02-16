@@ -22,6 +22,7 @@ import { IconButton } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Tooltip } from '@mui/material';
 
 
 function StudentsTable(student) {
@@ -116,7 +117,34 @@ function StudentsTable(student) {
                                         </TableCell>
                                         <TableCell>
                                             {student.cohort ?
-                                                <Typography>{student.cohort}</Typography>
+                                                student.user_id === user.id ?
+                                                    !editCohort ?
+                                                        <Tooltip title="Click to edit" arrow>
+                                                            <Typography className='specific-cohort' onClick={() => setEditCohort(true)}>
+                                                                {student.cohort}
+                                                            </Typography>
+                                                        </Tooltip>
+                                                    :
+                                                        student.user_id === user.id &&
+                                                        <>
+                                                            <input 
+                                                                className='skill-input'
+                                                                value={cohort}
+                                                                onChange={(e) => setCohort(e.target.value)}
+                                                            />
+                                                            <IconButton>
+                                                                <CheckIcon onClick={handleCohort} />
+                                                            </IconButton>
+                                                            <IconButton>
+                                                                <ArrowBackIcon onClick={() => {
+                                                                        setEditCohort(false);
+                                                                        setCohort('');
+                                                                    }} 
+                                                                />
+                                                            </IconButton>
+                                                        </>
+                                                :
+                                                    <Typography>{student.cohort}</Typography>
                                             :
                                                 !editCohort ?
                                                     student.user_id === user.id &&
