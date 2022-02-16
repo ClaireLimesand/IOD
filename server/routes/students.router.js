@@ -62,6 +62,26 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+router.put('/', rejectUnauthenticated, (req, res) => {
+    const sqlText = `
+        UPDATE "students"
+        SET "cohort" = $1
+        WHERE "user_id" = $2;
+    `;
+    const sqlValues = [
+        req.body.cohort,
+        req.user.id
+    ];
+
+    pool.query(sqlText, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(200);
+        })
+        .catch((dbErr) => {
+            console.log('PUT skills error', dbErr);
+            res.sendStatus(500);
+        })
+});
 
 
 module.exports = router;

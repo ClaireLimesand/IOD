@@ -3,6 +3,7 @@ import '../StudentsPage/StudentsPage.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
+import { useState } from 'react';
 import { 
     Table,
     TableBody,
@@ -19,8 +20,8 @@ import {
 } from '@material-ui/core';
 import { IconButton } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
-
-
+import CheckIcon from '@mui/icons-material/Check';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 function StudentsTable(student) {
@@ -29,6 +30,9 @@ function StudentsTable(student) {
     const user = useSelector(store => store.user);
     // const params= useParams();
     const dispatch = useDispatch();
+
+    const [cohort, setCohort] = useState('');
+    const [editCohort, setEditCohort] = useState(false);
 
     useEffect(() => {
         dispatch({
@@ -85,6 +89,8 @@ function StudentsTable(student) {
             type: 'CHANGE_COHORT',
             payload: cohort
         })
+        setCohort('');
+        setEditCohort(false);
     }
         
     return (
@@ -112,12 +118,32 @@ function StudentsTable(student) {
                                             {student.cohort ?
                                                 <Typography>{student.cohort}</Typography>
                                             :
-                                                student.user_id === user.id &&
-                                                <button className='apply-btn' onClick={handleCohort}>
-                                                    <IconButton sx={{ height: '25px', width: '20px' }}>
-                                                        <AddIcon sx={{ color: 'white' }} />
-                                                    </IconButton>
-                                                </button>
+                                                !editCohort ?
+                                                    student.user_id === user.id &&
+                                                        <button className='apply-btn' onClick={() => setEditCohort(true)}>
+                                                            <IconButton sx={{ height: '25px', width: '20px' }}>
+                                                                <AddIcon sx={{ color: 'white' }} />
+                                                            </IconButton>
+                                                        </button>
+                                                :
+                                                    student.user_id === user.id &&
+                                                        <>
+                                                            <input 
+                                                                className='skill-input'
+                                                                value={cohort}
+                                                                onChange={(e) => setCohort(e.target.value)}
+                                                            />
+                                                            <IconButton>
+                                                                <CheckIcon onClick={handleCohort} />
+                                                            </IconButton>
+                                                            <IconButton>
+                                                                <ArrowBackIcon onClick={() => {
+                                                                        setEditCohort(false);
+                                                                        setCohort('');
+                                                                    }} 
+                                                                />
+                                                            </IconButton>
+                                                        </>
                                             }
                                         </TableCell>
                                         <TableCell>
