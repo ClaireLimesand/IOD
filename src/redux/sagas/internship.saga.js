@@ -8,7 +8,6 @@ function* fetchInternships(action) {
             method: 'GET',
             url: '/api/internship'
         })
-        
         // Update the internships
         console.log(response.data)
         yield put({

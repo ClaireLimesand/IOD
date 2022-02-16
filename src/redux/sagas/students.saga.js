@@ -69,11 +69,30 @@ function* fetchSelectedProfile(action) {
     };
 }
 
+// Edit student cohort
+function* changeCohort(action) {
+    try {
+        yield axios({
+            method: 'PUT',
+            url: '/api/students',
+            data: {cohort: action.payload}
+        });
+
+        yield put({
+            type: 'FETCH_STUDENTS'
+        });
+    } catch(err) {
+        console.log('Error in fetchStudents Saga', err);
+    };
+}
+
+
 function* studentsSaga() {
     yield takeEvery('FETCH_STUDENTS', fetchStudents);
     yield takeEvery('GET_STUDENT', fetchStudentProfile);
     yield takeEvery('FETCH_STUDENTS_ADMIN', fetchStudentsAdmin);
     yield takeEvery('FETCH_SELECTED_PROFILE', fetchSelectedProfile);
+    yield takeEvery('CHANGE_COHORT', changeCohort);
 }
 
 

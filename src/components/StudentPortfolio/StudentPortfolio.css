@@ -25,17 +25,43 @@
     transition: ease 0.3s;
     width: 90%;
     font-family: Arial, Helvetica, sans-serif;
+    resize: none;
 }
 
 .project-input {
-    font-size: 18px;
-    cursor: text;
-    padding-bottom: 4px;
+    display: block;
+    margin-top: 1em;
+    border-radius: 10px;
     border: none;
-    border-radius: 15px;
     padding: 10px;
-    margin-bottom: 20px;
     width: 90%;
+    cursor: text;
     box-shadow: 0 6px 3px -2px rgba(0, 0, 0, 0.301);
     transition: ease 0.3s;
+    font-size: 18px;
+}
+
+.project-input:hover {
+    transform: scale(1.08, 1.08);
+    background-color: #26e9c95d;
+}
+
+.project-input:focus {
+    background-color: #19c9ac1e;
+}
+
+#internship-id-dropdown {
+    width: 60%;
+    margin-bottom: 10px;
+    margin-top: 2px;
+}
+
+#image-select-btn {
+    background-color: rgb(25, 189, 161);
+}
+
+#image-select-btn:hover {
+    background-color: rgb(25, 189, 161);
+    box-shadow: 0 6px 3px -2px rgba(36, 202, 202, 0.514);
+    transform: scale(1.05,1.05);
 }

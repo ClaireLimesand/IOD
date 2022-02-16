@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import Swal from 'sweetalert2';
 
 import "./PortfolioItem.css";
 
@@ -12,6 +13,12 @@ import StarIcon from '@mui/icons-material/Star';
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { DropzoneDialog } from 'material-ui-dropzone';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 // material ui styles
 const style = {
@@ -29,13 +36,15 @@ function PortfolioItem({ projects }) {
 
   // grab specific project to edit from reducer
   const projectToEdit = useSelector(store => store.projectToEdit);
+  const internships = useSelector((store) => store.internshipReducer);
 
   // allow student to add new projects by storing the data in these local states
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const [internship_id, setInternship_id] = useState("");
+  const [internship_id, setInternship_id] = useState('');
   const [open, setOpen] = React.useState(false);
+  const [pictureOpen, setPictureOpen] = useState(false);
 
   // opens and closes edit window
   const handleOpen = () => setOpen(true);
@@ -44,10 +53,38 @@ function PortfolioItem({ projects }) {
   // what happens on delete click
   const handleDeleteProjectButton = (id) => {
     console.log(id);
-    dispatch({
-      type: "DELETE_PROJECT",
-      payload: id,
-    });
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15B097',
+      cancelButtonColor: '#cf3123',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+              
+            Toast.fire({
+                icon: 'success',
+                title: 'Deleted successfully'
+            })
+            dispatch({
+              type: "DELETE_PROJECT",
+              payload: id,
+            });
+        }
+    })
   };
 
   // what happens on edit click
@@ -65,9 +102,10 @@ function PortfolioItem({ projects }) {
     dispatch({ type: 'CHANGE_DESCRIPTION', payload: e.target.value})
   };
 
-  const handleImageChange = (e) => {
-    dispatch({ type: 'CHANGE_IMAGE', payload: e.target.value})
-  };
+  const handleEditPicture = (file) => {
+    console.log(file);
+    setImage(file);
+  }
 
   // what happens when the save the edit button is click
   const handleEditProjectButton = (event) => {
@@ -80,8 +118,8 @@ function PortfolioItem({ projects }) {
           id: projectToEdit.id,
           name: projectToEdit.title,
           description: projectToEdit.description,
-          image: projectToEdit.image,
-          internship_id: projectToEdit.internship_id,
+          file: image,
+          internship_id: internship_id,
           user_id: projectToEdit.user_id
         }
     })
@@ -173,21 +211,50 @@ const handleFavorite = (project) => {
                           required
                         />
 
-                        <input
-                          className="skill-input"
+                        <textarea
+                          rows="4"
+                          className="project-input project-description-input"
                           placeholder="Description"
                           value={projectToEdit.description}
-                          onChange={handleDescriptionChange}
+                          onChange={(e) => handleDescriptionChange(e)}
                           required
                         />
 
-                        <input
-                          className="skill-input"
-                          placeholder="Image URL"
-                          value={projectToEdit.image}
-                          onChange={handleImageChange}
-                          required
+                        <IconButton onClick={() => setPictureOpen(true)} id='image-select-btn'>
+                          <AddPhotoAlternateIcon />
+                        </IconButton>
+                        <br />
+
+                        {/* project picture import dialogue */}
+                        <DropzoneDialog
+                          acceptedFiles={['image/*']}
+                          cancelButtonText={"cancel"}
+                          submitButtonText={"submit"}
+                          maxFileSize={5000000}
+                          open={pictureOpen}
+                          onClose={() => setPictureOpen(false)}
+                          onSave={(files) => {
+                            console.log('Files:', files[0]);
+                            setPictureOpen(false);
+                            handleEditPicture(files[0]);
+                          }}
+                          showPreviews={true}
+                          showFileNamesInPreview={true}
                         />
+
+                        <FormControl id='internship-id-dropdown' variant="standard">
+                          <InputLabel>Internship</InputLabel>
+                          <Select
+                            value={internship_id}
+                            label="Internship"
+                            onChange={(e) => setInternship_id(e.target.value)}
+                            required
+                          >
+                            {internships.map((internship) => {
+                              return <MenuItem key={internship_id} value={internship.id}>{internship.company_name}</MenuItem>;
+                            })}
+                          </Select>
+                        </FormControl>
 
                         <br />
                         <button type="submit">Update</button>

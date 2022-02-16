@@ -18,7 +18,7 @@ function FavoriteProject() {
       </div>
     :
       <div className="favProjects">
-        <h2 className="fav-name">Add a Favorite Project</h2>
+        <h3 className="fav-name">Add a Favorite Project</h3>
         <div className="fav-info">
           <img className="fav-img" src={favoriteProject.image} />
           <p>Go to your portfolio and press the star icon to favorite a project!</p>

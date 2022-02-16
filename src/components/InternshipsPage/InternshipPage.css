@@ -123,3 +123,15 @@
     box-shadow: 0 6px 3px -2px rgba(202, 36, 36, 0.514);
     transform: scale(1.05,1.05);
 }
+
+.applied-btn {
+    padding: 10px;
+    background-color: #15b09759;
+    color: white;
+    padding: 8px 18px;
+    box-shadow: 0 6px 3px -2px rgba(0,0,0,0.301);
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+}
