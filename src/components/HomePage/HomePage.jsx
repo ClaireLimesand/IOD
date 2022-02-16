@@ -14,7 +14,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
 
 import './HomePage.css';
 
@@ -121,7 +120,7 @@ const handleSaveButton = () => {
                         </Typography> 
                         <img className="register-gradient" src="gradient_bar.png" draggable={false} />
                           
-                        <select 
+                        {/* <select 
                           className="category-dropdown"
                           value={messageType} 
                           onChange={(event) => setMessageType(event.target.value)}
@@ -136,7 +135,21 @@ const handleSaveButton = () => {
                             </option>
                             )
                           })}
-                        </select>
+                        </select> */}
+
+                        <FormControl id='home-category-dropdown' variant="standard">
+                          <InputLabel>Announcement Type</InputLabel>
+                          <Select
+                            value={messageType}
+                            label="Announcement Type"
+                            onChange={(e) => setMessageType(e.target.value)}
+                            required
+                          >
+                            {categories.map((item) => {
+                              return <MenuItem key={item.id} value={item.id}>{item.title}</MenuItem>;
+                            })}
+                          </Select>
+                        </FormControl>
                         
                         <div>
                         <textarea

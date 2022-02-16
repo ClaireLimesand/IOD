@@ -46,6 +46,9 @@ function StudentPortfolio() {
 
   useEffect(() => {
     dispatch({
+      type: 'FETCH_PORTFOLIO'
+    });
+    dispatch({
       type: 'FETCH_INTERNSHIPS'
     });
   }, [])
@@ -119,14 +122,6 @@ function StudentPortfolio() {
                   onChange={(event) => setDescription(event.target.value)}
                   required
                 />
-
-                {/* <input
-                  className="project-input"
-                  placeholder="Image URL"
-                  value={image}
-                  onChange={(event) => setImage(event.target.value)}
-                  required
-                /> */}
 
                 <IconButton onClick={() => setPictureOpen(true)} id='image-select-btn'>
                   <AddPhotoAlternateIcon />
