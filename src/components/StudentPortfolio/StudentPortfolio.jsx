@@ -16,6 +16,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { DropzoneDialog } from 'material-ui-dropzone';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 const style = {
   position: "absolute",
@@ -37,6 +39,7 @@ function StudentPortfolio() {
   const [image, setImage] = useState("");
   const [internship_id, setInternship_id] = useState("");
   const [open, setOpen] = React.useState(false);
+  const [pictureOpen, setPictureOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -60,11 +63,21 @@ function StudentPortfolio() {
       image: image,
       internship_id: internship_id
     };
+    console.log(image);
+    // dispatch({
+    //   type: "ADD_PROJECT",
+    //   payload: newProject,
+    // });
     dispatch({
-      type: "ADD_PROJECT",
-      payload: newProject,
+      type: 'UPLOAD_PROJECT',
+      payload: {file: image, data: newProject}
     });
   };
+
+  const handleEditPicture = (file) => {
+    console.log(file);
+    setImage(file);
+  }
 
   return (
     <div className="container">
@@ -107,12 +120,34 @@ function StudentPortfolio() {
                   required
                 />
 
-                <input
+                {/* <input
                   className="project-input"
                   placeholder="Image URL"
                   value={image}
                   onChange={(event) => setImage(event.target.value)}
                   required
+                /> */}
+
+                <IconButton onClick={() => setPictureOpen(true)} id='image-select-btn'>
+                  <AddPhotoAlternateIcon />
+                </IconButton>
+                <br />
+
+                {/* project picture import dialogue */}
+                <DropzoneDialog
+                  acceptedFiles={['image/*']}
+                  cancelButtonText={"cancel"}
+                  submitButtonText={"submit"}
+                  maxFileSize={5000000}
+                  open={pictureOpen}
+                  onClose={() => setPictureOpen(false)}
+                  onSave={(files) => {
+                    console.log('Files:', files[0]);
+                    setPictureOpen(false);
+                    handleEditPicture(files[0]);
+                  }}
+                  showPreviews={true}
+                  showFileNamesInPreview={true}
                 />
 
                 <FormControl id='internship-id-dropdown' variant="standard">
@@ -121,9 +156,10 @@ function StudentPortfolio() {
                     value={internship_id}
                     label="Internship"
                     onChange={(e) => setInternship_id(e.target.value)}
+                    required
                   >
                     {internships.map((internship) => {
-                      return <MenuItem value={internship.id}>{internship.company_name}</MenuItem>;
+                      return <MenuItem key={internship_id} value={internship.id}>{internship.company_name}</MenuItem>;
                     })}
                   </Select>
                 </FormControl>
