@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import "./EditSkill.css";
 
+// grab all the icon logos
 import IconButton from '@mui/material/IconButton';
 import CheckIcon from '@mui/icons-material/Check';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -14,8 +15,10 @@ function EditSkill() {
     const dispatch = useDispatch();
     const params = useParams();
 
+    // grab the specified skill fro the reducer
     const editSkillReducer = useSelector(store => store.editSkill)
 
+    // fill reducer with a single skill to edit
     useEffect(() => {
         dispatch({
             type: 'FETCH_SINGLE_SKILL',
@@ -23,6 +26,7 @@ function EditSkill() {
         })
     }, [params.id]);
 
+    // below allows skill data to be edited
     const handleSkillChange = (e) => {
         dispatch({
             type: 'EDIT_SKILL_NAME',
@@ -42,6 +46,7 @@ function EditSkill() {
         history.push(`/user`)
     }
 
+    // handles what happens on back button
     const handleBack = (e) => {
         e.preventDefault();
         history.push(`/user`)

@@ -13,12 +13,15 @@ import AddModeratorIcon from '@mui/icons-material/AddModerator';
 import RemoveModeratorIcon from '@mui/icons-material/RemoveModerator';
 import { Tooltip } from '@mui/material';
 
+// for the admin page
 function AdminPage() {
     const dispatch = useDispatch();
 
+    // grab data from reducers
     const applications = useSelector((store) => store.applicationsReducer);
     const students = useSelector((store) => store.students);
 
+    // send request to populate reducers
     useEffect(() => {
         dispatch({
             type: 'FETCH_APPLICATIONS'
@@ -31,6 +34,7 @@ function AdminPage() {
         });
     }, [])
 
+    // handle what happens when clicking delete
     const handleDeleteNotification = (application) => {
         Swal.fire({
             title: 'Are you sure?',

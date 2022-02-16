@@ -9,6 +9,7 @@ require('dotenv').config();
 const cloudinary = require("cloudinary").v2;
 const cloudinaryUpload = require('../modules/cloudinary-config');
 
+// Allows students to set their resume on their profile
 router.put('/', rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {
       // after the image uploads, we have access to req.file:
       console.log('nifty! req.file:', req.file)
@@ -35,6 +36,7 @@ router.put('/', rejectUnauthenticated, cloudinaryUpload.single('image'), async (
        })  
   });
 
+  // gets the profile to display on the students page
   router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = 
     `
@@ -53,6 +55,7 @@ router.put('/', rejectUnauthenticated, cloudinaryUpload.single('image'), async (
     })  
 });
 
+// gets the specific resume for a student
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   const sqlText = 
   `

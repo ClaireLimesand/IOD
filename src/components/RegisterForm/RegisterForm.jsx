@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import "./RegisterForm.css";
 
+// allows users to create new profile for IOD
 function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +16,7 @@ function RegisterForm() {
   const registerUser = (event) => {
     event.preventDefault();
 
+    // send the new users info to the database
       dispatch({
         type: "REGISTER",
         payload: {

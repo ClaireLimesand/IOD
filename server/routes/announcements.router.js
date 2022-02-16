@@ -8,6 +8,7 @@ const {
 const pool = require('../modules/pool');
 const router = express.Router();
 
+// Grabbing all of teh data from the db table announcements and for the announcements pahge
 router.get('/', (req, res) => {
     const sqlText = `
         SELECT "announcements"."id", "message", "message_id", "title" FROM "announcements"

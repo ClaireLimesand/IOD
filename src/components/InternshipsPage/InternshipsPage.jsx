@@ -19,6 +19,7 @@ import DateRangePicker from '@mui/lab/DateRangePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
+// material ui styles
 const style = {
     position: 'absolute',
     top: '50%',
@@ -44,6 +45,7 @@ function InternshipsPage() {
     const internships = useSelector((store) => store.internshipReducer);
     const user = useSelector((store) => store.user);
 
+    // local state to add new internships
     const [companyName, setCompanyName] = useState('');
     const [subtitle, setSubtitle] = useState('');
     const [description, setDescription] = useState('');
@@ -53,6 +55,7 @@ function InternshipsPage() {
     const startDate= dateRange[0];
     const endDate = dateRange[1];
 
+    // opens edit window
     const [open, setOpen] = React.useState(false);
     const [editOpen, editSetOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -83,6 +86,7 @@ function InternshipsPage() {
     }
     
 
+    // what happens on save button click
     const handleSaveButton = () => {
         console.log(startDate);
         console.log(endDate);

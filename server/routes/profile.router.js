@@ -5,6 +5,7 @@ const {
 const pool = require('../modules/pool');
 const router = express.Router();
 
+// grabs all data about the student for student page
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         SELECT "email", "pronouns", "name", "picture", "banner", "cohort", "about", "linkedin", "resume", "user_id", "access_level" FROM "students"
@@ -25,6 +26,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// allows student to create new about info
 router.post('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         INSERT INTO "students" ("email", "pronouns", "name", "picture", "banner", "about", "linkedin", "user_id")
@@ -44,6 +46,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// allows students to edit about section on student profile
 router.put('/about', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         UPDATE "students"
@@ -65,6 +68,7 @@ router.put('/about', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// allows students to edit name, email, linkedin, and pronouns
 router.put('/top', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         UPDATE "students"

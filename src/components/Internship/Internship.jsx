@@ -22,6 +22,7 @@ function Internship({internship}) {
     const history = useHistory();
     const dispatch = useDispatch();
     
+    // sets local state to change logo
     const [logo, setLogo] = useState('');
     const [logoOpen, setLogoOpen] = useState(false);
 
@@ -29,12 +30,14 @@ function Internship({internship}) {
     const profile = useSelector((store) => store.profile);
     
 
+    // fetches student profile
     useEffect(() => {
         dispatch({
             type: 'FETCH_PROFILE'
         });
     }, [])
 
+    // what happens on delete button click
     const handleDeleteButton = (id) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -70,6 +73,7 @@ function Internship({internship}) {
         })
     }; 
 
+    // what happens when student clicks apply on intership
     const handleApply = () => {
         dispatch({
             type: 'SEND_APPLICATION',
@@ -77,6 +81,7 @@ function Internship({internship}) {
         });
     }
 
+    // allows logo to be edited
     const handleEditLogo = (file) => {
         console.log('file', file);
         const internshipWithLogo = {

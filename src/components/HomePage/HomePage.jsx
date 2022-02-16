@@ -18,6 +18,7 @@ import TextField from '@mui/material/TextField';
 
 import './HomePage.css';
 
+// style for material ui buttons and labels
 const style = {
   position: 'absolute',
   top: '50%',
@@ -40,11 +41,13 @@ function HomePage() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
+  // get data from all the reducers
   const announcements = useSelector((store) => store.announcements);
   const categories = useSelector((store) => store.categories);
   const user = useSelector((store) => store.user);
   const types = useSelector(store => store.types);
   
+  // local state to set the type of message and the message itself
   const [messageType, setMessageType] = useState('0');
   const [messageText, setMessageText] = useState('');
   const [open, setOpen] = React.useState(false);
@@ -60,18 +63,21 @@ useEffect(() => {
     getAnnouncements()
 }, []);
 
+// gets all the of types of messages
 const getCategories = () => {
   dispatch({
       type: 'FETCH_CATEGORIES'
   });
 }
 
+// gets all the announcements
 const getAnnouncements = () => {
   dispatch({
       type: 'FETCH_ANNOUNCEMENTS'
   });
 }
 
+// what happens on save button click
 const handleSaveButton = () => {
   const newMessage = {
       type: messageType,

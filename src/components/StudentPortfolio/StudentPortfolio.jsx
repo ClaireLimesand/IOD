@@ -26,15 +26,18 @@ function StudentPortfolio() {
   const dispatch = useDispatch();
   const portfolio = useSelector((store) => store.portfolio);
 
+  // allows students to add new projects by saving data inputs to this local state
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [internship_id, setInternship_id] = useState("");
   const [open, setOpen] = React.useState(false);
 
+  // opens and closes edit window
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  // what happens on save project button
   const handleSaveProjectButton = (event) => {
     event.preventDefault();
     setTitle("");
@@ -42,12 +45,14 @@ function StudentPortfolio() {
     setImage("");
     setInternship_id("");
     setOpen(false);
+    // new object that is filled with the populated local state from above
     const newProject = {
       title: title,
       description: description,
       image: image,
       internship_id: internship_id
     };
+    // send that data to database to be added
     dispatch({
       type: "ADD_PROJECT",
       payload: newProject,

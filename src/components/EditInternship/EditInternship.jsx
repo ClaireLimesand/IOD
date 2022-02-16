@@ -15,13 +15,16 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 import "./EditInternship.css";
 
+// for editing the internships
 function EditInternship() {
     const history = useHistory();
     const dispatch = useDispatch();
     const params = useParams();
 
+    // grab the chosen internship to edit from reducer
     const editInternshipReducer = useSelector(store => store.editInternship)
 
+    // fill reducer with the single internship to edit
     useEffect(() => {
         dispatch({
             type: 'FETCH_SINGLE_INTERNSHIP',
@@ -29,6 +32,7 @@ function EditInternship() {
         })
     }, [params.id]);
 
+    // All below are handling the ability to edit the data of the internship
     const handleNameChange = (e) => {
         dispatch({
             type: 'EDIT_INTERNSHIP_NAME',
@@ -63,6 +67,7 @@ function EditInternship() {
         });
     }
 
+    // what happens when finalizing the edit
     const handleSubmit = (e) => {
         e.preventDefault();
         const id = editInternshipReducer.id;
@@ -81,6 +86,7 @@ function EditInternship() {
             endDate,
         }
 
+        // send off the data with the newly edited internship
         dispatch({
             type: 'EDIT_INTERNSHIP',
             payload: {
@@ -88,9 +94,11 @@ function EditInternship() {
                 payload: editedInternship
             }
         })
+        // go back to internships page
         history.push(`/internships`)
     }
 
+    // what happens when the back button is pressed
     const handleBack = (e) => {
         e.preventDefault();
         history.push(`/internships`)

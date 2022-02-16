@@ -26,6 +26,7 @@ function Nav() {
 
   const user = useSelector((store) => store.user);
 
+  // Allows only users with access_level 3 to see admin content
   const adminContent = (
     user.access_level == 3 &&
     <ListItem button onClick={() => history.push('/admin')}>
@@ -36,6 +37,7 @@ function Nav() {
     </ListItem>
   );
 
+  // main nav bar contents
   const drawer = (
     <div>
       <img src='globe.png' draggable='false' />
@@ -50,6 +52,7 @@ function Nav() {
               <ListItemText primary="Home"/>
           </ListItem>
         {/* Profile link */}
+        {/* requires person to be logged in to an actuall account to see all nav bar windows */}
         {user.id &&
           <ListItem button onClick={() => history.push('/user')}>
               <ListItemIcon>

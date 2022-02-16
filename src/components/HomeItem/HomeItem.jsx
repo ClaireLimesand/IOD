@@ -10,8 +10,10 @@ import './HomeItem.css';
 function HomeItem({messageItem}) {
     const dispatch = useDispatch();
 
+    // get user info from reducer
     const user = useSelector((store) => store.user);
 
+    // what happens on delete button for announcements
     const handleDeleteButton = (id) => {
         Swal.fire({
             title: 'Are you sure?',

@@ -27,6 +27,7 @@ const style = {
     borderRadius: 3,
 };
 
+// the is everything inside the skills box and this whole component is dropped into user page
 function Skills() {
 
     const history = useHistory();
@@ -36,19 +37,23 @@ function Skills() {
     const skills = useSelector((store) => store.skillsReducer);
     const user = useSelector((store) => store.user);
 
+    // allows students to edit their skills
     const [editSkill, setEditSkill] = useState('');
     const [skill, setSkill] = useState('');
     const [selectedSkill, setSelectedSkill] = useState('');
 
+    // opens and closes the edit window
     const [open, setOpen] = React.useState(false);
     const [editOpen, editSetOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     
+    // fills reducer with skills data from database
     useEffect(() => {
         dispatch({ type: 'FETCH_SKILLS' });
     }, []);
 
+    // what happens on save skill button
     const handleSaveSkillButton = (event) => {
         event.preventDefault();
         setSkill('');
@@ -56,12 +61,14 @@ function Skills() {
         const newSkill = {
             skill: skill
         }
+        // add the new skill to the database
         dispatch({
             type: 'ADD_SKILL',
             payload: newSkill
         })
     }; 
 
+    // what happens when deleting a skill
     const handleDeleteSkillButton = (id) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -97,7 +104,9 @@ function Skills() {
         })
     };  
 
+    // what happens with editing a skill
     const handleEditSkill = () => {
+        // send data to database to update the new skill that was edited
         dispatch({ type: 'EDIT_SKILL', payload: {skill: skill, id: selectedSkill.id} });
         setEditSkill(!editSkill);
         setSkill('');

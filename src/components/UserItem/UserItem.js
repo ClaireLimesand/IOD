@@ -54,12 +54,14 @@ function UserItem({ dataItem }) {
     p: 4,
   };
 
+  // grabs the resume for the student from the database
   const handleSubmit = () => {
     dispatch({
       type: 'FETCH_RESUME'
     });
   };
 
+  // allows the profile picture to be edited
   const handleEditPicture = (file) => {
     console.log(file);
 
@@ -69,6 +71,7 @@ function UserItem({ dataItem }) {
     });
   }
 
+  // allows banner picture to be edited
   const handleEditBanner = (file) => {
     console.log(file);
 
@@ -78,6 +81,7 @@ function UserItem({ dataItem }) {
     });
   }
 
+  // allows resume to be added
   const handleEditResume = (file) => {
     console.log(file);
 
@@ -87,14 +91,17 @@ function UserItem({ dataItem }) {
     });
   }
 
+  // handles what happens when linkedin icon is clicked
   const handleLinkedClick = () => {
     window.open(dataItem.linkedin);
   };
 
+// what happens with portfoilo button is clicked
   const handlePortfolio = () => {
     history.push("/portfolio");
   };
 
+  // allows students to edit their about section
   const handleEditAbout = () => {
     dispatch({ type: 'EDIT_ABOUT', payload: about });
     setEditAbout(!editAbout);
