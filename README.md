@@ -46,7 +46,7 @@ Before you get started, make sure you have the following software installed on y
 SERVER_SESSION_SECRET=superDuperSecret
   ```
   While you're in your new `.env` file, replace `superDuperSecret` with a long random string to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- The image and PDF upload in this application require an account with Cloudinary. For a free account go here: 
+The image and PDF upload in this application require an account with Cloudinary. For a free account go here: 
 https://cloudinary.com/users/register/free
 and insert the following into your `.env` file:
  ```
@@ -55,8 +55,8 @@ CLOUDINARY_API_KEY=YOUR CLOUDINARY API KEY
 CLOUDINARY_API_SECRET=YOUR CLOUDINARY SECRET
 CLOUDINARY_URL=YOUR CLOUDINARY URL
  ```
-this will give you access to the image upload feature. The PDF upload to view resumes will require an upgraded paid account. 
-- This application also has optional Zapier integration and will send an email to a user when they sign up. To activate this you will need a paid account with Zapier. You can then enter the following into your `.env` file: 
+This will give you access to the image upload feature. The PDF upload to view resumes will require an upgraded paid account. 
+This application also has optional Zapier integration and will send an email to a user when they sign up. To activate this you will need a paid account with Zapier. You can then enter the following into your `.env` file: 
  ```
 ZAPIER_REGISTER_URL=YOUR ZAPIER URL 
  ```
