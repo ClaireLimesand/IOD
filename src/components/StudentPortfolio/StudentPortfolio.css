@@ -49,3 +49,9 @@
 .project-input:focus {
     background-color: #19c9ac1e;
 }
+
+#internship-id-dropdown {
+    width: 60%;
+    margin-bottom: 10px;
+    margin-top: 2px;
+}

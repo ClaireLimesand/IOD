@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 import PortfolioItem from "../PortfolioItem/PortfolioItem";
 import './StudentPortfolio.css';
@@ -11,6 +12,10 @@ import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const style = {
   position: "absolute",
@@ -25,6 +30,7 @@ const style = {
 function StudentPortfolio() {
   const dispatch = useDispatch();
   const portfolio = useSelector((store) => store.portfolio);
+  const internships = useSelector((store) => store.internshipReducer);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -34,6 +40,12 @@ function StudentPortfolio() {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    dispatch({
+      type: 'FETCH_INTERNSHIPS'
+    });
+  }, [])
 
   const handleSaveProjectButton = (event) => {
     event.preventDefault();
@@ -103,14 +115,19 @@ function StudentPortfolio() {
                   required
                 />
 
-                <input
-                  className="project-input"
-                  placeholder="Internship ID"
-                  type="number"
-                  value={internship_id}
-                  onChange={(event) => setInternship_id(event.target.value)}
-                  required
-                />
+                <FormControl id='internship-id-dropdown' variant="standard">
+                  <InputLabel>Internship</InputLabel>
+                  <Select
+                    value={internship_id}
+                    label="Internship"
+                    onChange={(e) => setInternship_id(e.target.value)}
+                  >
+                    {internships.map((internship) => {
+                      return <MenuItem value={internship.id}>{internship.company_name}</MenuItem>;
+                    })}
+                  </Select>
+                </FormControl>
+
                 <br />
                 <button type="submit">Add Project</button>
               </form>
