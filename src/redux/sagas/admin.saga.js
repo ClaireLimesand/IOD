@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 
+// get applications from database
 function* fetchApplications(action) {
     try {
         const response = yield axios({
@@ -17,7 +18,7 @@ function* fetchApplications(action) {
         console.error('GET error: ', err);
     }
 }
-
+// creating new applications to be stored in database
 function* sendApplication(action) {
     try {
         yield axios({
@@ -34,6 +35,7 @@ function* sendApplication(action) {
     }
 }
 
+// allows admin to delete notifications
 function* removeNotification(action) {
     try {
         yield axios({

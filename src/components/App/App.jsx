@@ -32,8 +32,10 @@ import './App.css';
 function App() {
   const dispatch = useDispatch();
 
+  // grab user data from reducer
   const user = useSelector(store => store.user);
 
+  // fetch data from database to fill all needed reducers right away
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
     dispatch({ type: 'FETCH_PROFILE' });

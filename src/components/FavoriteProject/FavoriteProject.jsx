@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import './FavoriteProject.css';
 
 function FavoriteProject() {
+  // get data from reducer
   const favoriteProject = useSelector((store) => store.favoriteProject);
 
   return (

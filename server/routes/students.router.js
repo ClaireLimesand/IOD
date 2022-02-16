@@ -5,6 +5,7 @@ rejectUnauthenticated,
 const pool = require('../modules/pool');
 const router = express.Router();
 
+// gets data for students
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         SELECT "students"."id", "email", "pronouns", "name", "picture", "banner", "cohort", "about", "linkedin", "resume", "user_id", "access_level" FROM "students"
@@ -23,6 +24,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// gets data for admin
 router.get('/admin', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         SELECT "user"."id", "name", "access_level" FROM "students"
@@ -42,6 +44,7 @@ router.get('/admin', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// gets data to view other students
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         SELECT * FROM "students"

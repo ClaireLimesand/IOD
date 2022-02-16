@@ -20,6 +20,7 @@ import Select from '@mui/material/Select';
 import { DropzoneDialog } from 'material-ui-dropzone';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
+// material ui styles
 const style = {
   position: "absolute",
   top: "50%",
@@ -33,9 +34,11 @@ const style = {
 function PortfolioItem({ projects }) {
   const dispatch = useDispatch();
 
+  // grab specific project to edit from reducer
   const projectToEdit = useSelector(store => store.projectToEdit);
   const internships = useSelector((store) => store.internshipReducer);
 
+  // allow student to add new projects by storing the data in these local states
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
@@ -43,9 +46,11 @@ function PortfolioItem({ projects }) {
   const [open, setOpen] = React.useState(false);
   const [pictureOpen, setPictureOpen] = useState(false);
 
+  // opens and closes edit window
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  // what happens on delete click
   const handleDeleteProjectButton = (id) => {
     console.log(id);
     Swal.fire({
@@ -82,11 +87,13 @@ function PortfolioItem({ projects }) {
     })
   };
 
+  // what happens on edit click
   const handleEdit = (id) => {
     dispatch({ type: 'FETCH_EDITED_PROJECT', payload: id})
     handleOpen();
   }
 
+  // allows student to edit the data of the project
   const handleTitleChange = (e) => {
     dispatch({ type: 'CHANGE_TITLE', payload: e.target.value})
   };
@@ -100,9 +107,11 @@ function PortfolioItem({ projects }) {
     setImage(file);
   }
 
+  // what happens when the save the edit button is click
   const handleEditProjectButton = (event) => {
     event.preventDefault();
     setOpen(false);
+    // send the new edited data to be updated on the database
     dispatch({
         type: 'EDIT_PROJECT',
         payload: {
@@ -116,8 +125,10 @@ function PortfolioItem({ projects }) {
     })
 }; 
 
+// what happens whe favorite button is clicked
 const handleFavorite = (project) => {
   console.log(project);
+  // send the favorited info to its on database table
   dispatch({ 
     type: 'STORE_FAVORITE_PROJECT',
     payload: {

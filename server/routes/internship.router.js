@@ -11,6 +11,7 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
+// grabs all data for internships
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = 
     `
@@ -35,6 +36,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 // SELECT * FROM "internships"
 
+// allows admin to add new internships
 router.post('/', rejectUnauthenticated, isAdmin, (req, res) => {
     const sqlQuery =`INSERT INTO "internships" ("company_name", "company_subtitle", "start_date", "end_date", "company_logo", "company_description")
         VALUES ($1, $2, $3, $4, $5, $6);`
@@ -57,6 +59,7 @@ router.post('/', rejectUnauthenticated, isAdmin, (req, res) => {
         })
 });
 
+// allows admin to delete internships
 router.delete('/:id', rejectUnauthenticated, isAdmin, (req, res) => {
     const sqlQuery = `
         DELETE FROM "internships" 
@@ -77,6 +80,7 @@ router.delete('/:id', rejectUnauthenticated, isAdmin, (req, res) => {
         })
 });
 
+// gets internships with specific id
 router.get('/:id', rejectUnauthenticated, (req, res) => {
         
     const sqlQuery = `
@@ -95,6 +99,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// allows admin to edit that specific internship 
 router.put('/:id', rejectUnauthenticated, isAdmin, (req, res) => {
     const sqlText = `
         UPDATE "internships"

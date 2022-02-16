@@ -8,6 +8,7 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
+// gets all data of message types for choosing message type for announcements as admin
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
       SELECT * FROM "message_types"

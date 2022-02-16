@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import "./LoginForm.css";
 
 function LoginForm() {
+  // local state to allow new student to login
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const errors = useSelector((store) => store.errors);
@@ -15,6 +16,7 @@ function LoginForm() {
   const login = (event) => {
     event.preventDefault();
 
+    // makes sure the username and password matches an actual account
     if (username && password) {
       dispatch({
         type: "LOGIN",

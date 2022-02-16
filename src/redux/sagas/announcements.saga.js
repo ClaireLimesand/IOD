@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
+// gets announcements from database
 function* fetchAnnouncements() {
     try {
         const response = yield axios({
@@ -16,6 +17,7 @@ function* fetchAnnouncements() {
     };
 };
 
+// allows admin to delete announcements
 function* deleteAnnouncement(action) {
     try {
         const response = yield axios({
@@ -30,6 +32,7 @@ function* deleteAnnouncement(action) {
     }
 }
 
+// allows admin to add announcements
 function* addAnnouncement(action) {
     try {
         const response = yield axios({

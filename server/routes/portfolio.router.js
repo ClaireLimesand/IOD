@@ -7,6 +7,7 @@ const router = express.Router();
 require('dotenv').config();
 const cloudinaryUpload = require('../modules/cloudinary-config');
 
+// grabs all data for projects for portfolio page
 router.get("/", rejectUnauthenticated, (req, res) => {
   const sqlText = `
       SELECT
@@ -33,6 +34,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
         dbRes.rows
       );
 
+      // groups projects to their specific internship
       // Transform dbRes.rows array to be an object where each
       // key corresponds to a given internship, and each key's value is an
       const splitProjects = (projects) => {
@@ -57,6 +59,8 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
+
+//  gets specific project
 router.get('/specific/:id', rejectUnauthenticated, (req, res) => {
   const sqlText = `
       SELECT
@@ -110,6 +114,7 @@ router.get('/specific/:id', rejectUnauthenticated, (req, res) => {
     });
 });
 
+// gets and specified project
 router.get("/:id", rejectUnauthenticated, (req, res) => {
   const sqlText = `
     SELECT * FROM "projects"
@@ -127,6 +132,7 @@ router.get("/:id", rejectUnauthenticated, (req, res) => {
     });
 });
 
+// allows student to make a new project
 router.post("/", rejectUnauthenticated, (req, res) => {
   const sqlText = `
     INSERT INTO "projects" ("project_name", "description", "image", "user_id", "internship_id")
@@ -151,6 +157,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
+// allows student to delete their projects
 router.delete("/:id", rejectUnauthenticated, (req, res) => {
   const sqlQuery = `
     DELETE FROM "projects" 
@@ -168,6 +175,7 @@ router.delete("/:id", rejectUnauthenticated, (req, res) => {
     });
 });
 
+// allows student to edit their projects
 router.put("/:id", rejectUnauthenticated, (req, res) => {
   const sqlText = `
     UPDATE "projects"

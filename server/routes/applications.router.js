@@ -5,7 +5,7 @@ const {
     rejectUnauthenticated,
     } = require('../modules/authentication-middleware');
 
-
+// getting all the data fro the db for the applications page
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `
         SELECT * FROM "applications"
@@ -22,6 +22,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// allows admin to add new applications to the database
 router.post('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         INSERT INTO "applications" ("company", "student_name")
@@ -41,6 +42,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// allows admin to edit applicatons
 router.put('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         UPDATE "applications"
@@ -56,6 +58,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// allows admin to delete applications
 router.delete('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         DELETE FROM "applications" 
@@ -75,7 +78,7 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
-// Add admin
+// Allows admin to add other admins
 router.put('/add', rejectUnauthenticated, (req, res) => {
     const sqlText = `
         UPDATE "user"
@@ -106,7 +109,7 @@ router.put('/remove', rejectUnauthenticated, (req, res) => {
     const sqlValues = [
         req.body.id
     ];
-
+// Allows admin to remove other admins
     pool.query(sqlText, sqlValues)
         .then((dbRes) => {
             res.sendStatus(201);

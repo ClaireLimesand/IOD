@@ -9,6 +9,7 @@ require('dotenv').config();
 // const cloudinary = require("cloudinary").v2;
 const cloudinaryUpload = require('../modules/cloudinary-config');
 
+// Allows students to change profile picture
 router.put('/', rejectUnauthenticated, cloudinaryUpload.single('image'), async (req, res) => {
       // after the image uploads, we have access to req.file:
       console.log('nifty! req.file:', req.file)

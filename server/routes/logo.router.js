@@ -12,6 +12,7 @@ require('dotenv').config();
 const cloudinary = require("cloudinary").v2;
 const cloudinaryUpload = require('../modules/cloudinary-config');
 
+// Allows Cloudinary to work for internships
 router.put('/', rejectUnauthenticated, isAdmin, cloudinaryUpload.single('image'), async (req, res) => {
       // after the image uploads, we have access to req.file:
       console.log('neato!', req.file)

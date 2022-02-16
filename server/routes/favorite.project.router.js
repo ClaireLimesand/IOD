@@ -5,6 +5,8 @@ const {
 const pool = require("../modules/pool");
 const router = express.Router();
 
+
+// grabs favorited project to be displayed on student page
 router.get("/", rejectUnauthenticated, (req, res) => {
     const sqlText = `
       SELECT * FROM "favorite-project"
@@ -23,6 +25,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
       });
 });
 
+// grabs all data for favorite project
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   const sqlText = `
     SELECT * FROM "favorite-project"
@@ -42,6 +45,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   });
 });
 
+// allows student to edit favorite project
 router.put("/", rejectUnauthenticated, (req, res) => {
   console.log('req.body for favorite project', req.body);
   const sqlText = `
@@ -70,6 +74,7 @@ router.put("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
+// allows student to add a favorite project
 router.post('/', rejectUnauthenticated, (req, res) => {
   const sqlText = `
     INSERT INTO "favorite-project" ("project_name", "description", "user_id")
