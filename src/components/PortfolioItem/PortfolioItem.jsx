@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import Swal from 'sweetalert2';
 
 import "./PortfolioItem.css";
 
@@ -39,10 +40,38 @@ function PortfolioItem({ projects }) {
 
   const handleDeleteProjectButton = (id) => {
     console.log(id);
-    dispatch({
-      type: "DELETE_PROJECT",
-      payload: id,
-    });
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15B097',
+      cancelButtonColor: '#cf3123',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+              
+            Toast.fire({
+                icon: 'success',
+                title: 'Deleted successfully'
+            })
+            dispatch({
+              type: "DELETE_PROJECT",
+              payload: id,
+            });
+        }
+    })
   };
 
   const handleEdit = (id) => {
