@@ -80,13 +80,15 @@ function* updateProject(action) {
             data: action.payload
         });
 
-        yield axios({
-            method: 'PUT',
-            url: `/api/portfolio/image/${action.payload.id}`,
-            headers: headers,
-            data: pictureForm
-        });
-        document.location.reload();
+        if (action.payload.file != '') {
+            yield axios({
+                method: 'PUT',
+                url: `/api/portfolio/image/${action.payload.id}`,
+                headers: headers,
+                data: pictureForm
+            });
+            document.location.reload();
+        }
 
         yield put({ 
             type: 'FETCH_PORTFOLIO'

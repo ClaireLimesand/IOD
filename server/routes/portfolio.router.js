@@ -173,12 +173,14 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
     UPDATE "projects"
     SET
       "project_name" = $1,
-      "description" = $2
-    WHERE "id" = $3;
+      "description" = $2,
+      "internship_id" = $3
+    WHERE "id" = $4;
   `;
   const sqlValues = [
     req.body.name,
     req.body.description,
+    req.body.internship_id,
     req.params.id,
   ];
 

@@ -39,7 +39,7 @@ function PortfolioItem({ projects }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const [internship_id, setInternship_id] = useState("");
+  const [internship_id, setInternship_id] = useState('');
   const [open, setOpen] = React.useState(false);
   const [pictureOpen, setPictureOpen] = useState(false);
 
