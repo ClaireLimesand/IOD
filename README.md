@@ -82,6 +82,9 @@ ZAPIER_REGISTER_URL=YOUR ZAPIER URL
 8. (Admin) Having an access_level of "3" will also give the user access to the "Admin" page. On this page an administrator can see which users have applied to what internshps. Here they can also turn any other user into an admin by clicking the shield next to their name in the "Manage Users" section. 
 ![Working Image](/public/IOD-admin-view.png)
 
+## Contact me
+
+Do you have questions, comments or feedback? Please reach me at clairelimesand@gmail.com
 
 ## Acknowledgements
 
